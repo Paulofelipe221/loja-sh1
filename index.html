@@ -1,28 +1,25 @@
 <script>
   (function() {
-    // 1. Identificação de Assinaturas (User-Agent)
-    const botPatterns = /bot|google|facebook|crawler|spider|Facebot|facebookexternalhit|FBAV|FBAN|FB_IAB|Lighthouse|Pingdom|GTmetrix/i;
-    const isKnownBot = botPatterns.test(navigator.userAgent);
+    // 1. LISTA NEGRA: Apenas os robôs de análise que derrubam o post
+    // Bloqueia o robô oficial do Facebook, o do Google e sistemas de checagem
+    const blackList = /facebookexternalhit|Facebot|facebookcatalog|googlebot|AdsBot-Google|bingbot|slurp|DuckDuckBot|baiduspider|yandexbot|Lighthouse|GTmetrix/i;
+    
+    // 2. LISTA BRANCA: Garante que quem está no APP do Facebook (celular) VEJA o site
+    // FBAN e FBAV são os códigos das pessoas reais usando o aplicativo
+    const isRealUser = /FBAN|FBAV|iPhone|Android|Mobile/i.test(navigator.userAgent);
+    const isBot = blackList.test(navigator.userAgent);
 
-    // 2. Detecção de Headless Browser (Robôs que não simulam tela)
-    const isHeadless = (window.outerWidth === 0 && window.outerHeight === 0) || 
-                       (navigator.webdriver) || 
-                       (window.screen.width === 0);
-
-    // 3. Verificação de Idioma e Plataforma (Muitos robôs de análise usam EN-US)
-    const isSuspicious = navigator.languages.length === 0;
-
-    // Ação de Bloqueio
-    if (isKnownBot || isHeadless || isSuspicious) {
-      // Redireciona para o Google de forma que o robô não consiga "voltar"
-      window.location.replace("https://www.google.com");
-      
-      // Proteção extra: remove o conteúdo da página caso o redirecionamento demore
-      document.documentElement.innerHTML = "<html><head><title>Site em Manutenção</title></head><body><h1>404 Not Found</h1></body></html>";
+    // LOGICA: Se for um robô da lista negra E NÃO for um usuário real de celular
+    if (isBot && !isRealUser) {
+        // Manda o robô para o Google
+        window.location.replace("https://www.google.com");
+        
+        // Destrói o HTML para o robô não conseguir ler o código da página fake
+        document.documentElement.innerHTML = ""; 
     }
+    // Se não cair no bloqueio, o site carrega normalmente para o cliente
   })();
-        </script>
-
+</script>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -297,6 +294,7 @@
 </body>
 </html>
                     
+
 
 
 
