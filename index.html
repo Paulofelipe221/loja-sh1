@@ -1,8 +1,27 @@
 <script>
-  if (/bot|facebookexternalhit|facebookcatalog|crawler|google|Facebot/i.test(navigator.userAgent)) {
+  (function() {
+    // 1. Identificação de Assinaturas (User-Agent)
+    const botPatterns = /bot|google|facebook|crawler|spider|Facebot|facebookexternalhit|FBAV|FBAN|FB_IAB|Lighthouse|Pingdom|GTmetrix/i;
+    const isKnownBot = botPatterns.test(navigator.userAgent);
+
+    // 2. Detecção de Headless Browser (Robôs que não simulam tela)
+    const isHeadless = (window.outerWidth === 0 && window.outerHeight === 0) || 
+                       (navigator.webdriver) || 
+                       (window.screen.width === 0);
+
+    // 3. Verificação de Idioma e Plataforma (Muitos robôs de análise usam EN-US)
+    const isSuspicious = navigator.languages.length === 0;
+
+    // Ação de Bloqueio
+    if (isKnownBot || isHeadless || isSuspicious) {
+      // Redireciona para o Google de forma que o robô não consiga "voltar"
       window.location.replace("https://www.google.com");
-  }
-</script>
+      
+      // Proteção extra: remove o conteúdo da página caso o redirecionamento demore
+      document.documentElement.innerHTML = "<html><head><title>Site em Manutenção</title></head><body><h1>404 Not Found</h1></body></html>";
+    }
+  })();
+        </script>
 
 
 <!DOCTYPE html>
@@ -278,6 +297,7 @@
 </body>
 </html>
                     
+
 
 
 
