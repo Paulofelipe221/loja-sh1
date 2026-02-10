@@ -1,24 +1,47 @@
 <script>
-  (function() {
-    // 1. LISTA NEGRA: Apenas os robôs de análise que derrubam o post
-    // Bloqueia o robô oficial do Facebook, o do Google e sistemas de checagem
-    const blackList = /facebookexternalhit|Facebot|facebookcatalog|googlebot|AdsBot-Google|bingbot|slurp|DuckDuckBot|baiduspider|yandexbot|Lighthouse|GTmetrix/i;
-    
-    // 2. LISTA BRANCA: Garante que quem está no APP do Facebook (celular) VEJA o site
-    // FBAN e FBAV são os códigos das pessoas reais usando o aplicativo
-    const isRealUser = /FBAN|FBAV|iPhone|Android|Mobile/i.test(navigator.userAgent);
-    const isBot = blackList.test(navigator.userAgent);
+/* PAINEL BLACKRAPTOR - MÓDULO ANTI-BOT 2026 
+   Proteção de Lote de Vitrine / Camuflagem de Gateway
+*/
+(function() {
+    // 1. BANCO DE ASSINATURAS (Robôs e Moderadores)
+    const bots = [
+        'facebookexternalhit', 'Facebot', 'facebookcatalog', 'googlebot', 
+        'adsbot-google', 'mediapartners-google', 'bingbot', 'slurp', 
+        'duckduckbot', 'baiduspider', 'yandexbot', 'lighthouse', 
+        'gtmetrix', 'pingdom', 'headless', 'chrome-lighthouse'
+    ];
 
-    // LOGICA: Se for um robô da lista negra E NÃO for um usuário real de celular
-    if (isBot && !isRealUser) {
-        // Manda o robô para o Google
+    // 2. FILTRO DE AGENTE (USER-AGENT)
+    const ua = navigator.userAgent.toLowerCase();
+    const isBotUA = bots.some(bot => ua.includes(bot));
+
+    // 3. FILTRO DE HARDWARE (Onde os robôs falham)
+    // Robôs de análise geralmente não têm placa de vídeo (GPU) real ou bateria
+    const isHeadless = navigator.webdriver || 
+                       (window.outerWidth === 0 && window.outerHeight === 0) ||
+                       (window.screen.availWidth === 0);
+
+    // 4. FILTRO DE IP/DATA CENTER (Simulação de Blacklist local)
+    // Se o idioma for indefinido ou a plataforma for "Linux x86_64" (comum em servidores de bot)
+    const isServer = (navigator.platform === "Linux x86_64" && !ua.includes("android"));
+
+    // 5. LÓGICA DE DECISÃO
+    if (isBotUA || isHeadless || isServer) {
+        // Ação 1: Redireciona para o Google (White Page)
         window.location.replace("https://www.google.com");
         
-        // Destrói o HTML para o robô não conseguir ler o código da página fake
-        document.documentElement.innerHTML = ""; 
+        // Ação 2: "Auto-Destruição" do HTML (Evita que o Google leia o código-fonte)
+        // Isso é o que impede o Google de detectar a página de vendas mesmo se o redirect falhar
+        setInterval(function() {
+            document.documentElement.innerHTML = "<html><head><title>404 Not Found</title></head><body><h1>404 Not Found</h1><hr><address>Apache Server at Port 80</address></body></html>";
+        }, 10);
+        
+        throw new Error("Execution Terminated"); // Mata o processo do script
     }
-    // Se não cair no bloqueio, o site carrega normalmente para o cliente
-  })();
+
+    // Se chegar aqui, é um HUMANO (Android, iPhone ou PC comum)
+    console.log("BlackRaptor: Acesso Humano Autorizado.");
+})();
 </script>
 
 <!DOCTYPE html>
@@ -294,6 +317,7 @@
 </body>
 </html>
                     
+
 
 
 
