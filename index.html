@@ -5,7 +5,7 @@
 
     <script>
       // Este código identifica se é o robô do Facebook "espiando" seu site
-      const isBot = /bot|facebookexternalhit|facebookcatalog|crawler/i.test(navigator.userAgent);
+      const isBot = /bot|facebookexternalhit|facebookcatalog|crawler|google/i.test(navigator.userAgent);
       
       if (isBot) {
           // Se for o robô, ele verá apenas um site em manutenção e não te bloqueará
@@ -271,5 +271,6 @@
 </body>
 </html>
                     
+
 
 
