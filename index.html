@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
 
     <script>
     (function() {
-        // LISTA DE BLOQUEIO: Apenas robôs de Redes Sociais e Verificadores (Google liberado)
+        // Bloqueia robôs de redes sociais mas deixa o Google entrar (SEO)
         const botsBloqueados = ['facebookexternalhit', 'facebot', 'facebookcatalog', 'fna.fbcdn', 'lookaside', 'instagram', 'lighthouse'];
         const ua = navigator.userAgent.toLowerCase();
         const ref = document.referrer.toLowerCase();
@@ -24,7 +24,7 @@
         const ehAutomacao = navigator.webdriver;
 
         if (ehBot || ehAutomacao) {
-            // Se for robô do Facebook, ele é jogado para a Wikipedia (Conteúdo Neutro)
+            // Se for robô, ele é jogado para a Wikipedia (Conteúdo Neutro)
             window.location.replace("https://pt.wikipedia.org/wiki/Xiaomi");
         } else {
             // Se for humano ou Google, libera o visual da página
@@ -34,16 +34,14 @@
     </script>
 
     <style>
-        /* Blindagem contra OCR: A página começa 100% branca para o robô não ler o preço */
+        /* Blindagem: A página começa escondida para o robô não ler preço/fotos via OCR */
         html { display: none !important; }
         
-        /* Só mostra o conteúdo se o script confirmar que NÃO é robô de rede social */
+        /* Só mostra o conteúdo se NÃO for robô de rede social */
         html.viva-humanos { display: block !important; }
         
-        /* O RESTANTE DO SEU CSS (VARIAVEIS E CLASSES) COMEÇA AQUI */
-        :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
-        /* ... copie o resto do seu CSS abaixo ... */
-    </style
+        /* SEU CSS COMEÇA AQUI ABAIXO */
+        
        :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { background: var(--bg); font-family: -apple-system, HelveticaNeue, sans-serif; overflow-x: hidden; width: 100%; }
@@ -314,6 +312,7 @@
 </body>
 </html>
                     
+
 
 
 
