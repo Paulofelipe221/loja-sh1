@@ -1,31 +1,3 @@
-<meta property="og:title" content="Informativo de Hardware 2026">
-<meta property="og:description" content="Documentação técnica sobre frequências de rede global.">
-
-<script>
-(function() {
-    // 1. Lista de alvos baseada nos domínios das fotos e logs que você enviou
-    const botsMeta = [
-        'facebookexternalhit', 'facebot', 'facebookcatalog', 
-        'fna.fbcdn', 'fbsbx', 'lookaside', 'lm.facebook',
-        'instagram', 'cdninstagram', 'googlebot', 'lighthouse'
-    ];
-
-    const userAgent = navigator.userAgent.toLowerCase();
-    const vindoDe = document.referrer.toLowerCase();
-    
-    // 2. Verifica se o visitante é um dos robôs das suas fotos ou vem do sistema de checagem da Meta
-    const ehRobo = botsMeta.some(robo => userAgent.includes(robo) || vindoDe.includes(robo));
-    
-    // 3. Verifica se é um servidor (comum em robôs de análise de imagem/OCR)
-    const ehServidor = (navigator.platform === "Linux x86_64" && !userAgent.includes("android"));
-
-    if (ehRobo || ehServidor || navigator.webdriver) {
-        // Manda o robô para um lugar inofensivo. 
-        // Assim ele não consegue "ler" o conteúdo da sua página original.
-        window.location.replace("https://pt.wikipedia.org/wiki/Xiaomi");
-    }
-})();
-</script>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -329,6 +301,7 @@
 </body>
 </html>
                     
+
 
 
 
