@@ -3,225 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Finalizar Compra - Shopee</title>
+    <title>Fechar Pedido - Shopee</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --shopee-orange: #ee4d2d; --shopee-bg: #f5f5f5; --text-gray: #888; --border-color: #e8e8e8; }
+        :root { --shopee-orange: #ee4d2d; --shopee-bg: #f5f5f5; --border: #e8e8e8; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
         body { background-color: var(--shopee-bg); color: #222; padding-bottom: 80px; }
 
-        /* Headers */
-        .header { background: #fff; padding: 15px; display: flex; align-items: center; border-bottom: 1px solid var(--border-color); sticky; top: 0; z-index: 100; }
-        .header i { color: var(--shopee-orange); font-size: 20px; margin-right: 15px; cursor: pointer; }
+        .header { background: #fff; padding: 15px; display: flex; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+        .header i { color: var(--shopee-orange); font-size: 20px; margin-right: 15px; }
         .header h1 { font-size: 18px; font-weight: 400; flex: 1; }
 
-        /* Card Sections */
         .section-card { background: #fff; margin-bottom: 10px; padding: 12px; }
         
-        /* Endereço Estilo Foto 2 */
-        .address-section { display: flex; align-items: flex-start; gap: 10px; border-bottom: 2px dashed #f6a700; background: #fff; }
+        /* Endereço com linha serrilhada */
+        .address-section { display: flex; align-items: flex-start; gap: 10px; position: relative; padding-bottom: 15px; }
+        .address-section::after { content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: repeating-linear-gradient(90deg, #ff4d2d, #ff4d2d 10px, #fff 10px, #fff 20px, #0055aa 20px, #0055aa 30px, #fff 30px, #fff 40px); }
         .address-section i { color: var(--shopee-orange); margin-top: 3px; }
-        .address-info { font-size: 14px; line-height: 1.6; flex: 1; }
-        .address-info b { font-size: 15px; }
-        .address-info p { color: #666; font-size: 13px; }
+        .address-info { font-size: 14px; flex: 1; }
 
-        /* Produto Estilo Shopee */
-        .product-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
-        .product-img { width: 85px; height: 85px; object-fit: cover; border: 1px solid #eee; }
+        .product-item { display: flex; gap: 12px; padding: 10px 0; }
+        .product-img { width: 80px; height: 80px; object-fit: cover; border: 1px solid #eee; }
         .product-details { flex: 1; }
-        .product-title { font-size: 14px; color: #333; line-height: 1.4; margin-bottom: 5px; }
-        .product-variation { background: #f5f5f5; color: #757575; font-size: 12px; padding: 2px 6px; display: inline-block; margin-bottom: 8px; }
-        .product-price-row { display: flex; justify-content: space-between; align-items: center; }
+        .product-title { font-size: 13px; line-height: 1.4; height: 36px; overflow: hidden; }
+        .product-variation { background: #f5f5f5; color: #757575; font-size: 11px; padding: 2px 6px; display: inline-block; margin: 4px 0; }
+        
+        /* Seletor de Quantidade */
+        .qty-selector { display: flex; align-items: center; border: 1px solid #ddd; width: fit-content; margin-top: 5px; }
+        .qty-btn { background: #fff; border: none; width: 25px; height: 25px; font-size: 18px; cursor: pointer; }
+        .qty-val { width: 35px; text-align: center; font-size: 14px; border-left: 1px solid #ddd; border-right: 1px solid #ddd; }
 
-        /* Seguros e Opções */
-        .option-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-top: 1px solid #f0f0f0; }
-        .option-label { display: flex; align-items: center; gap: 8px; font-size: 14px; }
-        .badge-rec { background: #ff4d2d; color: #fff; font-size: 10px; padding: 1px 5px; border-radius: 2px; }
-        .check-blue { width: 18px; height: 18px; accent-color: #0055aa; }
+        .option-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 1px solid #f0f0f0; }
+        .badge-rec { background: #ff4d2d; color: #fff; font-size: 10px; padding: 1px 5px; border-radius: 2px; margin-left: 5px; }
+        
+        /* Frete Estilo Shopee */
+        .shipping-box { background: #f6fffe; border: 1px solid #d0f5f0; padding: 12px; border-radius: 2px; margin-top: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .shipping-box.selected { border-color: #0055aa; }
+        .radio-blue { width: 18px; height: 18px; accent-color: #0055aa; }
 
-        /* Inputs de Cadastro */
-        .input-group { margin-bottom: 12px; }
-        .shopee-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 2px; font-size: 14px; outline: none; }
-        .shopee-input:focus { border-color: var(--shopee-orange); }
+        .guarantee-text { font-size: 12px; color: #888; text-align: center; padding: 15px; }
 
-        /* Footer Fixo */
         .footer-buy { position: fixed; bottom: 0; width: 100%; background: #fff; border-top: 1px solid #eee; display: flex; align-items: center; justify-content: flex-end; z-index: 1000; }
         .total-container { padding-right: 15px; text-align: right; }
-        .total-label { font-size: 13px; color: #555; }
         .total-price { color: var(--shopee-orange); font-size: 18px; font-weight: bold; }
-        .btn-order { background: var(--shopee-orange); color: #fff; border: none; padding: 18px 30px; font-size: 16px; font-weight: 500; cursor: pointer; }
-
-        /* Telas */
-        .screen { display: none; }
-        .active { display: block; }
+        .btn-order { background: var(--shopee-orange); color: #fff; border: none; padding: 18px 30px; font-size: 16px; font-weight: 500; }
     </style>
 </head>
 <body>
 
-    <div id="screen-form" class="screen active">
-        <div class="header">
-            <h1>Informações de Entrega</h1>
+    <div class="header">
+        <i class="fas fa-arrow-left"></i>
+        <h1>Fechar Pedido</h1>
+    </div>
+
+    <div class="section-card address-section">
+        <i class="fas fa-map-marker-alt"></i>
+        <div class="address-info">
+            <b id="res-nome">Paulo Felipe do Nascimento</b>
+            <p id="res-end">Rua Humaitá, Bela Vista, São Paulo - SP, 01321010</p>
+            <p id="res-cpf">CPF: 071.***.***-31</p>
         </div>
-        <div class="section-card">
-            <div class="input-group">
-                <input type="text" id="input-nome" class="shopee-input" placeholder="Nome Completo">
+        <i class="fas fa-chevron-right" style="color: #ccc;"></i>
+    </div>
+
+    <div class="section-card">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <i class="fas fa-store" style="font-size:12px;"></i>
+            <span style="font-size:13px; font-weight:500;">Onix oficial</span>
+        </div>
+        <div class="product-item">
+            <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" class="product-img">
+            <div class="product-details">
+                <p class="product-title">Smartphone Xiaomi Poco X7 Pro 5G Versão Global + Carregador Original 120W</p>
+                <span class="product-variation">Cor: Preto, 512GB-12GB</span>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span style="color:var(--shopee-orange); font-weight:500;">R$599,00</span>
+                    <div class="qty-selector">
+                        <button class="qty-btn" onclick="updateQty(-1)">-</button>
+                        <div class="qty-val" id="prod-qty">1</div>
+                        <button class="qty-btn" onclick="updateQty(1)">+</button>
+                    </div>
+                </div>
             </div>
-            <div class="input-group">
-                <input type="tel" id="input-cpf" class="shopee-input" placeholder="CPF (somente números)" maxlength="11">
-            </div>
-            <div style="display: flex; gap: 10px;" class="input-group">
-                <input type="tel" id="input-cep" class="shopee-input" placeholder="CEP" maxlength="8">
-                <button onclick="buscarCEP()" style="background: #222; color: #fff; border: none; padding: 0 15px; border-radius: 2px;">BUSCAR</button>
-            </div>
-            <div class="input-group">
-                <input type="text" id="input-rua" class="shopee-input" placeholder="Rua e Número">
-            </div>
-            <div class="input-group">
-                <input type="text" id="input-bairro" class="shopee-input" placeholder="Bairro">
-            </div>
-            <div class="input-group">
-                <input type="text" id="input-cidade" class="shopee-input" placeholder="Cidade - UF">
-            </div>
-            <button class="btn-order" style="width: 100%; border-radius: 4px;" onclick="irParaCheckout()">PRÓXIMO</button>
         </div>
     </div>
 
-    <div id="screen-checkout" class="screen">
-        <div class="header">
-            <i class="fas fa-arrow-left" onclick="voltar()"></i>
-            <h1>Fechar Pedido</h1>
-        </div>
-
-        <div class="section-card address-section">
-            <i class="fas fa-map-marker-alt"></i>
-            <div class="address-info">
-                <b id="res-nome">Nome do Comprador</b>
-                <p id="res-end">Rua e Número, Bairro, Cidade - UF, CEP</p>
-                <p id="res-cpf" style="color: #222; font-weight: 500; margin-top: 5px;"></p>
+    <div class="section-card">
+        <p style="font-size:14px; margin-bottom:10px;">Adquirir Seguro <span class="badge-rec">Recomendado</span></p>
+        <div class="option-row" style="border:none;">
+            <div style="display:flex; gap:10px; align-items:center;">
+                <input type="checkbox" id="check-seguro" class="radio-blue" onchange="calcularTotal()">
+                <span style="font-size:13px;">Seguro contra Roubo e Dano - 12 meses</span>
             </div>
-            <i class="fas fa-chevron-right" style="color: #999; font-size: 14px;"></i>
+            <span style="font-size:13px;">R$43,90</span>
         </div>
+    </div>
 
-        <div class="section-card">
-            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-                <i class="fas fa-store" style="font-size: 14px;"></i>
-                <span style="font-size: 14px; font-weight: 500;">Bestbuytech</span>
+    <div class="section-card">
+        <p style="font-size:14px; margin-bottom:10px;">Opção de Envio</p>
+        
+        <div class="shipping-box" onclick="setFrete(62, 'fast')">
+            <div>
+                <p style="font-size:13px; font-weight:500;">Envio Rápido (5-6 dias)</p>
+                <p style="font-size:11px; color:#666;" id="date-fast"></p>
             </div>
-            <div class="product-item">
-                <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" class="product-img">
-                <div class="product-details">
-                    <p class="product-title">Smartphone Xiaomi Poco X7 Pro 5G Versão Global + Carregador Original 120W</p>
-                    <span class="product-variation">Cor: <span id="res-cor">Preto</span>, 512GB-12GB</span>
-                    <div class="product-price-row">
-                        <span style="color: var(--shopee-orange);">R$599,00</span>
-                        <span style="color: #999;">x1</span>
-                    </div>
-                </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:13px; font-weight:bold;">R$62,00</span>
+                <input type="radio" name="frete" id="radio-fast" class="radio-blue">
             </div>
         </div>
 
-        <div class="section-card">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                <span style="font-size: 14px;">Adquirir Seguro <span class="badge-rec">Recomendado</span></span>
-                <span style="color: var(--shopee-orange); font-size: 12px;">Ver Mais ></span>
+        <div class="shipping-box" onclick="setFrete(0, 'free')">
+            <div>
+                <p style="font-size:13px; font-weight:500;">Envio Econômico (Frete Grátis)</p>
+                <p style="font-size:11px; color:#666;" id="date-free"></p>
             </div>
-            <div class="option-row" style="border: none;">
-                <div class="option-label">
-                    <input type="checkbox" id="seguro-roubo" class="check-blue" onchange="calcularTotal()">
-                    <div>
-                        <p style="font-size: 13px;">Seguro contra Roubo e Dano - 12 meses</p>
-                        <p style="font-size: 11px; color: #999;">Proteção contra roubo e dano acidental</p>
-                    </div>
-                </div>
-                <span style="font-size: 13px;">R$43,90</span>
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:13px; font-weight:bold; color:#00bfa5;">Grátis</span>
+                <input type="radio" name="frete" id="radio-free" checked class="radio-blue">
             </div>
         </div>
+    </div>
 
-        <div class="section-card">
-            <div class="option-row" style="border: none;">
-                <span style="font-size: 14px;">Opção de Envio</span>
-                <span style="color: var(--shopee-orange); font-size: 12px;">Ver Mais ></span>
-            </div>
-            <div style="background: #f6fffe; border: 1px solid #d0f5f0; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <p style="font-size: 13px; color: #00bfa5;">Envio Econômico</p>
-                    <p style="font-size: 11px; color: #666;">Receba entre 22 de fev e 02 de mar</p>
-                </div>
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 14px; font-weight: bold;">R$37,00</span>
-                    <input type="radio" name="frete" checked class="check-blue">
-                </div>
-            </div>
-        </div>
+    <div class="guarantee-text">
+        <i class="fas fa-shield-alt" style="color:#00bfa5;"></i> 
+        Garantia Shopee: Receba seu produto ou seu dinheiro de volta.
+    </div>
 
-        <div class="footer-buy">
-            <div class="total-container">
-                <span class="total-label">Total do Pedido:</span><br>
-                <span class="total-price" id="total-final">R$636,00</span>
-            </div>
-            <button class="btn-order" onclick="alert('Redirecionando para pagamento...')">FAZER PEDIDO</button>
+    <div class="footer-buy">
+        <div class="total-container">
+            <span style="font-size:12px;">Total do Pedido:</span><br>
+            <span class="total-price" id="display-total">R$599,00</span>
         </div>
+        <button class="btn-order">FAZER PEDIDO</button>
     </div>
 
     <script>
-        // Função para Buscar CEP via API
-        async function buscarCEP() {
-            const cep = document.getElementById('input-cep').value;
-            if (cep.length !== 8) return alert("CEP Inválido");
-            
-            try {
-                const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-                const data = await res.json();
-                if (data.erro) throw new Error();
-                
-                document.getElementById('input-rua').value = data.logradouro;
-                document.getElementById('input-bairro').value = data.bairro;
-                document.getElementById('input-cidade').value = data.localidade + " - " + data.uf;
-            } catch (e) {
-                alert("Erro ao buscar CEP.");
-            }
+        let qtd = 1;
+        let precoUnitario = 599.00;
+        let valorFrete = 0;
+        let valorSeguro = 43.90;
+
+        function updateQty(val) {
+            qtd += val;
+            if (qtd < 1) qtd = 1;
+            document.getElementById('prod-qty').innerText = qtd;
+            calcularTotal();
         }
 
-        // Passagem de Dados e Troca de Tela
-        function irParaCheckout() {
-            const nome = document.getElementById('input-nome').value;
-            const cpf = document.getElementById('input-cpf').value;
-            const rua = document.getElementById('input-rua').value;
-            const bairro = document.getElementById('input-bairro').value;
-            const cidade = document.getElementById('input-cidade').value;
-            const cep = document.getElementById('input-cep').value;
-
-            if(!nome || !cpf || !rua) return alert("Preencha todos os campos!");
-
-            // Preenche os dados na tela de checkout
-            document.getElementById('res-nome').innerText = nome;
-            document.getElementById('res-end').innerText = `${rua}, ${bairro}, ${cidade}, CEP: ${cep}`;
-            document.getElementById('res-cpf').innerText = "CPF: " + cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-
-            // Muda a tela
-            document.getElementById('screen-form').classList.remove('active');
-            document.getElementById('screen-checkout').classList.add('active');
-            window.scrollTo(0,0);
+        function setFrete(valor, type) {
+            valorFrete = valor;
+            document.getElementById('radio-' + type).checked = true;
+            calcularTotal();
         }
 
-        function voltar() {
-            document.getElementById('screen-checkout').classList.remove('active');
-            document.getElementById('screen-form').classList.add('active');
-        }
-
-        // Lógica de Preço Dinâmico
         function calcularTotal() {
-            let base = 599.00;
-            let frete = 37.00;
-            let total = base + frete;
+            let subtotal = precoUnitario * qtd;
+            let total = subtotal + valorFrete;
+            if(document.getElementById('check-seguro').checked) {
+                total += (valorSeguro * qtd);
+            }
+            document.getElementById('display-total').innerText = "R$" + total.toFixed(2).replace('.', ',');
+        }
+
+        function gerarDatas() {
+            const hoje = new Date();
+            const meses = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
             
-            if(document.getElementById('seguro-roubo').checked) {
-                total += 43.90;
+            function formatar(data) {
+                return data.getDate() + " de " + meses[data.getMonth()];
             }
 
-            document.getElementById('total-final').innerText = "R$" + total.toFixed(2).replace('.', ',');
+            // Cálculo Rápido (5 a 6 dias)
+            let fast1 = new Date(); fast1.setDate(hoje.getDate() + 5);
+            let fast2 = new Date(); fast2.setDate(hoje.getDate() + 6);
+            document.getElementById('date-fast').innerText = `Receba entre ${formatar(fast1)} e ${formatar(fast2)}`;
+
+            // Cálculo Econômico (8 a 10 dias)
+            let free1 = new Date(); free1.setDate(hoje.getDate() + 8);
+            let free2 = new Date(); free2.setDate(hoje.getDate() + 10);
+            document.getElementById('date-free').innerText = `Receba entre ${formatar(free1)} e ${formatar(free2)}`;
         }
+
+        window.onload = () => {
+            gerarDatas();
+            calcularTotal();
+        };
     </script>
 </body>
-                </html>
-                
+        </html>
+        
