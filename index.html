@@ -3,203 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Finalizar Compra - Shopee</title>
+    <title>Shopee Brasil | Finalizar Compra</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --orange: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, Helvetica, Arial, sans-serif; }
-        body { background: var(--bg); overflow-x: hidden; }
+        :root { --shopee-orange: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --text-gray: #757575; --blue-shopee: #4d94ff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, Helvetica, sans-serif; }
+        body { background: var(--bg); color: #222; }
 
         /* HEADER */
-        .header { background: white; height: 50px; display: flex; align-items: center; padding: 0 12px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #ddd; }
-        .back-btn { color: var(--orange); font-size: 20px; }
-        .header-title { flex: 1; margin-left: 15px; font-size: 18px; }
+        .header { background: white; height: 52px; display: flex; align-items: center; padding: 0 12px; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #e8e8e8; }
+        .back-btn { color: var(--shopee-orange); font-size: 22px; cursor: pointer; }
+        .header-title { flex: 1; margin-left: 15px; font-size: 18px; font-weight: 400; }
 
-        .page { display: none; min-height: 100vh; padding-bottom: 80px; }
-        .active { display: block; }
+        /* NAVEGAÇÃO ENTRE TELAS */
+        .screen { display: none; padding-bottom: 80px; }
+        .screen.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* SELO FRETE GRÁTIS (Foto 1000255573) */
-        .free-shipping-tag { background: #00bfa5; color: white; display: flex; align-items: center; padding: 5px 10px; font-size: 13px; font-weight: bold; width: 100%; gap: 5px; }
+        /* SEÇÃO DE ENDEREÇO COM BORDA LISTRADA */
+        .address-section { background: white; padding: 15px; position: relative; margin-bottom: 10px; }
+        .address-line { position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background-image: repeating-linear-gradient(45deg, var(--shopee-orange), var(--shopee-orange) 15px, #fff 15px, #fff 30px, var(--blue-shopee) 30px, var(--blue-shopee) 45px, #fff 45px, #fff 60px); }
         
-        /* SEÇÕES */
-        .section { background: white; padding: 12px; margin-bottom: 8px; }
-        .address-box { position: relative; padding: 15px; border-bottom: 2px solid transparent; border-image: repeating-linear-gradient(45deg, #ee4d2d, #ee4d2d 10px, #fff 10px, #fff 20px, #4d94ff 20px, #4d94ff 30px, #fff 30px, #fff 40px) 10; }
-
         /* INPUTS E BOTÃO BUSCAR CEP */
-        .cep-row { display: flex; gap: 8px; margin-bottom: 10px; }
-        .shopee-input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 2px; outline: none; }
-        .btn-cep { background: #fff; border: 1px solid var(--orange); color: var(--orange); padding: 0 15px; border-radius: 2px; }
+        .input-group { margin-bottom: 12px; }
+        .row-cep { display: flex; gap: 8px; }
+        .shopee-input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 2px; font-size: 14px; outline: none; background: #fafafa; }
+        .btn-search-cep { background: white; border: 1px solid var(--shopee-orange); color: var(--shopee-orange); padding: 0 15px; border-radius: 2px; font-size: 12px; cursor: pointer; }
 
-        /* SEGUROS (Foto 1000255562 e 1000255563) */
-        .insurance-card { border: 1px solid #eee; border-radius: 4px; padding: 12px; margin-top: 10px; display: flex; align-items: flex-start; gap: 10px; }
-        .insurance-card input[type="checkbox"] { accent-color: var(--orange); width: 18px; height: 18px; }
+        /* SELO FRETE GRÁTIS ORIGINAL */
+        .free-shipping-banner { background: var(--teal); color: white; padding: 8px 12px; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; }
+        .free-shipping-banner img { height: 16px; }
 
-        /* MÉTODO PAGAMENTO PIX (Foto 1000255564) */
-        .pix-select { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #eee; }
-        .pix-dot { width: 18px; height: 18px; border: 2px solid var(--orange); border-radius: 50%; position: relative; }
-        .pix-dot::after { content: ''; width: 10px; height: 10px; background: var(--orange); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; }
+        /* PRODUTO NO CHECKOUT */
+        .product-card { background: #fdfdfd; padding: 12px; display: flex; gap: 10px; border-bottom: 1px solid #eee; }
+        .product-img { width: 80px; height: 80px; object-fit: cover; border: 1px solid #eee; }
+        .product-info { flex: 1; }
+        .product-name { font-size: 13px; line-height: 1.3; margin-bottom: 5px; }
+        .product-price { color: var(--shopee-orange); font-weight: 500; }
 
-        /* RESUMO VALORES */
-        .summary-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; color: #555; }
-        .discount { color: var(--orange); }
+        /* SEGURO (ALERTA AUTOMÁTICO) */
+        .insurance-box { background: white; padding: 15px; margin-bottom: 10px; }
+        .insurance-item { border: 1px solid #eee; padding: 12px; border-radius: 4px; display: flex; align-items: flex-start; gap: 10px; margin-top: 10px; }
+        .insurance-item input { accent-color: var(--shopee-orange); width: 18px; height: 18px; margin-top: 2px; }
+        .ins-title { font-size: 13px; font-weight: 500; display: flex; justify-content: space-between; width: 100%; }
+
+        /* MÉTODO PIX COM BOLINHA */
+        .payment-method { background: white; padding: 15px; margin-bottom: 10px; }
+        .pix-option { display: flex; align-items: center; gap: 12px; padding: 10px 0; }
+        .pix-circle { width: 20px; height: 20px; border: 2px solid var(--shopee-orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .pix-circle::after { content: ''; width: 10px; height: 10px; background: var(--shopee-orange); border-radius: 50%; }
+
+        /* RESUMO DE VALORES */
+        .summary-box { background: white; padding: 15px; font-size: 13px; }
+        .summary-line { display: flex; justify-content: space-between; margin-bottom: 8px; color: #555; }
+        .highlight-orange { color: var(--shopee-orange); }
 
         /* FOOTER */
-        .footer { position: fixed; bottom: 0; width: 100%; background: white; height: 60px; display: flex; align-items: center; border-top: 1px solid #eee; }
+        .footer { position: fixed; bottom: 0; width: 100%; background: white; height: 58px; display: flex; align-items: center; border-top: 1px solid #eee; z-index: 1000; }
         .footer-total { flex: 1; text-align: right; padding-right: 15px; }
-        .btn-orange { background: var(--orange); color: white; border: none; height: 100%; width: 140px; font-weight: bold; font-size: 15px; }
+        .total-label { font-size: 12px; color: #555; }
+        .total-val { color: var(--shopee-orange); font-size: 20px; font-weight: bold; }
+        .btn-order { background: var(--shopee-orange); color: white; border: none; width: 150px; height: 100%; font-size: 16px; font-weight: 500; cursor: pointer; }
 
-        /* TELA PIX */
-        .timer { font-size: 22px; color: var(--orange); font-weight: bold; margin: 15px 0; }
-        .pix-copy-box { background: #f0f0f0; border: 1px dashed #aaa; padding: 12px; font-size: 11px; word-break: break-all; margin: 15px 0; }
+        /* TELA PIX FINAL */
+        .pix-screen { text-align: center; padding: 20px; }
+        .timer-box { font-size: 24px; color: var(--shopee-orange); font-weight: bold; margin: 15px 0; }
+        .pix-qr { width: 200px; height: 200px; margin: 0 auto 20px; border: 1px solid #eee; padding: 10px; }
+        .pix-copy-area { background: #f0f0f0; border: 1px dashed #bbb; padding: 12px; font-size: 11px; word-break: break-all; border-radius: 4px; margin-bottom: 15px; }
     </style>
 </head>
 <body>
 
-    <div id="page-1" class="page active">
+    <div id="screen-address" class="screen active">
         <div class="header">
             <i class="fas fa-arrow-left back-btn"></i>
-            <h1 class="header-title">Informações de Envio</h1>
+            <h1 class="header-title">Endereço de Entrega</h1>
         </div>
-        <div class="section">
-            <input type="text" id="nome" class="shopee-input" style="width: 100%; margin-bottom: 10px;" placeholder="Nome Completo">
-            <div class="cep-row">
-                <input type="tel" id="cep" class="shopee-input" placeholder="CEP">
-                <button class="btn-cep" onclick="buscarCep()">Buscar CEP</button>
+        <div class="address-section" style="padding-top: 20px;">
+            <div class="input-group">
+                <input type="text" id="nome" class="shopee-input" style="width:100%" placeholder="Nome Completo">
             </div>
-            <input type="text" id="rua" class="shopee-input" style="width: 100%; margin-bottom: 10px;" placeholder="Rua e Número">
-            <input type="text" id="bairro" class="shopee-input" style="width: 100%; margin-bottom: 10px;" placeholder="Bairro">
-            <input type="text" id="cidade" class="shopee-input" style="width: 100%; margin-bottom: 10px;" placeholder="Cidade / UF">
-            <button class="btn-orange" onclick="proximo()" style="width: 100%; height: 45px; margin-top: 10px;">PRÓXIMO</button>
+            <div class="input-group row-cep">
+                <input type="tel" id="cep" class="shopee-input" placeholder="CEP">
+                <button class="btn-search-cep" onclick="buscarCep()">BUSCAR CEP</button>
+            </div>
+            <div class="input-group">
+                <input type="text" id="rua" class="shopee-input" style="width:100%" placeholder="Rua / Avenida / Número">
+            </div>
+            <div class="input-group">
+                <input type="text" id="bairro" class="shopee-input" style="width:100%" placeholder="Bairro">
+            </div>
+            <div class="input-group">
+                <input type="text" id="cidade" class="shopee-input" style="width:100%" placeholder="Cidade / Estado">
+            </div>
+            <button class="btn-order" onclick="irParaCheckout()" style="width:100%; height:48px; border-radius:4px;">PRÓXIMO</button>
         </div>
     </div>
 
-    <div id="page-2" class="page">
+    <div id="screen-checkout" class="screen">
         <div class="header">
-            <i class="fas fa-arrow-left back-btn" onclick="voltar()"></i>
-            <h1 class="header-title">Confirmar Pedido</h1>
-        </div>
-        
-        <div class="address-box section">
-            <i class="fas fa-map-marker-alt" style="color: var(--orange);"></i>
-            <strong id="res-nome">Nome</strong> (+55) 88 999...<br>
-            <span id="res-rua" style="font-size:12px; color:#666;">Rua Exemplo, 123</span>
+            <i class="fas fa-arrow-left back-btn" onclick="voltarTela('screen-address')"></i>
+            <h1 class="header-title">Informações do Pedido</h1>
         </div>
 
-        <div class="free-shipping-tag">
-            <i class="fas fa-truck"></i> FRETE GRÁTIS acima de R$10
+        <div class="address-section">
+            <div style="font-size: 14px; color: #222;">
+                <i class="fas fa-map-marker-alt" style="color: var(--shopee-orange);"></i> 
+                <strong id="disp-nome">Nome</strong> (+55) 88 99...<br>
+                <span id="disp-addr" style="color: #666; font-size: 12px;">Rua Exemplo, 123 - Bairro</span>
+            </div>
+            <div class="address-line"></div>
         </div>
 
-        <div class="section" style="display:flex; gap:10px;">
-            <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:90px;">
-            <div>
-                <p style="font-size:14px;">Poco X7 Pro 5G NFC Versão Global 512GB/12GB</p>
-                <p style="color:#888; font-size:12px;">Cor: Preto</p>
-                <p style="color:var(--orange); font-weight:bold; margin-top:5px;">R$2.499,00</p>
+        <div class="free-shipping-banner">
+            <i class="fas fa-truck"></i> FRETE GRÁTIS ACIMA DE R$10
+        </div>
+
+        <div class="product-card">
+            <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" class="product-img">
+            <div class="product-info">
+                <div class="product-name">Xiaomi Poco X7 Pro 5G Snapdragon 8 Gen 2 - 512GB/12GB RAM - Global</div>
+                <div style="color: #888; font-size: 11px; margin-bottom: 5px;">Variação: Preto Estelar</div>
+                <div class="product-price">R$2.499,00</div>
             </div>
         </div>
 
-        <div class="section">
-            <p style="font-size:13px; font-weight:bold;">Adquirir Seguro <span style="background:var(--orange); color:white; padding:1px 4px; border-radius:2px; font-size:10px;">Recomendado</span></p>
-            <div class="insurance-card">
-                <input type="checkbox" id="seguro-roubo" onchange="atualizarTotal()">
-                <div>
-                    <div class="flex-between"><span>Seguro contra Roubo e Dano</span> <strong>R$262,40</strong></div>
-                    <p style="font-size:11px; color:#888;">Proteção contra roubo, furto qualificado e dano acidental.</p>
+        <div class="insurance-box">
+            <p style="font-size: 13px; font-weight: 500;">Adicionar Seguro</p>
+            <div class="insurance-item">
+                <input type="checkbox" id="seguro" onchange="calcTotal()">
+                <div style="flex: 1;">
+                    <div class="ins-title"><span>Seguro contra Roubo e Furto</span> <span>R$197,50</span></div>
+                    <p style="font-size: 11px; color: #999;">Proteção completa para o seu smartphone por 1 ano.</p>
                 </div>
             </div>
         </div>
 
-        <div class="section">
-            <div class="pix-select">
-                <div class="pix-dot"></div>
-                <div style="flex:1; color:var(--teal); font-weight:bold;"><i class="fas fa-university"></i> Pix</div>
-                <i class="fas fa-check-circle" style="color:var(--orange)"></i>
+        <div class="payment-method">
+            <p style="font-size: 13px; font-weight: 500; margin-bottom: 10px;">Opção de Envio</p>
+            <div style="background: #fafffe; border: 1px solid var(--teal); padding: 10px; border-radius: 2px;">
+                <div class="ins-title"><span style="color: var(--teal);">Entrega Padrão</span> <span>R$37,85</span></div>
+                <div style="font-size: 12px; margin-top: 4px;" id="data-chegada">Receba entre 17 e 19 de fev</div>
             </div>
         </div>
 
-        <div class="section" style="font-size:13px;">
-            <div class="summary-row"><span>Total dos Produtos</span><span>R$2.499,00</span></div>
-            <div class="summary-row"><span>Total do Frete</span><span>R$37,85</span></div>
-            <div class="summary-row"><span>Desconto de Frete</span><span class="discount">-R$37,85</span></div>
-            <div class="summary-row"><span>Cupom Shopee</span><span class="discount">-R$1.900,00</span></div>
-            <div class="summary-row" id="linha-seguro" style="display:none;"><span>Seguro Adicional</span><span id="txt-seguro">R$0,00</span></div>
-            <hr style="margin:10px 0; border:0; border-top:1px solid #eee;">
-            <div class="summary-row" style="font-size:16px; font-weight:bold; color:black;">
-                <span>Pagamento Total</span>
-                <span style="color:var(--orange);" id="final-total">R$599,00</span>
+        <div class="payment-method">
+            <p style="font-size: 13px; font-weight: 500; margin-bottom: 5px;">Método de Pagamento</p>
+            <div class="pix-option">
+                <div class="pix-circle"></div>
+                <div style="flex: 1; color: var(--teal); font-weight: bold;"><i class="fas fa-university"></i> Pix</div>
+                <i class="fas fa-check-circle" style="color: var(--shopee-orange);"></i>
+            </div>
+        </div>
+
+        <div class="summary-box">
+            <div class="summary-line"><span>Subtotal do Pedido</span><span>R$2.499,00</span></div>
+            <div class="summary-line"><span>Subtotal do Frete</span><span>R$37,85</span></div>
+            <div class="summary-line"><span>Desconto de Frete</span><span class="highlight-orange">-R$37,85</span></div>
+            <div class="summary-line"><span>Cupom Shopee</span><span class="highlight-orange">-R$1.900,00</span></div>
+            <div id="ins-line" class="summary-line" style="display: none;"><span>Seguro</span><span>R$197,50</span></div>
+            <div class="summary-line" style="border-top: 1px solid #eee; padding-top: 10px; margin-top: 10px; font-size: 16px; font-weight: bold; color: #000;">
+                <span>Total</span><span id="txt-total" class="highlight-orange">R$599,00</span>
             </div>
         </div>
 
         <div class="footer">
             <div class="footer-total">
-                <div style="font-size:12px; color:#555;">Total: <span style="color:var(--orange); font-size:18px; font-weight:bold;" id="footer-price">R$599,00</span></div>
-                <div style="font-size:10px; color:var(--orange);">Economizou R$1.937,85</div>
+                <span class="total-label">Total:</span><br>
+                <span class="total-val" id="foot-total">R$599,00</span>
             </div>
-            <button class="btn-orange" onclick="gerarPix()">FAZER PEDIDO</button>
+            <button class="btn-order" onclick="gerarPedido()">FAZER PEDIDO</button>
         </div>
     </div>
 
-    <div id="page-3" class="page">
+    <div id="screen-pix" class="screen">
         <div class="header">
-            <i class="fas fa-arrow-left back-btn"></i>
+            <i class="fas fa-arrow-left back-btn" onclick="location.reload()"></i>
             <h1 class="header-title">Pagamento</h1>
         </div>
-        <div class="section" style="text-align:center;">
-            <p style="font-size:14px; color:#555;">Pague em até</p>
-            <div class="timer" id="timer">02:30:00</div>
-            <p style="font-size:12px; color:#999;">Aprovação instantânea</p>
+        <div class="pix-screen">
+            <div style="font-size: 13px; color: #555;">Pagamento Total</div>
+            <div id="pix-total-val" style="font-size: 24px; color: var(--shopee-orange); font-weight: bold; margin-bottom: 10px;">R$599,00</div>
+            <div class="timer-box" id="pix-timer">02:30:00</div>
+            <p style="font-size: 12px; color: #999; margin-bottom: 20px;">Vencimento em: <span id="data-venc"></span></p>
+
+            <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #eee;">
+                <p style="font-size: 14px; font-weight: bold; color: var(--teal); margin-bottom: 10px;"><i class="fas fa-university"></i> PIX</p>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b55204000053039865406599.005802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF&color=ee4d2d" class="pix-qr">
+                <div class="pix-copy-area" id="pix-code">00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b55204000053039865406599.005802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF</div>
+                <button class="btn-order" onclick="copyPix()" style="width: 100%; height: 45px; border-radius: 4px;">COPIAR CÓDIGO PIX</button>
+            </div>
             
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b55204000053039865406599.005802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF&color=ee4d2d" style="width:200px; margin:20px 0;">
-            
-            <div class="pix-copy-box" id="pix-str">00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b55204000053039865406599.005802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF</div>
-            
-            <button class="btn-orange" onclick="copy()" style="width:100%; border-radius:4px; height:45px;">COPIAR CÓDIGO PIX</button>
-            <button class="btn-orange" style="width:100%; border-radius:4px; height:45px; background:white; color:#555; border:1px solid #ddd; margin-top:10px;">OK</button>
+            <div style="margin-top: 20px; text-align: left; font-size: 12px; color: #666; line-height: 1.6;">
+                1. Copie o código Pix acima.<br>
+                2. No app do seu banco, escolha "Pix Copia e Cola".<br>
+                3. O pagamento é confirmado na hora.
+            </div>
         </div>
     </div>
 
     <script>
-        function buscarCep() {
-            let cep = document.getElementById('cep').value.replace(/\D/g, '');
+        // Lógica de Data (Hoje + 5 a 7 dias)
+        function setDates() {
+            const meses = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+            const d = new Date();
+            
+            const min = new Date(); min.setDate(d.getDate() + 5);
+            const max = new Date(); max.setDate(d.getDate() + 7);
+            
+            document.getElementById('data-chegada').innerText = `Receba entre ${min.getDate()} e ${max.getDate()} de ${meses[max.getMonth()]}`;
+            document.getElementById('data-venc').innerText = `${d.getDate()} de ${meses[d.getMonth()]}, ${d.getHours() + 2}:${d.getMinutes()}`;
+        }
+
+        // Busca CEP Real
+        async function buscarCep() {
+            const cep = document.getElementById('cep').value.replace(/\D/g, '');
             if(cep.length === 8) {
-                fetch(`https://viacep.com.br/ws/${cep}/json/`).then(r => r.json()).then(d => {
-                    if(!d.erro) {
-                        document.getElementById('rua').value = d.logradouro;
-                        document.getElementById('bairro').value = d.bairro;
-                        document.getElementById('cidade').value = d.localidade + "/" + d.uf;
-                    }
-                });
+                const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                const data = await res.json();
+                if(!data.erro) {
+                    document.getElementById('rua').value = data.logradouro;
+                    document.getElementById('bairro').value = data.bairro;
+                    document.getElementById('cidade').value = data.localidade + " / " + data.uf;
+                }
             }
         }
 
-        function proximo() {
-            if(!document.getElementById('nome').value) return alert("Preencha o nome");
-            document.getElementById('res-nome').innerText = document.getElementById('nome').value;
-            document.getElementById('res-rua').innerText = document.getElementById('rua').value + ", " + document.getElementById('cidade').value;
-            document.getElementById('page-1').classList.remove('active');
-            document.getElementById('page-2').classList.add('active');
+        function irParaCheckout() {
+            if(!document.getElementById('nome').value) return alert("Preencha o nome completo");
+            document.getElementById('disp-nome').innerText = document.getElementById('nome').value;
+            document.getElementById('disp-addr').innerText = `${document.getElementById('rua').value}, ${document.getElementById('bairro').value}`;
+            
+            document.getElementById('screen-address').classList.remove('active');
+            document.getElementById('screen-checkout').classList.add('active');
+            setDates();
             window.scrollTo(0,0);
         }
 
-        function atualizarTotal() {
-            let base = 599.00;
-            let seguro = document.getElementById('seguro-roubo').checked;
-            if(seguro) {
-                base += 262.40;
-                document.getElementById('linha-seguro').style.display = 'flex';
-                document.getElementById('txt-seguro').innerText = "R$262,40";
-            } else {
-                document.getElementById('linha-seguro').style.display = 'none';
-            }
-            let totalFormatado = "R$" + base.toFixed(2).replace('.', ',');
-            document.getElementById('final-total').innerText = totalFormatado;
-            document.getElementById('footer-price').innerText = totalFormatado;
+        function voltarTela(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
         }
 
-        function gerarPix() {
-            document.getElementById('page-2').classList.remove('active');
-            document.getElementById('page-3').classList.add('active');
-            startTimer(150 * 60); // 2h 30m
+        function calcTotal() {
+            let total = 599.00;
+            const seguro = document.getElementById('seguro').checked;
+            if(seguro) {
+                total += 197.50;
+                document.getElementById('ins-line').style.display = 'flex';
+            } else {
+                document.getElementById('ins-line').style.display = 'none';
+            }
+            const formatted = "R$" + total.toFixed(2).replace('.', ',');
+            document.getElementById('txt-total').innerText = formatted;
+            document.getElementById('foot-total').innerText = formatted;
+            document.getElementById('pix-total-val').innerText = formatted;
+        }
+
+        function gerarPedido() {
+            voltarTela('screen-pix');
+            startTimer(150 * 60); // 2h 30min
         }
 
         function startTimer(duration) {
@@ -208,16 +271,17 @@
                 hours = parseInt(timer / 3600, 10);
                 minutes = parseInt((timer % 3600) / 60, 10);
                 seconds = parseInt(timer % 60, 10);
-                document.getElementById('timer').textContent = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+                document.getElementById('pix-timer').textContent = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
                 if (--timer < 0) timer = 0;
             }, 1000);
         }
 
-        function copy() {
-            navigator.clipboard.writeText(document.getElementById('pix-str').innerText);
+        function copyPix() {
+            const code = document.getElementById('pix-code').innerText;
+            navigator.clipboard.writeText(code);
             alert("Código Pix copiado!");
         }
     </script>
 </body>
-                                        </html>
-                
+                </html>
+                                            
