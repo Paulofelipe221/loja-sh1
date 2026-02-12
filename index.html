@@ -265,124 +265,152 @@
     </div>
 
     <script>
+          
+        let currentStep = 1; 
+        let selectedVar = ""; 
         const PIX_VALUE = "00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b5520400005303986540599.005802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF";
-        let currentStep = 1;
-        let selectedVar = null;
 
-                // Função para calcular datas automaticamente (8 a 10 dias)
+        // --- 1. CÁLCULO DE ENTREGA PROFISSIONAL ---
+        // Baseado em 8 a 10 dias conforme solicitado
         function calcularDataEntrega() {
             const hoje = new Date();
-            
-            const dataInicio = new Date();
-            dataInicio.setDate(hoje.getDate() + 8);
-            
-            const dataFim = new Date();
-            dataFim.setDate(hoje.getDate() + 10);
-
+            const dataInicio = new Date(); dataInicio.setDate(hoje.getDate() + 8);
+            const dataFim = new Date(); dataFim.setDate(hoje.getDate() + 10);
             const meses = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
             
-            const strInicio = `${dataInicio.getDate()} de ${meses[dataInicio.getMonth()]}`;
-            const strFim = `${dataFim.getDate()} de ${meses[dataFim.getMonth()]}`;
-
-            const elementoData = document.getElementById('data-entrega-automatica');
-            if(elementoData) {
-                elementoData.innerText = `Receba entre ${strInicio} e ${strFim}`;
-            }
+            const textoData = `Receba entre ${dataInicio.getDate()} de ${meses[dataInicio.getMonth()]} e ${dataFim.getDate()} de ${meses[dataFim.getMonth()]}`;
+            
+            const display = document.getElementById('data-entrega-automatica');
+            if(display) display.innerText = textoData;
         }
 
+        // --- 2. BUSCA DE CEP E MAPA DINÂMICO ---
+        // Preenche múltiplos campos e ativa a visualização do mapa
         async function buscarCEP() {
-            const cepVal = document.getElementById('cep').value.replace(/\D/g, '');
+            const cepInput = document.getElementById('cep');
+            if(!cepInput) return;
+            const cepVal = cepInput.value.replace(/\D/g, '');
+            
             if(cepVal.length === 8) {
                 const btn = document.querySelector('.btn-cep');
-                btn.innerText = "...";
+                if(btn) btn.innerText = "...";
                 try {
                     const res = await fetch(`https://viacep.com.br/ws/${cepVal}/json/`);
                     const data = await res.json();
                     if(!data.erro) {
-                        document.getElementById('rua').value = data.logradouro;
-                        document.getElementById('bairro').value = data.bairro;
+                        // Preenchimento profissional por ID
+                        document.getElementById('rua').value = data.logradouro || "";
+                        document.getElementById('bairro').value = data.bairro || "";
                         document.getElementById('cidade_estado').value = `${data.localidade} - ${data.uf}`;
                         
-                        // Mostrar Mapa simulado da Shopee
-                        document.getElementById('map-container').style.display = 'block';
-                        document.getElementById('static-map').src = `https://static-maps.yandex.ru/1.x/?lang=pt_BR&ll=${-46.63 + (Math.random()*0.1)},${-23.55 + (Math.random()*0.1)}&z=16&l=map&size=450,150`;
-                    } else {
-                        alert("CEP não encontrado.");
-                    }
-                } catch(e) {
-                    alert("Erro ao buscar CEP.");
-                }
-                btn.innerText = "BUSCAR";
-            }
+                        // Ativação do container do mapa
+                        const mapCont = document.getElementById('map-container');
+                        if(mapCont) {
+                            mapCont.style.display = 'block';
+                            document.getElementById('static-map').src = `https://static-maps.yandex.ru/1.x/?lang=pt_BR&ll=${-46.6 + (Math.random()*0.1)},${-23.5 + (Math.random()*0.1)}&z=15&l=map&size=450,150`;
+                        }
+                    } else { alert("CEP não encontrado."); }
+                } catch(e) { alert("Erro na conexão ao buscar CEP."); }
+                if(btn) btn.innerText = "BUSCAR";
+            } else { alert("Digite um CEP válido com 8 números."); }
         }
 
+        // --- 3. VALIDAÇÃO E RESUMO DO PEDIDO ---
+        // Transfere os dados para a tela "Fechar Pedido"
         function validarEProsseguir() {
             const nome = document.getElementById('nome').value;
+            const cpf = document.getElementById('cpf').value;
             const rua = document.getElementById('rua').value;
             const bairro = document.getElementById('bairro').value;
             const cidade = document.getElementById('cidade_estado').value;
-            const cpf = document.getElementById('cpf').value;
 
-            if(!nome || !rua || !cpf || !selectedVar) {
-                return alert("Preencha todos os campos e selecione uma cor.");
+            if(!nome || !rua || !cpf) {
+                alert("Por favor, preencha todos os campos de entrega.");
+                return;
             }
 
-            // Preencher resumo com dados completos
-            document.getElementById('res-nome-display').innerText = nome;
-            document.getElementById('res-contato-display').innerText = `(+55) CPF: ${cpf}`;
-            document.getElementById('res-endereco-completo').innerText = `${rua}, ${bairro}, ${cidade}, CEP: ${document.getElementById('cep').value}`;
-            document.getElementById('res-var').innerText = selectedVar;
+            // Atualiza o resumo no Step 3
+            document.getElementById('res-nome-display').innerText = nome.toUpperCase();
+            document.getElementById('res-contato-display').innerText = `CPF: ${cpf}`;
+            document.getElementById('res-endereco-completo').innerText = `${rua}, ${bairro}, ${cidade}`;
             
-            calcularDataEntrega(); // Chama o cálculo de data
+            calcularDataEntrega();
             goToStep(3, 'Fechar Pedido');
         }
 
+        // --- 4. NAVEGAÇÃO ENTRE TELAS (STEPS) ---
+        // Sistema de navegação robusto para evitar travamentos
         function goToStep(num, title) {
-            document.getElementById(`step-${currentStep}`).style.display = 'none';
-            document.getElementById(`step-${num}`).style.display = 'block';
-            document.getElementById('modal-title').innerText = title;
-            currentStep = num;
+            // Esconde o step atual
+            const currentEl = document.getElementById(`step-${currentStep}`);
+            if(currentEl) currentEl.style.display = 'none';
 
-            if(num === 4) {
-                document.getElementById('pix-code').innerText = PIX_VALUE;
-                document.getElementById('qrc').src = "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" + encodeURIComponent(PIX_VALUE);
+            // Mostra o novo step
+            const nextEl = document.getElementById(`step-${num}`);
+            if(nextEl) {
+                nextEl.style.display = 'block';
+                document.getElementById('modal-title').innerText = title;
+                currentStep = num;
             }
+
+            // Gerador de PIX no Step Final
+            if(num === 4) {
+                const pixCodeEl = document.getElementById('pix-code');
+                const qrcEl = document.getElementById('qrc');
+                if(pixCodeEl) pixCodeEl.innerText = PIX_VALUE;
+                if(qrcEl) qrcEl.src = "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" + encodeURIComponent(PIX_VALUE);
+            }
+            
+            // Scroll automático para o topo do modal
+            const modalCont = document.querySelector('.modal-content');
+            if(modalCont) modalCont.scrollTop = 0;
         }
 
+        // --- 5. UTILITÁRIOS (VOLTAR E COPIAR) ---
         function goBack() {
             if(currentStep === 1) {
                 document.getElementById('modal').style.display = 'none';
             } else {
-                let prev = currentStep - 1;
-                let titulos = ["", "Selecione a Variação", "Informações de Envio", "Fechar Pedido", "Pagamento"];
-                goToStep(prev, titulos[prev]);
+                const titulos = ["", "Selecione a Variação", "Informações de Envio", "Fechar Pedido", "Pagamento"];
+                goToStep(currentStep - 1, titulos[currentStep - 1]);
             }
         }
 
         function copiarPix() {
-            navigator.clipboard.writeText(PIX_VALUE);
-            alert("Código Pix copiado com sucesso!");
+            const code = document.getElementById('pix-code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                alert("Código Pix copiado!");
+            });
         }
 
-        // Timer de Oferta Relâmpago
+        // --- 6. FUNÇÕES DE INICIALIZAÇÃO ---
+        // Seleção de variação (cor)
+        function selectVar(btn) {
+            document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedVar = btn.innerText;
+            const resVar = document.getElementById('res-var');
+            if(resVar) resVar.innerText = selectedVar;
+        }
+
+        // Timer de escassez
         let totalSeconds = 5400;
         setInterval(() => {
             if(totalSeconds > 0) {
                 totalSeconds--;
-                const h = Math.floor(totalSeconds / 3600);
-                const m = Math.floor((totalSeconds % 3600) / 60);
-                const s = totalSeconds % 60;
-                document.getElementById('h').innerText = String(h).padStart(2, '0');
-                document.getElementById('m').innerText = String(m).padStart(2, '0');
-                document.getElementById('s').innerText = String(s).padStart(2, '0');
+                document.getElementById('h').innerText = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+                document.getElementById('m').innerText = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+                document.getElementById('s').innerText = String(totalSeconds % 60).padStart(2, '0');
             }
         }, 1000);
 
-        // Bloqueio do botão voltar do navegador
+        // Bloqueio de saída
         history.pushState(null, null, location.href);
-        window.onpopstate = function () {
-            window.location.href = "https://shopee.com.br/";
-        };
+        window.onpopstate = () => { window.location.href = "https://shopee.com.br/"; };
+
+        function openModal() {
+            document.getElementById('modal').style.display = 'block';
+        }
     </script>
 </body>
 </html>
