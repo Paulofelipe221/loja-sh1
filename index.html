@@ -41,21 +41,15 @@
         .price-row { color: var(--shopee); font-size: 26px; font-weight: 500; display: flex; align-items: baseline; gap: 5px; }
         .old-price { color: #999; text-decoration: line-through; font-size: 14px; }
 
-        /* Selo Indicado com Mãozinha Azul Original */
-        .selo-indicado { background: var(--shopee); color: white; font-size: 10px; padding: 1px 4px; border-radius: 2px; margin-right: 5px; display: inline-flex; align-items: center; gap: 3px; font-weight: 500; }
-        .icon-joinha { color: white; font-size: 9px; }
+        /* Selo Indicado com Mãozinha de Libra (Azul Original) */
+        .selo-indicado { background: var(--shopee); color: white; font-size: 10px; padding: 2px 5px; border-radius: 2px; margin-right: 5px; display: inline-flex; align-items: center; gap: 3px; font-weight: bold; }
+        .icon-joinha { color: white; font-size: 10px; }
 
         /* Shop Section */
         .shop-section { background: white; padding: 15px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
         .shop-info { display: flex; align-items: center; gap: 10px; }
         .shop-logo { width: 45px; height: 45px; border-radius: 50%; border: 1px solid #eee; }
         .btn-visit-shop { border: 1px solid var(--shopee); color: var(--shopee); padding: 5px 12px; font-size: 12px; background: white; border-radius: 2px; text-decoration: none; font-weight: 500; }
-
-        /* Reviews */
-        .reviews-header { background: white; padding: 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-        .review-item { background: white; padding: 15px; border-bottom: 1px solid #f2f2f2; }
-        .review-media { display: flex; gap: 6px; overflow-x: auto; margin-top: 10px; }
-        .review-media video, .review-media img { width: 110px; height: 110px; object-fit: cover; border-radius: 2px; flex-shrink: 0; }
 
         /* Footer */
         .footer-main { position: fixed; bottom: 0; width: 100%; height: 55px; background: white; display: flex; border-top: 1px solid #ddd; z-index: 1000; }
@@ -358,6 +352,7 @@
                 return alert("Preencha todos os campos corretamente.");
             }
             document.getElementById('res-nome-final').innerText = document.getElementById('nome').value.toUpperCase();
+            // CORREÇÃO CPF: Removido o CPF:CPF duplicado
             document.getElementById('res-cpf-final').innerText = "CPF: " + cpfInput;
             document.getElementById('res-end-final').innerText = `${document.getElementById('rua').value}, ${document.getElementById('numero').value} - ${document.getElementById('cidade').value}`;
             document.getElementById('res-cor').innerText = corSel;
@@ -383,7 +378,6 @@
             alert("Código PIX copiado com sucesso!");
         }
 
-        // Timer de Oferta
         let t = 5400; 
         setInterval(() => {
             if (t > 0) t--;
