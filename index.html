@@ -197,15 +197,30 @@
             </div>
 
             <div id="step-2" style="display:none; padding:15px; background:white;">
-                <input type="text" id="nome" class="input-box" placeholder="Nome Completo">
-                <input type="tel" id="cpf" class="input-box" placeholder="CPF">
-                <div class="cep-row">
-                    <input type="tel" id="cep" class="input-box" style="margin-bottom:0;" placeholder="CEP">
-                    <button class="btn-cep" onclick="buscarCEP()">BUSCAR</button>
-                </div>
-                <input type="text" id="rua" class="input-box" placeholder="Rua / Número / Bairro">
-                <button class="btn-buy" style="width:100%; height:45px; border-radius:4px;" onclick="goToStep(3, 'Fechar Pedido')">PRÓXIMO</button>
+    <input type="text" id="nome" class="input-box" placeholder="Nome Completo">
+    <input type="tel" id="cpf" class="input-box" placeholder="CPF">
+    
+    <div class="cep-row">
+        <input type="tel" id="cep" class="input-box" style="margin-bottom:0;" placeholder="CEP">
+        <button class="btn-cep" onclick="buscarCEP()">BUSCAR</button>
+    </div>
+
+    <input type="text" id="rua" class="input-box" placeholder="Rua / Avenida / Número">
+    <input type="text" id="bairro" class="input-box" placeholder="Bairro">
+    <input type="text" id="cidade_estado" class="input-box" placeholder="Cidade / Estado">
+
+    <div id="map-container" style="display:none; margin-top: 10px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden;">
+        <div style="background: #fdfdfd; padding: 10px; font-size: 12px; border-bottom: 1px solid #eee;">
+            <i class="fas fa-map-marked-alt" style="color:var(--shopee)"></i> Confirme sua localização no mapa
+        </div>
+        <div id="map-frame" style="height: 150px; background: #e5e3df; display: flex; align-items: center; justify-content: center;">
+            <img id="static-map" src="" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+    </div>
+
+    <button class="btn-buy" style="width:100%; height:45px; border-radius:4px; margin-top:15px;" onclick="validarEProsseguir()">PRÓXIMO</button>
             </div>
+            
 
             <div id="step-3" style="display:none;">
                 <div class="address-line">
@@ -326,3 +341,4 @@
     </script>
 </body>
 </html>
+
