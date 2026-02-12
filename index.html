@@ -19,287 +19,105 @@
         }
     })();
     </script>
-     <style>
-        /* Reset e Cores */
+
+    <style>
         :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, HelveticaNeue, sans-serif; }
         body { background: var(--bg); overflow-x: hidden; }
 
-        /* Header */
+        /* Navigation */
         .top-nav { background: white; padding: 10px; display: flex; align-items: center; position: sticky; top: 0; z-index: 999; border-bottom: 1px solid #eee; height: 50px; }
-        .search-bar { flex: 1; background: #f0f0f0; border: none; padding: 8px 12px; border-radius: 2px; margin: 0 10px; font-size: 14px; }
+        .search-container { flex: 1; background: #f0f0f0; margin: 0 10px; border-radius: 2px; padding: 8px 12px; font-size: 14px; color: #888; }
 
-        /* Slider e Banners */
+        /* Banners */
         .slider { width: 100%; display: block; }
-        .flash-sale { background: linear-gradient(90deg, #ff4d2d, #ff8a00); color: white; padding: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .free-shipping { background: #002060; color: white; padding: 8px 15px; font-weight: bold; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+        .flash-sale { background: linear-gradient(90deg, #ff4d2d, #ff8a00); color: white; padding: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+        .timer-unit { background: #333; color: #fff; padding: 2px 4px; border-radius: 2px; font-weight: bold; margin: 0 2px; }
 
-        /* Info do Produto */
+        /* Product Card */
         .p-card { background: white; padding: 15px; margin-bottom: 8px; }
         .price { color: var(--shopee); font-size: 24px; font-weight: 500; }
         .old-price { color: #999; text-decoration: line-through; font-size: 13px; }
-        .title { font-size: 15px; margin-top: 8px; line-height: 1.4; color: #333; }
+        .badge-off { background: #fff5f1; color: var(--shopee); font-size: 12px; padding: 2px 5px; border-radius: 2px; margin-left: 8px; font-weight: bold; }
+        .title { font-size: 15px; margin-top: 10px; line-height: 1.4; color: #333; }
+        .indicator { background: var(--shopee); color: white; font-size: 10px; padding: 2px 4px; border-radius: 2px; margin-right: 5px; font-weight: bold; }
 
-        /* Loja e Avaliações */
-        .section-link { background: white; padding: 15px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: inherit; border-bottom: 1px solid #eee; }
-        .shop-thumb { width: 45px; height: 45px; border-radius: 50%; border: 1px solid #eee; margin-right: 10px; }
-        .btn-view { border: 1px solid var(--shopee); color: var(--shopee); padding: 4px 10px; border-radius: 2px; font-size: 12px; }
+        /* Section Links */
+        .section-link { background: white; padding: 15px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: inherit; }
+        .shop-logo { width: 45px; height: 45px; border-radius: 50%; border: 1px solid #eee; margin-right: 12px; }
+        .btn-outline { border: 1px solid var(--shopee); color: var(--shopee); padding: 5px 12px; border-radius: 2px; font-size: 12px; font-weight: 500; }
 
-        /* Modal - O segredo para não sobrepor */
-        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 10000; }
-        .modal-content { position: absolute; bottom: 0; width: 100%; background: white; border-radius: 12px 12px 0 0; padding: 20px; max-height: 85vh; overflow-y: auto; }
-        
-        /* Esconder passos inativos */
-        .step { display: none; }
-        .step.active { display: block; }
+        /* Reviews */
+        .review-media { display: flex; gap: 8px; margin-top: 10px; overflow-x: auto; }
+        .review-media img, .review-media video { width: 100px; height: 100px; object-fit: cover; border-radius: 4px; flex-shrink: 0; }
 
-        /* Botões e Inputs */
-        .opt-btn { background: #f5f5f5; border: 1px solid #eee; padding: 10px; margin: 5px; border-radius: 4px; cursor: pointer; min-width: 80px; }
-        .opt-btn.selected { border-color: var(--shopee); color: var(--shopee); background: #fff5f1; }
-        .btn-main { background: var(--shopee); color: white; border: none; width: 100%; padding: 15px; font-weight: bold; border-radius: 4px; margin-top: 15px; cursor: pointer; }
-        .btn-alt { background: #eee; color: #555; border: none; width: 100%; padding: 12px; border-radius: 4px; margin-top: 10px; cursor: pointer; }
-        .input-box { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; }
-
-        /* Rodapé Fixo */
+        /* Footer */
         .footer-buy { position: fixed; bottom: 0; width: 100%; background: white; display: flex; border-top: 1px solid #eee; z-index: 998; }
-        .btn-buy-now { flex: 1; background: var(--shopee); color: white; border: none; padding: 15px; font-weight: bold; font-size: 16px; }
+        .footer-icons { width: 120px; display: flex; border-right: 1px solid #f2f2f2; color: var(--shopee); }
+        .icon-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 18px; }
+        .icon-item span { font-size: 9px; margin-top: 2px; }
+        .btn-buy-now { flex: 1; background: var(--shopee); color: white; border: none; padding: 15px; font-weight: bold; font-size: 16px; cursor: pointer; }
+
+        /* Modal Structure */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 10000; }
+        .modal-content { position: absolute; bottom: 0; width: 100%; background: white; border-radius: 12px 12px 0 0; padding: 20px; max-height: 90vh; overflow-y: auto; }
+        .modal-nav { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; font-size: 18px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        
+        .opt-btn { background: #f5f5f5; border: 1px solid #eee; padding: 10px; margin: 5px 5px 5px 0; border-radius: 4px; cursor: pointer; font-size: 12px; }
+        .opt-btn.selected { border-color: var(--shopee); color: var(--shopee); background: #fff5f1; }
+        .input-box { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; outline: none; }
+        
+        /* Shipping Options */
+        .shipping-option { border: 1px solid #ddd; padding: 15px; border-radius: 4px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .shipping-option.selected { border-color: var(--shopee); background: #fff5f1; }
+        .shopee-radio { width: 18px; height: 18px; border: 2px solid #ccc; border-radius: 50%; }
+        .shopee-radio.selected { background: var(--shopee); border-color: var(--shopee); }
     </style>
 </head>
 <body>
+
     <div class="top-nav">
         <a href="https://shopee.com.br/"><i class="fas fa-arrow-left" style="color:var(--shopee); font-size: 18px;"></i></a>
-        <div class="search-container"><input type="text" class="search-bar" placeholder="Buscar na Shopee"></div>
-        <i class="fas fa-shopping-cart" style="color:var(--shopee);"></i>
+        <div class="search-container">Buscar na Shopee</div>
+        <i class="fas fa-shopping-cart" style="color:var(--shopee); font-size: 18px;"></i>
     </div>
 
-    <div class="main-slider">
-        <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4">
-    </div>
+    <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" class="slider">
 
-    <div class="flash-sale-banner">
-        <div class="flash-sale-left"><i class="fas fa-bolt"></i> OFERTA RELÂMPAGO</div>
-        <div class="timer-box">
-            <span style="font-size:12px; margin-right:5px;">TERMINA EM</span>
-            <div class="timer-unit" id="h">01</div> : <div class="timer-unit" id="m">30</div> : <div class="timer-unit" id="s">00</div>
-        </div>
-    </div>
-
-    <div class="free-shipping-banner">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg" alt="Brasil">
-        FRETE GRÁTIS <span>acima de R$10</span>
-    </div>
-
-    <div class="product-card">
-        <div class="old-price">R$2.299,00</div>
-        <div class="price-row">R$599,00 <span class="discount-tag">74% OFF</span> <span style="font-size:12px; color:#999; margin-left:10px;">6,4mil Vendidos</span></div>
-        <div class="product-title">
-            <span class="indicator-tag">Indicado</span> 
-            Xiaomi Poco X7 PRO 5G Global Version, Processador Dimensity 8400-Ultra, Tela AMOLED 120Hz
-        </div>
-    </div>
-
-    <div class="shop-section">
-        <div class="shop-info">
-            <img src="https://down-br.img.susercontent.com/file/br-11134216-7r98o-m8ktdfse9yq937" class="shop-avatar">
-            <span class="badge-indicado">Indicado</span>
-            <div>
-                <div class="shop-name">Onix Oficial <i class="fas fa-check-circle" style="color:#2d88ff; font-size:12px;"></i></div>
-                <div style="font-size: 11px; color: #757575;">Ativo há 3 minutos | São Paulo</div>
-            </div>
-        </div>
-        <a href="https://shopee.com.br/shop/1078992312" class="shop-btn">Ver Loja</a>
-    </div>
-
-    <a href="https://shopee.com.br/buyer/95682341/rating" class="product-ratings-header__wrapper">
-        <div style="display: flex; flex-direction: column; gap: 4px;">
-            <div style="color: #222; font-size: 14px; font-weight: 500;">Avaliações do produto</div>
-            <div style="display: flex; align-items: center; gap: 5px;">
-                <div class="product-ratings-header__stats-avg">4.9/5</div>
-                <div style="color: #757575; font-size: 12px;">(2,4mil resenhas)</div>
-            </div>
-        </div>
-        <div style="color: var(--shopee); font-size: 13px;">Ver tudo <i class="fas fa-chevron-right" style="font-size:10px;"></i></div>
-    </a>
-
-    <div class="review-item">
-        <div style="display:flex; align-items:center; gap:8px; font-size:13px; font-weight:500;">
-            luizadriano871 <span style="color:#999; font-size:10px;">• 2 dias atrás</span>
-        </div>
-        <div style="color:#ee4d2d; font-size:10px; margin:4px 0;">⭐⭐⭐⭐⭐</div>
-        <div style="font-size:13px; color:#555;">Aparelho espetacular! O desempenho em jogos é absurdo. Recomendo a Onix!</div>
-        <div class="review-media">
-            <video autoplay loop muted playsinline src="https://down-bs-br.vod.susercontent.com/api/v4/11110103/mms/br-11110103-6kfkr-mc6f0gc92ch3fd.16000051752497615.mp4"></video>
-            <img src="https://down-br.img.susercontent.com/file/br-11134103-7r98o-mc6f0urdynjb78">
-        </div>
-    </div>
-
-    <div style="height: 60px;"></div>
-    
-    <div class="footer">
-        <div style="width:120px; display:flex;">
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--shopee); border-right:1px solid #eee;"><i class="far fa-comment-dots"></i><span style="font-size:9px;">Chat</span></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--shopee);"><i class="fas fa-cart-plus"></i><span style="font-size:9px;">Carrinho</span></div>
-        </div>
-        <button class="btn-buy" onclick="openModal()">Compre Agora</button>
-    </div>
-
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <div id="selection-screen">
-                <div style="display:flex; align-items:center; margin-bottom:15px;">
-                    <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:80px; height:80px; border-radius:4px;">
-                    <div style="margin-left:15px;"><div style="color:var(--shopee); font-size:20px; font-weight:500;">R$599,00</div><div style="font-size:12px; color:#888;">Estoque: 1071</div></div>
-                </div>
-                <p style="font-size:14px; margin-bottom:10px;">Escolha a Cor</p>
-                <div>
-                    <button class="opt-btn" onclick="selectVar(this)">AMARELO</button>
-                    <button class="opt-btn" onclick="selectVar(this)">PRETO</button>
-                    <button class="opt-btn" onclick="selectVar(this)">CINZA</button>
-                </div>
-                <button class="btn-buy" style="width:100%; height:45px; border-radius:4px; margin-top:20px;" onclick="goToForm()">PRÓXIMO</button>
-                <button class="btn-voltar" onclick="document.getElementById('modal').style.display='none'">VOLTAR</button>
-            </div>
-
-            <div id="form-screen" style="display:none;">
-                <input type="text" id="nome" class="input-box" placeholder="Nome Completo">
-                <input type="tel" id="cpf" class="input-box" placeholder="CPF">
-                <div style="display:flex; gap:8px; margin-bottom:10px;">
-                    <input type="tel" id="cep" class="input-box" style="margin-bottom:0;" placeholder="CEP">
-                    <button class="btn-cep" onclick="buscarCEP()">BUSCAR CEP</button>
-                </div>
-                <input type="text" id="rua" class="input-box" placeholder="Rua / Avenida">
-                <input type="text" id="bairro" class="input-box" placeholder="Bairro">
-                <input type="text" id="cidade" class="input-box" placeholder="Cidade / Estado">
-                <button class="btn-buy" style="width:100%; height:45px; border-radius:4px;" onclick="finalizar()">GERAR PIX</button>
-            </div>
-
-            <div id="pix-screen" style="display:none; text-align:center;">
-                <div class="garantia-shopee">
-                    <i class="fas fa-shield-alt" style="font-size: 24px; margin-bottom: 5px;"></i>
-                    <span>Se o produto não for entregue,<br>a Shopee devolve seu dinheiro!</span>
-                </div>
-                <p style="font-weight:bold; color:var(--teal); margin-bottom: 5px;">Código PIX Gerado!</p>
-                <img id="qr-img" src="" style="margin:10px 0; width:180px;">
-                <div id="pix-copy" style="background:#f5f5f5; padding:10px; font-size:10px; word-break:break-all; margin-bottom:15px; border: 1px dashed #ccc;"></div>
-                <button class="btn-buy" style="width:100%; height:40px; border-radius:4px;" onclick="copiarPix()">COPIAR CÓDIGO</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const PIX_KEY = "00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b55204000053039865406599.005802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF";
-        
-        function openModal() { document.getElementById('modal').style.display='block'; }
-        
-        let selectedVar = null;
-        function selectVar(btn) {
-            document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            selectedVar = btn.innerText;
-        }
-
-        function goToForm() {
-            if(!selectedVar) return alert("Selecione uma cor.");
-            document.getElementById('selection-screen').style.display='none';
-            document.getElementById('form-screen').style.display='block';
-        }
-
-        async function buscarCEP() {
-            const cepVal = document.getElementById('cep').value.replace(/\D/g, '');
-            if(cepVal.length === 8) {
-                const res = await fetch(`https://viacep.com.br/ws/${cepVal}/json/`);
-                const data = await res.json();
-                if(!data.erro) {
-                    document.getElementById('rua').value = data.logradouro;
-                    document.getElementById('bairro').value = data.bairro;
-                    document.getElementById('cidade').value = data.localidade + " / " + data.uf;
-                }
-            }
-        }
-
-        function finalizar() {
-            if(!document.getElementById('nome').value || !document.getElementById('cpf').value) return alert("Preencha todos os campos.");
-            
-            document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(PIX_KEY)}&color=ee4d2d`;
-            document.getElementById('pix-copy').innerText = PIX_KEY;
-            
-            document.getElementById('form-screen').style.display='none';
-            document.getElementById('pix-screen').style.display='block';
-        }
-
-        function copiarPix() {
-            navigator.clipboard.writeText(PIX_KEY);
-            alert('Código PIX copiado!');
-        }
-
-        // Timer
-        let totalSec = 5400;
-        setInterval(() => {
-            if(totalSec > 0) totalSec--;
-            document.getElementById('h').innerText = String(Math.floor(totalSec/3600)).padStart(2,'0');
-            document.getElementById('m').innerText = String(Math.floor((totalSec%3600)/60)).padStart(2,'0');
-            document.getElementById('s').innerText = String(totalSec%60).padStart(2,'0');
-        }, 1000);
-
-        // Bloqueio de volta
-        history.pushState(null, null, location.href);
-        window.onpopstate = () => { window.location.href = "https://shopee.com.br/"; };
-    </script>
-</body>
-</html>
-
-
-    <div class="top-nav">
-        <i class="fas fa-arrow-left" style="color:var(--shopee);"></i>
-        <div style="flex:1; position:relative; margin: 0 10px;">
-            <input type="text" class="search-bar" placeholder="Buscar na Shopee">
-        </div>
-        <i class="fas fa-shopping-cart" style="color:var(--shopee);"></i>
-    </div>
-
-    <div class="main-slider">
-        <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4">
-    </div>
-
-    <div class="flash-sale-banner">
+    <div class="flash-sale">
         <div style="font-weight:bold; font-style:italic;"><i class="fas fa-bolt"></i> OFERTA RELÂMPAGO</div>
-        <div class="timer-box">
-            TERMINA EM <span class="timer-unit" id="h">01</span> : <span class="timer-unit" id="m">30</span> : <span class="timer-unit" id="s">00</span>
-        </div>
+        <div>TERMINA EM <span class="timer-unit" id="h">01</span>:<span class="timer-unit" id="m">30</span>:<span class="timer-unit" id="s">00</span></div>
     </div>
 
-    <div class="product-card">
-        <div class="old-price">R$2.299,00</div>
-        <div class="price-row">R$599,00 <span style="background:rgba(238,77,45,0.1); font-size:12px; padding:2px 4px; border-radius:2px; margin-left:10px;">74% OFF</span></div>
-        <div style="margin-top:10px; font-size:15px; line-height:1.4;">
-            <span style="background:var(--shopee); color:white; font-size:10px; padding:2px 4px; border-radius:2px; margin-right:5px;">Indicado</span>
-            Xiaomi Poco X7 PRO 5G Global Version - Lote Exclusivo 2026
-        </div>
+    <div class="p-card">
+        <div class="old-price">R$ 2.299,00</div>
+        <div class="price">R$ 599,00 <span class="badge-off">74% OFF</span></div>
+        <h1 class="title"><span class="indicator">Indicado</span>Xiaomi Poco X7 PRO 5G Global Version - Lote Exclusivo 2026</h1>
     </div>
 
-    <div class="shop-section">
-        <div class="shop-info">
+    <a href="https://shopee.com.br/shop/1078992312" class="section-link" style="border-bottom: 1px solid #f2f2f2;">
+        <div style="display:flex; align-items:center;">
             <img src="https://down-br.img.susercontent.com/file/br-11134216-7r98o-m8ktdfse9yq937" class="shop-logo">
             <div>
                 <p style="font-weight:bold; font-size:14px;">Onix Oficial <i class="fas fa-check-circle" style="color:#2673dd; font-size:12px;"></i></p>
-                <p style="font-size:11px; color:#888;">Ativo há 3 minutos</p>
+                <p style="font-size:11px; color:#888;">Ativo há 3 minutos | São Paulo</p>
             </div>
         </div>
-        <a href="#" class="btn-visit-shop">Visitar Loja</a>
-    </div>
+        <div class="btn-outline">Visitar Loja</div>
+    </a>
 
-    <div class="reviews-header">
+    <a href="https://shopee.com.br/buyer/95682341/rating" class="section-link">
         <div>
             <p style="font-size:13px; font-weight:bold;">AVALIAÇÕES DO PRODUTO (19.566)</p>
             <div style="color:var(--shopee); font-size:11px; margin-top:3px;">⭐⭐⭐⭐⭐ 5/5</div>
         </div>
         <span style="color:var(--shopee); font-size:12px;">Ver Tudo ></span>
-    </div>
+    </a>
 
-    <div class="review-item">
+    <div class="p-card" style="border-top: 1px solid #f2f2f2;">
         <div style="font-size:13px; font-weight:500;">luizadriano871 <span style="color:#999; font-size:10px;">• 2 dias atrás</span></div>
         <div style="color:#ee4d2d; font-size:10px; margin:5px 0;">⭐⭐⭐⭐⭐</div>
-        <p style="font-size:13px;">Aparelho espetacular! O processador é um monstro e a câmera é sensacional.</p>
+        <p style="font-size:13px; color:#555;">Aparelho espetacular! O processador é um monstro e a câmera é sensacional.</p>
         <div class="review-media">
             <video autoplay loop muted playsinline src="https://down-bs-br.vod.susercontent.com/api/v4/11110103/mms/br-11110103-6kfkr-mc6f0gc92ch3fd.16000051752497615.mp4"></video>
             <img src="https://down-br.img.susercontent.com/file/br-11134103-7r98o-mc6f0urdynjb78">
@@ -307,13 +125,14 @@
         </div>
     </div>
 
-    <div style="height: 60px;"></div>
-    <div class="footer-main">
-        <div style="width:120px; display:flex; justify-content:space-around; align-items:center; color:var(--shopee); border-right:1px solid #eee;">
-            <i class="far fa-comment-dots" style="font-size:20px;"></i>
-            <i class="fas fa-cart-plus" style="font-size:20px;"></i>
+    <div style="height: 70px;"></div>
+    
+    <div class="footer-buy">
+        <div class="footer-icons">
+            <div class="icon-item"><i class="far fa-comment-dots"></i><span>Chat</span></div>
+            <div class="icon-item"><i class="fas fa-cart-plus"></i><span>Carrinho</span></div>
         </div>
-        <button class="btn-orange-full" onclick="openModal()">Compre Agora</button>
+        <button class="btn-buy-now" onclick="openModal()">Compre Agora</button>
     </div>
 
     <div id="modal" class="modal">
@@ -323,261 +142,136 @@
                 <span id="modal-title">Selecionar Opção</span>
             </div>
 
-            <div id="step-1" class="step-container">
+            <div id="step-1">
                 <div style="display:flex; gap:15px; margin-bottom:20px;">
-                    <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:90px; height:90px; border-radius:4px;">
+                    <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:90px; border-radius:4px;">
                     <div>
-                        <div style="color:var(--shopee); font-size:24px; font-weight:bold;">R$599,00</div>
-                        <div style="font-size:12px; color:#888;">Estoque: 1.071</div>
+                        <p style="color:var(--shopee); font-size:22px; font-weight:bold;">R$ 599,00</p>
+                        <p style="font-size:12px; color:#888;">Estoque: 1.071</p>
                     </div>
                 </div>
-
-                <p class="section-title">Cor:</p>
+                <p style="font-size:14px; font-weight:bold;">Cor:</p>
                 <div id="cor-group" style="margin-bottom:15px;">
                     <button class="opt-btn" onclick="selectVar(this, 'cor')">AMARELO</button>
                     <button class="opt-btn" onclick="selectVar(this, 'cor')">PRETO</button>
                     <button class="opt-btn" onclick="selectVar(this, 'cor')">CINZA</button>
-                    <button class="opt-btn" onclick="selectVar(this, 'cor')">IRON MAN</button>
                 </div>
-
-                <p class="section-title">Armazenamento (GB):</p>
-                <div id="gb-group" style="margin-bottom:15px;">
+                <p style="font-size:14px; font-weight:bold;">Armazenamento:</p>
+                <div id="gb-group">
                     <button class="opt-btn" onclick="selectVar(this, 'gb')">512GB-12GB</button>
                     <button class="opt-btn" onclick="selectVar(this, 'gb')">256GB-8GB</button>
-                    <button class="opt-btn" onclick="selectVar(this, 'gb')">256GB-12GB</button>
                 </div>
-
-                <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0;">
-                    <span class="section-title">Quantidade</span>
-                    <div style="display:flex; align-items:center; border:1px solid #ddd; border-radius:2px;">
-                        <button onclick="updateQty(-1)" style="padding:5px 12px; border:none; background:none;">-</button>
-                        <span id="qty-val" style="width:30px; text-align:center;">1</span>
-                        <button onclick="updateQty(1)" style="padding:5px 12px; border:none; background:none;">+</button>
-                    </div>
-                </div>
-                <button class="btn-orange-full" style="margin-top:15px; border-radius:4px;" onclick="nextStep(2)">PRÓXIMO</button>
+                <button class="btn-buy-now" style="width:100%; margin-top:20px; border-radius:4px;" onclick="nextStep(2)">PRÓXIMO</button>
             </div>
 
-            <div id="step-2" class="step-container" style="display:none;">
-                <p class="section-title">Dados para Entrega</p>
+            <div id="step-2" style="display:none;">
                 <input type="text" id="nome" class="input-box" placeholder="Nome Completo">
-                <input type="tel" id="cpf" class="input-box" placeholder="CPF (Apenas números)" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                
+                <input type="tel" id="cpf" class="input-box" placeholder="CPF">
                 <div style="display:flex; gap:8px;">
-                    <input type="tel" id="cep" class="input-box" placeholder="CEP" maxlength="8" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                    <button class="btn-orange-full" style="width:90px; height:44px; font-size:12px; border-radius:4px;" onclick="buscarCEP()">BUSCAR</button>
+                    <input type="tel" id="cep" class="input-box" placeholder="CEP">
+                    <button style="background:var(--shopee); color:white; border:none; border-radius:4px; padding:0 10px; margin-bottom:10px;" onclick="buscarCEP()">BUSCAR</button>
                 </div>
-
-                <input type="text" id="rua" class="input-box" placeholder="Rua / Avenida">
-                <input type="text" id="numero" class="input-box" placeholder="Número">
-                <input type="text" id="bairro" class="input-box" placeholder="Bairro">
-                <input type="text" id="cidade" class="input-box" placeholder="Cidade / Estado">
-
-                <button class="btn-orange-full" style="border-radius:4px;" onclick="validarDados()">PRÓXIMO</button>
+                <input type="text" id="rua" class="input-box" placeholder="Endereço">
+                <input type="text" id="cidade" class="input-box" placeholder="Cidade / UF">
+                <button class="btn-buy-now" style="width:100%; border-radius:4px;" onclick="nextStep(3)">PRÓXIMO</button>
             </div>
 
             <div id="step-3" style="display:none;">
-                <div class="delivery-header">
-                    <h3><i class="fas fa-map-marker-alt"></i> Endereço de Entrega</h3>
-                    <p><strong id="res-nome-final"></strong></p>
-                    <p>CPF: <span id="res-cpf-final"></span></p>
-                    <p id="res-end-final" style="font-size:12px; color:#666;"></p>
+                <p style="margin-bottom:15px; font-weight:bold;">Opções de Envio:</p>
+                <div class="shipping-option selected" onclick="selectEnvio(0, this)">
+                    <div><p style="font-weight:bold;">FRETE GRÁTIS</p><p style="font-size:12px; color:#888;">Entrega em 3-5 dias</p></div>
+                    <div class="shopee-radio selected"></div>
                 </div>
-
-                <div style="background:#fff; padding:12px 15px; border-bottom:1px solid #eee; display:flex; align-items:center; gap:8px; font-weight:bold; font-size:13px;">
-                    <i class="fas fa-store"></i> Onix Oficial <i class="fas fa-check-circle" style="color:#2673dd;"></i>
+                <div class="shipping-option" onclick="selectEnvio(32, this)">
+                    <div><p style="font-weight:bold;">SEDEX EXPRESS</p><p style="font-size:12px; color:#888;">Entrega em 24h úteis</p></div>
+                    <div class="shopee-radio"></div>
                 </div>
-
-                <div style="display:flex; gap:10px; padding:15px; background:#fff; border-bottom:1px solid #eee;">
-                    <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" style="width:60px; height:60px; object-fit:cover; border-radius:2px;">
-                    <div style="flex:1;">
-                        <p style="font-size:13px; font-weight:500;">Poco X7 Pro 5G - <span id="res-gb"></span></p>
-                        <p style="font-size:11px; color:#888;">Cor: <span id="res-cor"></span></p>
-                        <p style="color:var(--shopee); font-weight:bold; margin-top:5px;">R$599,00 <span style="color:#888; font-weight:normal; font-size:11px;">x1</span></p>
+                <div style="background:#fff; padding:15px; border-top:1px solid #eee; margin-top:20px;">
+                    <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:18px;">
+                        <span>Total:</span>
+                        <span id="total-txt" style="color:var(--shopee);">R$ 599,00</span>
                     </div>
-                </div>
-
-                <div style="padding:15px; background:#fff; margin-bottom:8px;">
-                    <p class="section-title">Proteção Adicional</p>
-                    <div style="border:1px solid #eee; padding:12px; border-radius:4px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleSeguro()">
-                        <div>
-                            <p style="font-size:12px; font-weight:bold;">Seguro 12 Meses</p>
-                            <p style="font-size:11px; color:#888;">Roubo, perda ou danos</p>
-                        </div>
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <span style="font-weight:bold; font-size:13px;">R$62,00</span>
-                            <div id="rad-seguro" class="shopee-radio"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="padding:15px; background:#fff;">
-                    <p class="section-title">Opções de Envio</p>
-                    <div class="shipping-option selected" onclick="selectEnvio(0, this)">
-                        <div>
-                            <p style="font-size:13px; font-weight:bold;">Envio Econômico (Grátis)</p>
-                            <span style="font-size:11px; color:#888;">Chega entre 22 de fev e 24 de fev</span>
-                        </div>
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <span style="font-weight:bold;">R$0,00</span>
-                            <div class="shopee-radio selected"></div>
-                        </div>
-                    </div>
-                    <div class="shipping-option" onclick="selectEnvio(32, this)">
-                        <div>
-                            <p style="font-size:13px; font-weight:bold;">Entrega Rápida</p>
-                            <span style="font-size:11px; color:#888;">Chega entre 18 de fev e 20 de fev</span>
-                        </div>
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <span style="font-weight:bold;">R$32,00</span>
-                            <div class="shopee-radio"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="padding:20px 15px; background:#fff; border-top:1px solid #eee; margin-top:8px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <span style="font-size:16px; font-weight:bold;">Total do Pedido:</span>
-                        <span id="total-txt" style="color:var(--shopee); font-size:22px; font-weight:bold;">R$599,00</span>
-                    </div>
-                    <p id="economy-box" class="economy-text"></p>
-                    <button class="btn-orange-full" style="height:55px; margin-top:15px; border-radius:4px;" onclick="gerarPix()">Finalizar Compra</button>
+                    <button class="btn-buy-now" style="width:100%; margin-top:15px; border-radius:4px;" onclick="gerarPix()">FINALIZAR COMPRA</button>
                 </div>
             </div>
 
-            <div id="step-4" style="display:none; text-align:center; padding:30px 15px; background:white;">
-                <p style="font-weight:bold; color:var(--teal); font-size:18px;">Código PIX Gerado!</p>
+            <div id="step-4" style="display:none; text-align:center;">
+                <p style="color:var(--teal); font-weight:bold; font-size:18px;">Código PIX Gerado!</p>
                 <img id="qr-code" src="" style="width:200px; margin:20px 0;">
-                <div id="pix-copy" style="background:#f5f5f5; padding:15px; font-size:11px; word-break:break-all; border:1px dashed #ccc; margin-bottom:20px;"></div>
-                <button class="btn-orange-full" style="border-radius:4px;" onclick="copiarPix()">COPIAR CÓDIGO PIX</button>
+                <div id="pix-copy" style="background:#f5f5f5; padding:15px; font-size:10px; word-break:break-all; border:1px dashed #ccc; margin-bottom:20px;"></div>
+                <button class="btn-buy-now" style="width:100%; border-radius:4px;" onclick="copiarPix()">COPIAR CÓDIGO PIX</button>
             </div>
 
         </div>
     </div>
 
     <script>
-        let currentStep = 1; 
-        let qty = 1;
-        let precoBase = 599; 
-        let precoAntigo = 2299;
-        let vSeguro = 0; 
-        let vEnvio = 0;
-        let corSel = ""; 
+        let currentStep = 1;
+        let corSel = "";
         let gbSel = "";
+        let vEnvio = 0;
+        const PIX_CHAVE = "00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b5520400005303986540599.005802BR5917LOJA ONIX OFICIAL6009SAO PAULO62070503***6304";
 
-        function openModal() {
-            document.getElementById('modal').style.display = 'block';
-            currentStep = 1;
-            updateHeader();
-        }
-
-        function updateHeader() {
-            const titles = ["", "Selecionar Opção", "Informações de Envio", "Fechar Pedido", "Pagamento"];
-            document.getElementById('modal-title').innerText = titles[currentStep];
-        }
+        function openModal() { document.getElementById('modal').style.display = 'block'; }
+        function prevStep() { if(currentStep === 1) document.getElementById('modal').style.display = 'none'; else nextStep(currentStep - 1); }
 
         function nextStep(n) {
-            if (n === 2 && (!corSel || !gbSel)) return alert("Selecione Cor e GB!");
+            if(n === 2 && (!corSel || !gbSel)) return alert("Selecione Cor e Armazenamento!");
             document.querySelectorAll('[id^="step-"]').forEach(s => s.style.display = 'none');
             document.getElementById('step-' + n).style.display = 'block';
             currentStep = n;
-            updateHeader();
-        }
-
-        function prevStep() {
-            if (currentStep === 1) document.getElementById('modal').style.display = 'none';
-            else nextStep(currentStep - 1);
+            const titles = ["", "Selecionar Opção", "Dados de Entrega", "Opção de Envio", "Pagamento"];
+            document.getElementById('modal-title').innerText = titles[n];
         }
 
         function selectVar(btn, grupo) {
             document.querySelectorAll(`#${grupo}-group .opt-btn`).forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
-            if (grupo === 'cor') corSel = btn.innerText;
-            if (grupo === 'gb') gbSel = btn.innerText;
+            if(grupo === 'cor') corSel = btn.innerText; else gbSel = btn.innerText;
         }
 
-        function updateQty(val) {
-            if (qty + val >= 1) {
-                qty += val;
-                document.getElementById('qty-val').innerText = qty;
-                calcTotal();
-            }
-        }
-
-        function selectEnvio(valor, elemento) {
+        function selectEnvio(valor, el) {
             vEnvio = valor;
-            document.querySelectorAll('.shipping-option').forEach(opt => {
-                opt.classList.remove('selected');
-                opt.querySelector('.shopee-radio').classList.remove('selected');
-            });
-            elemento.classList.add('selected');
-            elemento.querySelector('.shopee-radio').classList.add('selected');
-            calcTotal();
-        }
-
-        function toggleSeguro() {
-            vSeguro = (vSeguro === 0) ? 62 : 0;
-            document.getElementById('rad-seguro').classList.toggle('selected', vSeguro > 0);
-            document.getElementById('rad-seguro').querySelector('.shopee-radio').classList.toggle('selected', vSeguro > 0);
-            calcTotal();
-        }
-
-        function calcTotal() {
-            let total = (precoBase * qty) + vSeguro + vEnvio;
-            let eco = (precoAntigo * qty) - total;
-            document.getElementById('total-txt').innerText = "R$" + total.toFixed(2).replace('.', ',');
-            document.getElementById('economy-box').innerText = "Você economizou R$" + eco.toFixed(2).replace('.', ',');
-            return total;
+            document.querySelectorAll('.shipping-option').forEach(o => { o.classList.remove('selected'); o.querySelector('.shopee-radio').classList.remove('selected'); });
+            el.classList.add('selected'); el.querySelector('.shopee-radio').classList.add('selected');
+            document.getElementById('total-txt').innerText = "R$ " + (599 + valor).toFixed(2).replace('.', ',');
         }
 
         async function buscarCEP() {
-            let c = document.getElementById('cep').value;
-            if (c.length === 8) {
-                const r = await fetch(`https://viacep.com.br/ws/${c}/json/`);
+            let cep = document.getElementById('cep').value.replace(/\D/g, '');
+            if(cep.length === 8) {
+                const r = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
                 const d = await r.json();
-                if (!d.erro) {
-                    document.getElementById('rua').value = d.logradouro;
+                if(!d.erro) {
+                    document.getElementById('rua').value = d.logradouro + " - " + d.bairro;
                     document.getElementById('cidade').value = d.localidade + " / " + d.uf;
                 }
             }
         }
 
-        function validarDados() {
-            if (!document.getElementById('nome').value || document.getElementById('cpf').value.length < 11) {
-                return alert("Preencha os dados corretamente!");
-            }
-            document.getElementById('res-nome-final').innerText = document.getElementById('nome').value.toUpperCase();
-            document.getElementById('res-cpf-final').innerText = "CPF: " + document.getElementById('cpf').value;
-            document.getElementById('res-end-final').innerText = `${document.getElementById('rua').value}, ${document.getElementById('numero').value} - ${document.getElementById('cidade').value}`;
-            document.getElementById('res-cor').innerText = corSel;
-            document.getElementById('res-gb').innerText = gbSel;
-            nextStep(3);
-        }
-
         function gerarPix() {
-            const val = calcTotal().toFixed(2);
-            const px = "00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b5520400005303986540" + val + "5802BR5917LOJA ONIX OFICIAL6009SAO PAULO62070503***6304";
-            document.getElementById('qr-code').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(px)}&color=ee4d2d`;
-            document.getElementById('pix-copy').innerText = px;
+            if(!document.getElementById('nome').value) return alert("Preencha seu nome!");
+            let valPix = (599 + vEnvio).toFixed(2);
+            let payload = PIX_CHAVE.replace("599.00", valPix);
+            document.getElementById('qr-code').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(payload)}&color=ee4d2d`;
+            document.getElementById('pix-copy').innerText = payload;
             nextStep(4);
         }
 
         function copiarPix() {
             navigator.clipboard.writeText(document.getElementById('pix-copy').innerText);
-            alert("PIX Copiado!");
+            alert("Código PIX Copiado!");
         }
 
-        // Timer Regressivo
-        let t = 5400; 
+        // Timer
+        
+        let t = 5400;
         setInterval(() => {
-            if (t > 0) t--;
-            document.getElementById('h').innerText = String(Math.floor(t / 3600)).padStart(2, '0');
-            document.getElementById('m').innerText = String(Math.floor((t % 3600) / 60)).padStart(2, '0');
-            document.getElementById('s').innerText = String(t % 60).padStart(2, '0');
+            t--;
+            document.getElementById('h').innerText = String(Math.floor(t/3600)).padStart(2,'0');
+            document.getElementById('m').innerText = String(Math.floor((t%3600)/60)).padStart(2,'0');
+            document.getElementById('s').innerText = String(t%60).padStart(2,'0');
         }, 1000);
     </script>
 </body>
 </html>
-
-
-
