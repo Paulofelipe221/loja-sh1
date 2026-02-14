@@ -249,134 +249,137 @@
         <button class="btn-buy-now" onclick="openModal()">Compre Agora</button>
     </div>
 
-    <div style="display: flex; gap: 10px; padding: 15px;">
-    <img src="https://i.postimg.cc/ctv07Hv2/br-11134103-81ztc-mk5oi70vvpxf33.webp" style="width: 100px; height: 100px; border-radius: 4px;">
-    <div>
+    
+    <button onclick="openModal()">Abrir Modal</button>
 
     <div id="modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <img src="https://i.postimg.cc/hvd5NVng/celular-xiaomi-poco-x7-pro-nfc-dual-sim-512gb-12gb-ram.jpg" class="modal-img">
-                <div>
-                    <div style="color:var(--shopee); font-size:20px; font-weight:bold;">R$599,00</div>
-                    <div style="font-size:12px; color:#888;">Estoque: 1.071</div>
+                <div style="flex: 1;">
+                    <div id="modal-product-price" style="color: var(--shopee); font-size: 22px; font-weight: bold;">R$599,00</div>
+                    <div id="modal-old-price" style="text-decoration: line-through; color: #757575; font-size: 14px;">R$2.299,00</div>
+                    <div style="font-size: 12px; color: #888; margin-top: 5px;">Estoque: 1.071</div>
                 </div>
-                <i class="fas fa-times" style="margin-left:auto; color:#999;" onclick="closeModal()"></i>
+                <i class="fas fa-times" style="cursor: pointer; color: #999;" onclick="closeModal()">X</i>
             </div>
 
-            <div id="modal-product-price" style="color: #ee4d2d; font-size: 20px; font-weight: bold;">R$599,00</div>
-        <div id="modal-old-price" style="text-decoration: line-through; color: #757575; font-size: 14px;">R$2.299,00</div>
-        <div style="font-size: 12px; color: #757575; margin-top: 4px;">Estoque: 1.071</div>
-    </div>
-</div>
+            <div id="step-1" style="padding: 15px;">
+                <p class="option-title" style="font-weight: bold; margin: 0;">Cor:</p>
+                <div class="option-group" id="cor-group">
+                    <button class="opt-btn" onclick="selectOpt(this, 'cor')">AMARELO</button>
+                    <button class="opt-btn" onclick="selectOpt(this, 'cor')">PRETO</button>
+                    <button class="opt-btn" onclick="selectOpt(this, 'cor')">IRON MAN</button>
+                </div>
 
-<div id="step-1" style="padding: 15px;">
-    <p class="option-title">Cor:</p>
-    <div class="option-group" id="cor-group">
-        <button class="opt-btn" onclick="selectOpt(this, 'cor')">AMARELO</button>
-        <button class="opt-btn" onclick="selectOpt(this, 'cor')">PRETO</button>
-        <button class="opt-btn" onclick="selectOpt(this, 'cor')">IRON MAN</button>
-    </div>
+                <p class="option-title" style="margin-top: 20px; font-weight: bold;">Versão:</p>
+                <div class="option-group" id="versao-group">
+                    <button class="opt-btn" style="width: 100%; text-align: left; margin-bottom: 8px;" onclick="selectOpt(this, 'versao', 256)">12 GB de RAM + 256 GB</button>
+                    <button class="opt-btn" style="width: 100%; text-align: left;" onclick="selectOpt(this, 'versao', 512)">12 GB de RAM + 512 GB</button>
+                </div>
 
-    <p class="option-title" style="margin-top: 20px;">Versão:</p>
-    <div class="option-group" id="versao-group">
-        <button class="opt-btn" style="width: 100%; text-align: left; margin-bottom: 8px;" onclick="selectOpt(this, 'versao', 256)">12 GB de RAM + 256 GB</button>
-        <button class="opt-btn" style="width: 100%; text-align: left;" onclick="selectOpt(this, 'versao', 512)">12 GB de RAM + 512 GB</button>
-    </div>
-
-    <button id="btn-next-step" class="btn-buy-now" 
-            style="width:100%; height:45px; border-radius:2px; margin-top:20px; background-color: #ccc; cursor: not-allowed;" 
-            onclick="validateAndNext()" disabled>
-        PRÓXIMO
-    </button>
-</div> 
+                <button id="btn-next-step" class="btn-buy-now" 
+                        style="width:100%; height:45px; border-radius:2px; margin-top:20px; background-color: #ccc; cursor: not-allowed;" 
+                        onclick="validateAndNext()" disabled>
+                    PRÓXIMO
+                </button>
+            </div> 
              
-            <div id="step-2" style="display:none;">
+            <div id="step-2" style="display:none; padding: 15px;">
+                <p style="font-weight: bold;">Dados para entrega:</p>
                 <input type="text" id="nome" class="input-box" placeholder="Nome Completo">
                 <input type="tel" id="cep" class="input-box" placeholder="CEP" maxlength="8">
-                <button class="btn-buy-now" style="width:100%; height:45px; border-radius:2px;" onclick="gerarPix()">FINALIZAR COMPRA</button>
+                <button class="btn-buy-now" style="width:100%; height:45px; border-radius:2px; background-color: var(--shopee); margin-top: 15px;" onclick="gerarPix()">FINALIZAR COMPRA</button>
             </div>
-            <div id="step-pix" style="display:none; text-align:center;">
-                <p style="color:var(--btn-green); font-weight:bold;">Código PIX Gerado!</p>
-                <img id="qr-code" style="width:180px; margin:15px 0;">
-                <button class="btn-buy-now" style="width:100%; height:40px;" onclick="copiarPix()">COPIAR PIX</button>
+
+            <div id="step-pix" style="display:none; text-align:center; padding: 15px;">
+                <p style="color:var(--btn-green); font-weight:bold; font-size: 18px;">Código PIX Gerado!</p>
+                <img id="qr-code" style="width:180px; margin:15px 0; border: 1px solid #eee;">
+                <button class="btn-buy-now" style="width:100%; height:45px; background-color: var(--shopee); border-radius: 2px;" onclick="copiarPix()">COPIAR PIX</button>
             </div>
         </div>
     </div>
 
     <script>
-   const precoBase = 599.00;
-    const precoAntigoBase = 2299.00; // Preço cortado inicial
-    let corEscolhida = false;
-    let versaoEscolhida = false;
-    let valorFinal = precoBase;
+        const precoBase = 599.00;
+        const precoAntigoBase = 2299.00;
+        let corEscolhida = false;
+        let versaoEscolhida = false;
+        let valorFinal = precoBase;
 
-    function selectOpt(element, group, memoria = null) {
-        const buttons = element.parentElement.querySelectorAll('.opt-btn');
-        buttons.forEach(btn => {
-            btn.classList.remove('active', 'selected');
-        });
-        
-        element.classList.add('selected', 'active');
-
-        if (group === 'cor') corEscolhida = true;
-        
-        if (group === 'versao') {
-            versaoEscolhida = true;
-            atualizarPreco(memoria);
-        }
-
-        const btnNext = document.getElementById('btn-next-step');
-        if (corEscolhida && versaoEscolhida) {
-            btnNext.style.backgroundColor = "#ee4d2d";
-            btnNext.style.cursor = "pointer";
-            btnNext.disabled = false;
-        }
-    }
-
-    function atualizarPreco(memoria) {
-        const precoElemento = document.getElementById('modal-product-price');
-        const precoAntigoElemento = document.getElementById('modal-old-price');
-        
-        if (precoElemento && precoAntigoElemento) {
-            valorFinal = precoBase;
-            let valorAntigo = precoAntigoBase;
-
-            if (memoria === 512) {
-                valorFinal = precoBase * 1.20; // +20%
-                valorAntigo = precoAntigoBase * 1.20; // Aumenta o riscado também para manter a proporção
-            }
+        function selectOpt(element, group, memoria = null) {
+            const buttons = element.parentElement.querySelectorAll('.opt-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active', 'selected');
+            });
             
-            precoElemento.innerText = `R$${valorFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-            precoAntigoElemento.innerText = `R$${valorAntigo.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+            element.classList.add('selected', 'active');
+
+            if (group === 'cor') corEscolhida = true;
+            
+            if (group === 'versao') {
+                versaoEscolhida = true;
+                atualizarPreco(memoria);
+            }
+
+            const btnNext = document.getElementById('btn-next-step');
+            if (corEscolhida && versaoEscolhida) {
+                btnNext.style.backgroundColor = "#ee4d2d";
+                btnNext.style.cursor = "pointer";
+                btnNext.disabled = false;
+            }
         }
-    }
 
-    function nextStep() {
-        document.getElementById('step-1').style.display = 'none';
-        document.getElementById('step-2').style.display = 'block';
-    }
+        function atualizarPreco(memoria) {
+            const precoElemento = document.getElementById('modal-product-price');
+            const precoAntigoElemento = document.getElementById('modal-old-price');
+            
+            if (precoElemento && precoAntigoElemento) {
+                valorFinal = precoBase;
+                let valorAntigo = precoAntigoBase;
 
-    function validateAndNext() {
-        if (corEscolhida && versaoEscolhida) {
-            nextStep();
+                if (memoria === 512) {
+                    valorFinal = precoBase * 1.20;
+                    valorAntigo = precoAntigoBase * 1.20;
+                }
+                
+                precoElemento.innerText = `R$${valorFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+                precoAntigoElemento.innerText = `R$${valorAntigo.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+            }
         }
-    }
 
-    function openModal() { document.getElementById('modal').style.display = 'block'; }
-    function closeModal() { document.getElementById('modal').style.display = 'none'; }
-
-    function gerarPix() {
-        const px = `00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b55204000053039865405${valorFinal.toFixed(2)}5802BR5917LOJA ONIX OFICIAL6009SAO PAULO62070503***6304`;
-        const qrImg = document.getElementById('qr-code');
-        if (qrImg) {
-            qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(px)}&color=ee4d2d`;
+        function nextStep() {
+            document.getElementById('step-1').style.display = 'none';
+            document.getElementById('step-2').style.display = 'block';
         }
-        document.getElementById('step-2').style.display = 'none';
-        document.getElementById('step-pix').style.display = 'block';
-    }
 
-        // 7. Timer Regressivo
+        function validateAndNext() {
+            if (corEscolhida && versaoEscolhida) {
+                nextStep();
+            }
+        }
+
+        function openModal() { document.getElementById('modal').style.display = 'block'; }
+        function closeModal() { document.getElementById('modal').style.display = 'none'; }
+
+        function gerarPix() {
+            const px = `00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b55204000053039865405${valorFinal.toFixed(2)}5802BR5917LOJA ONIX OFICIAL6009SAO PAULO62070503***6304`;
+            const qrImg = document.getElementById('qr-code');
+            if (qrImg) {
+                qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(px)}&color=ee4d2d`;
+            }
+            document.getElementById('step-2').style.display = 'none';
+            document.getElementById('step-pix').style.display = 'block';
+        }
+
+        function copiarPix() {
+            const code = `00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b55204000053039865405${valorFinal.toFixed(2)}5802BR5917LOJA ONIX OFICIAL6009SAO PAULO62070503***6304`;
+            navigator.clipboard.writeText(code).then(() => {
+                alert("Código PIX copiado!");
+            });
+        }
+
+        // Timer Regressivo (Apenas lógica, certifique-se de ter os IDs 'h', 'm', 's' no seu HTML principal)
         let t = 5370;
         setInterval(() => {
             if(t > 0) t--;
@@ -392,4 +395,3 @@
     </script>
 </body>
 </html>
-
