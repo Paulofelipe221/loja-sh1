@@ -97,16 +97,17 @@
     </style>
 </head>
 <body>
+   <div class="top-nav">
+    <i class="fas fa-arrow-left back-icon" onclick="window.location.href='https://shopee.com.br'"></i>
+    
+    <form action="https://shopee.com.br/search" method="GET" class="search-container" style="display: flex; flex: 1; align-items: center;">
+        <i class="fas fa-search" style="margin-left: 10px;"></i>
+        <input type="text" name="keyword" placeholder="Buscar na Shopee" style="border: none; outline: none; width: 100%; padding: 8px;">
+    </form>
 
-    <div class="top-nav">
-        <i class="fas fa-arrow-left back-icon" onclick="window.location.href='https://shopee.com.br'"></i>
-        <div class="search-container">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Buscar na Shopee" readonly>
-        </div>
-        <i class="fas fa-shopping-cart cart-icon"></i>
-    </div>
-
+    <i class="fas fa-shopping-cart cart-icon" onclick="window.location.href='https://shopee.com.br/cart'"></i>
+   </div>
+    
     <div class="main-slider">
         <div class="carousel-track" id="mainTrack">
             <div class="carousel-item"><img src="https://i.postimg.cc/hvd5NVng/celular-xiaomi-poco-x7-pro-nfc-dual-sim-512gb-12gb-ram.jpg"></div>
@@ -316,6 +317,7 @@
     </script>
 </body>
 </html>
+
 
 
 
