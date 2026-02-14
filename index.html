@@ -237,35 +237,30 @@
 </div>
     
     <div class="footer">
-        <a href="https://shopee.com.br/shop/1078992312" class="footer-icon-btn">
-            <i class="far fa-comment-dots"></i>
-            <span>Chat</span>
-        </a>
-        
-            <div class="footer">
-        <a href="#" class="footer-icon-btn">
-            <i class="far fa-comment-dots" style="color: #00bfa5;"></i>
-            <span>Chat</span>
-        </a>
-        
-        <button class="btn-add-cart" onclick="openModal()">
-            <i class="fas fa-cart-plus"></i>
-            <span>Adicionar ao carrinho</span>
-        </button>
-        <button class="btn-buy-now" onclick="openModal()">Compre Agora</button>
-    </div>
+    <a href="https://shopee.com.br/shop/1078992312" class="footer-icon-btn">
+        <i class="far fa-comment-dots" style="color: #00bfa5;"></i>
+        <span>Chat</span>
+    </a>
+    
+    <button class="btn-add-cart" onclick="openModal()">
+        <i class="fas fa-cart-plus"></i>
+        <span>Adicionar ao carrinho</span>
+    </button>
+    
+    <button class="btn-buy-now" onclick="openModal()">Compre Agora</button>
+</div>
 
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <img src="https://i.postimg.cc/hvd5NVng/celular-xiaomi-poco-x7-pro-nfc-dual-sim-512gb-12gb-ram.jpg" class="modal-img">
-                <div style="flex: 1;">
-                    <div id="modal-product-price" style="color: var(--shopee); font-size: 22px; font-weight: bold;">R$599,00</div>
-                    <div id="modal-old-price" style="text-decoration: line-through; color: #757575; font-size: 14px;">R$2.299,00</div>
-                    <div style="font-size: 12px; color: #888; margin-top: 5px;">Estoque: 1.071</div>
-                </div>
-                <i class="fas fa-times" style="cursor: pointer; color: #999; font-size: 20px;" onclick="closeModal()">X</i>
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <img src="https://i.postimg.cc/hvd5NVng/celular-xiaomi-poco-x7-pro-nfc-dual-sim-512gb-12gb-ram.jpg" class="modal-img">
+            <div style="flex: 1;">
+                <div id="modal-product-price" style="color: var(--shopee); font-size: 22px; font-weight: bold;">R$599,00</div>
+                <div id="modal-old-price" style="text-decoration: line-through; color: #757575; font-size: 14px;">R$2.299,00</div>
+                <div style="font-size: 12px; color: #888; margin-top: 5px;">Estoque: 1.071</div>
             </div>
+            <i class="fas fa-times" style="cursor: pointer; color: #999; font-size: 20px; padding: 10px;" onclick="closeModal()"></i>
+        </div>
 
             <div id="step-1" style="padding: 10px;">
                 <p class="option-title" style="font-weight: bold;">Cor:</p>
@@ -646,5 +641,6 @@
 </script>
             
             
+
 
 
