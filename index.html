@@ -638,10 +638,75 @@
         }
     }
 
+    // --- FUNÇÃO PARA BUSCAR CEP ---
+    async function buscarCep() {
+    const cep = document.getElementById('inCep').value.replace(/\D/g, '');
+    if(cep.length === 8) {
+        const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = await res.json();
+        if(!data.erro) {
+            document.getElementById('inRua').value = data.logradouro;
+            document.getElementById('inBairro').value = data.bairro;
+            document.getElementById('inCidade').value = data.localidade;
+            document.getElementById('inUF').value = data.uf;
+        }
+    }
+}
+
+// --- SALVAR ENDEREÇO E ATUALIZAR RESUMO ---
+function salvarEndereco() {
+    const nome = document.getElementById('inName').value;
+    const rua = document.getElementById('inRua').value;
+    const num = document.getElementById('inNum').value;
+    const bairro = document.getElementById('inBairro').value;
+    
+    if(!nome || !rua || !num) return alert("Preencha os dados de entrega!");
+
+    document.getElementById('dispName').innerText = nome;
+    document.getElementById('dispAddr').innerText = `${rua}, ${num}, ${bairro}`;
+    openPage('step-2');
+}
+
+// --- CALCULAR DATA DE ENTREGA (Sempre 8 a 12 dias à frente) ---
+function calcularEntrega() {
+    const hoje = new Date();
+    const d1 = new Date(); d1.setDate(hoje.getDate() + 8);
+    const d2 = new Date(); d2.setDate(hoje.getDate() + 12);
+    const meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+    document.getElementById('deliveryDate').innerText = `Receba entre ${d1.getDate()} de ${meses[d1.getMonth()]} e ${d2.getDate()} de ${meses[d2.getMonth()]}`;
+}
+
+// --- GERAÇÃO DO QR CODE PIX DINÂMICO ---
+function gerarPix() {
+    const valor = valorFinal.toFixed(2);
+    const pixRaw = `00020101021226870014br.gov.bcb.pix2565shopee_oficial_pay_${valor.replace('.','')}`;
+    
+    // Gera a imagem do QR Code usando API pública
+    document.getElementById('qrCodeImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(pixRaw)}`;
+    document.getElementById('pixCodeDisplay').innerText = pixRaw;
+}
+
+// --- FINALIZAR PEDIDO ---
+function finalizarPedido() {
+    if(isPixSelected) {
+        gerarPix();
+        openPage('pixPage');
+    } else {
+        alert("Selecione o Pix ou adicione um Cartão de Crédito.");
+    }
+}
+
+// --- MÁSCARA DE CPF ---
+document.getElementById('inCpf').oninput = e => {
+    let v = e.target.value.replace(/\D/g, '');
+    v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+    e.target.value = v;
+};    
 </script> 
 
 </body> 
 </html>
+
 
 
 
