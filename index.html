@@ -638,9 +638,36 @@
             e.target.value = v;
         };
     }
-</script>
+
+    function openModal() {
+        const modal = document.getElementById('modal');
+        if (modal) {
+            modal.style.display = 'block'; // Mostra o modal
+            document.body.style.overflow = 'hidden'; // Trava a página atrás
+        } else {
+            console.error("Erro: Elemento 'modal' não encontrado!");
+        }
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('modal');
+        if (modal) {
+            modal.style.display = 'none'; // Esconde o modal
+            document.body.style.overflow = 'auto'; // Destrava a página
+        }
+    }
+
+    // Fecha o modal se o utilizador clicar na parte escura (fora da caixa)
+    window.onclick = function(event) {
+        const modal = document.getElementById('modal');
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+
+</script> </body> </html> 
             
-            
+
 
 
 
