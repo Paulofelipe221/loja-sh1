@@ -280,7 +280,7 @@
         PRÓXIMO
     </button>
             </div>
-            
+             
             <div id="step-2" style="display:none;">
                 <input type="text" id="nome" class="input-box" placeholder="Nome Completo">
                 <input type="tel" id="cep" class="input-box" placeholder="CEP" maxlength="8">
@@ -295,109 +295,115 @@
     </div>
 
     <script>
-// 1. Configurações de Estado e Preço
-const precoBase = 599.00;
-let corEscolhida = false;
-let versaoEscolhida = false;
+        // 1. Configurações de Estado e Preço
+        const precoBase = 599.00;
+        let corEscolhida = false;
+        let versaoEscolhida = false;
+        let valorFinal = precoBase;
 
-// 2. Função Unificada para Seleção de Opções
-function selectOpt(element, group, memoria = null) {
-    // Remove destaque de outros botões do mesmo grupo
-    const buttons = element.parentElement.querySelectorAll('.opt-btn');
-    buttons.forEach(btn => {
-        btn.classList.remove('active');
-        btn.classList.remove('selected'); // Garante compatibilidade com seu CSS
-    });
-    
-    // Destaca o botão atual
-    element.classList.add('selected');
-    element.classList.add('active');
+        // 2. Função Unificada para Seleção de Opções
+        function selectOpt(element, group, memoria = null) {
+            // Remove destaque de outros botões do mesmo grupo
+            const buttons = element.parentElement.querySelectorAll('.opt-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.remove('selected');
+            });
+            
+            // Destaca o botão atual
+            element.classList.add('selected');
+            element.classList.add('active');
 
-    if (group === 'cor') {
-        corEscolhida = true;
-    }
-    
-    if (group === 'versao') {
-        versaoEscolhida = true;
-        atualizarPreco(memoria);
-    }
+            if (group === 'cor') {
+                corEscolhida = true;
+            }
+            
+            if (group === 'versao') {
+                versaoEscolhida = true;
+                atualizarPreco(memoria);
+            }
 
-    // Libera o botão "PRÓXIMO" se ambos estiverem selecionados
-    const btnNext = document.getElementById('btn-next-step');
-    if (corEscolhida && versaoEscolhida) {
-        btnNext.style.backgroundColor = "#ee4d2d";
-        btnNext.style.cursor = "pointer";
-        btnNext.disabled = false;
-    }
-}
-
-// 3. Atualização Dinâmica de Preço
-function atualizarPreco(memoria) {
-    const precoElemento = document.querySelector('.modal-price') || document.querySelector('#modal-product-price');
-    
-    if (precoElemento) {
-        let novoPreco = precoBase;
-        if (memoria === 512) {
-            novoPreco = precoBase * 1.20; // +20%
+            // Libera o botão "PRÓXIMO" se ambos estiverem selecionados
+            const btnNext = document.getElementById('btn-next-step');
+            if (corEscolhida && versaoEscolhida) {
+                btnNext.style.backgroundColor = "#ee4d2d";
+                btnNext.style.cursor = "pointer";
+                btnNext.disabled = false;
+            }
         }
-        precoElemento.innerText = `R$${novoPreco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-    }
-}
 
-// 4. Navegação entre Etapas
-function nextStep() {
-    document.getElementById('step-1').style.display = 'none';
-    document.getElementById('step-2').style.display = 'block';
-}
+        // 3. Atualização Dinâmica de Preço
+        function atualizarPreco(memoria) {
+            // Procura o elemento de preço (ID ou Classe)
+            const precoElemento = document.getElementById('modal-product-price') || document.querySelector('.modal-price');
+            
+            if (precoElemento) {
+                valorFinal = precoBase;
+                if (memoria === 512) {
+                    valorFinal = precoBase * 1.20; // +20% se for 512GB
+                }
+                // Formata para padrão R$ 0,00
+                precoElemento.innerText = `R$${valorFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+            }
+        }
 
-function validateAndNext() {
-    if (corEscolhida && versaoEscolhida) {
-        nextStep();
-    }
-}
+        // 4. Navegação entre Etapas
+        function nextStep() {
+            document.getElementById('step-1').style.display = 'none';
+            document.getElementById('step-2').style.display = 'block';
+        }
 
-// 5. Funções de Interface (Modal e Carrossel)
-function openModal() { document.getElementById('modal').style.display = 'block'; }
-function closeModal() { document.getElementById('modal').style.display = 'none'; }
+        function validateAndNext() {
+            if (corEscolhida && versaoEscolhida) {
+                nextStep();
+            }
+        }
 
-function toggleSection(id) {
-    const el = document.getElementById(id);
-    el.classList.toggle('active');
-}
+        // 5. Funções de Interface (Modal e Carrossel)
+        function openModal() { document.getElementById('modal').style.display = 'block'; }
+        function closeModal() { document.getElementById('modal').style.display = 'none'; }
 
-// Carrossel de imagens
-const track = document.getElementById('mainTrack');
-if (track) {
-    track.addEventListener('scroll', () => {
-        const index = Math.round(track.scrollLeft / track.offsetWidth) + 1;
-        const carouselNum = document.getElementById('carouselNum');
-        if (carouselNum) carouselNum.innerText = index + '/8';
-    });
-}
+        function toggleSection(id) {
+            const el = document.getElementById(id);
+            if(el) el.classList.toggle('active');
+        }
 
-// 6. Checkout e Pix
-function gerarPix() {
-    const px = "00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b5520400005303986540599.005802BR5917LOJA ONIX OFICIAL6009SAO PAULO62070503***6304";
-    const qrImg = document.getElementById('qr-code');
-    if (qrImg) {
-        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(px)}&color=ee4d2d`;
-    }
-    document.getElementById('step-2').style.display = 'none';
-    document.getElementById('step-pix').style.display = 'block';
-}
+        // Carrossel de imagens
+        const track = document.getElementById('mainTrack');
+        if (track) {
+            track.addEventListener('scroll', () => {
+                const index = Math.round(track.scrollLeft / track.offsetWidth) + 1;
+                const carouselNum = document.getElementById('carouselNum');
+                if (carouselNum) carouselNum.innerText = index + '/8';
+            });
+        }
 
-// 7. Timer Regressivo
-let t = 5370;
-setInterval(() => {
-    if(t > 0) t--;
-    const h = document.getElementById('h');
-    const m = document.getElementById('m');
-    const s = document.getElementById('s');
-    if (h && m && s) {
-        h.innerText = String(Math.floor(t/3600)).padStart(2,'0');
-        m.innerText = String(Math.floor((t%3600)/60)).padStart(2,'0');
-        s.innerText = String(t%60).padStart(2,'0');
-    }
-}, 1000);
+        // 6. Checkout e Pix (Gerando com o valor atualizado)
+        function gerarPix() {
+            // O valor no QR Code agora segue o valorFinal (599 ou 718.80)
+            const px = `00020101021226580014br.gov.bcb.pix0136db0cbb53-17be-449c-89c8-9bffd8f6c7b55204000053039865405${valorFinal.toFixed(2)}5802BR5917LOJA ONIX OFICIAL6009SAO PAULO62070503***6304`;
+            
+            const qrImg = document.getElementById('qr-code');
+            if (qrImg) {
+                qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(px)}&color=ee4d2d`;
+            }
+            document.getElementById('step-2').style.display = 'none';
+            document.getElementById('step-pix').style.display = 'block';
+        }
+
+        // 7. Timer Regressivo
+        let t = 5370;
+        setInterval(() => {
+            if(t > 0) t--;
+            const h = document.getElementById('h');
+            const m = document.getElementById('m');
+            const s = document.getElementById('s');
+            if (h && m && s) {
+                h.innerText = String(Math.floor(t/3600)).padStart(2,'0');
+                m.innerText = String(Math.floor((t%3600)/60)).padStart(2,'0');
+                s.innerText = String(t%60).padStart(2,'0');
+            }
+        }, 1000);
     </script>
-    
+</body>
+</html>
