@@ -294,22 +294,11 @@
     
     <button class="btn-buy-now" onclick="openModal()">Compre Agora</button>
 </div>
-
-<div id="modal" class="modal">
-    <div class="modal-content">
-        <div style="display:flex; gap:15px; margin-bottom:20px;">
-            <img src="https://i.postimg.cc/hvd5NVng/celular-xiaomi-poco-x7-pro-nfc-dual-sim-512gb-12gb-ram.jpg" style="width:90px; height:90px; object-fit:cover; border:1px solid #eee;">
-            <div style="flex:1">
-                <div id="modalPreco" style="color:var(--shopee); font-size:20px; font-weight:bold;">R$ 599,00</div>
-                <div id="selPreview" style="font-size:12px; color:#888; margin-top:5px;">Selecione Cor e Versão</div>
-            </div>
-            <i class="fas fa-times" onclick="closeModal()" style="color:#999; font-size: 20px;"></i>
-        </div>
-
+  
+  <div class="container">
+    <div class="content">
         <p class="input-label">Cor</p>
         <div class="option-group">
-            <button class="opt-btn" onclick="setOpt(this, 'cor', 'Amarelo')">Amarelo</button>
-            <button class="opt-btn" onclick="setOpt(this, 'cor', 'Preto')">Preto</button>
             <button class="opt-btn" onclick="setOpt(this, 'cor', 'Iron Man')">Iron Man</button>
         </div>
 
@@ -322,31 +311,6 @@
         <button id="btnConfirm" class="btn-main" disabled style="width:100%; border-radius:4px; height:50px; margin-top:20px; background: #ccc;" onclick="goToAddress()">
             PRÓXIMO
         </button>
-    </div>
-</div>
-  
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <div style="display:flex; gap:15px; margin-bottom:20px;">
-        <img src="https://i.postimg.cc/hvd5NVng/celular-xiaomi-poco-x7-pro-nfc-dual-sim-512gb-12gb-ram.jpg" style="width:90px; height:90px; object-fit:cover; border:1px solid #eee;">
-        <div style="flex:1">
-          <div id="modalPreco" style="color:var(--shopee); font-size:20px; font-weight:bold;">R$ 499,17</div>
-          <div id="selPreview" style="font-size:12px; color:#888; margin-top:5px;">Selecione Cor e Versão</div>
-        </div>
-        <i class="fas fa-times" onclick="closeModal()" style="color:#999;"></i>
-      </div>
-      <p class="input-label">Cor</p>
-      <div>
-        <button class="opt-btn" onclick="setOpt(this, 'cor', 'Amarelo')">Amarelo</button>
-        <button class="opt-btn" onclick="setOpt(this, 'cor', 'Preto')">Preto</button>
-        <button class="opt-btn" onclick="setOpt(this, 'cor', 'Iron Man')">Iron Man</button>
-      </div>
-      <p class="input-label" style="margin-top:10px;">Versão</p>
-      <div>
-        <button class="opt-btn" onclick="setOpt(this, 'versao', '256GB', 499.17)">12GB + 256GB</button>
-        <button class="opt-btn" onclick="setOpt(this, 'versao', '512GB', 599.00)">12GB + 512GB</button>
-      </div>
-      <button id="btnConfirm" class="btn-main" disabled style="width:100%; border-radius:4px; height:45px; margin-top:15px;" onclick="goToAddress()">PRÓXIMO</button>
     </div>
   </div>
 
@@ -515,22 +479,20 @@
     }, 1000);
 
     function openPage(id) {
-    // Esconde TODAS as divs que tenham a classe 'page'
+    // Esconde todas as páginas
     document.querySelectorAll('.page').forEach(p => {
         p.style.display = 'none';
         p.classList.remove('active');
     });
-
-    // Mostra apenas a que você quer
+    // Mostra a página desejada
     const target = document.getElementById(id);
     if (target) {
         target.style.display = 'block';
         target.classList.add('active');
     }
-    
-    // Sobe a tela para o topo
-    window.scrollTo(0, 0);
+         window.scrollTo(0, 0);
     }
+        
              
     // --- FUNÇÃO PARA ABRIR/FECHAR ESPECIFICAÇÕES (CORRIGIDO) ---
     function toggleSection(id) {
@@ -628,6 +590,7 @@
 
 
               
+
 
 
 
