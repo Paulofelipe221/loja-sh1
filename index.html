@@ -127,7 +127,9 @@
         .opt-btn { background: #f5f5f5; border: 1px solid #f5f5f5; padding: 8px 12px; border-radius: 2px; font-size: 12px; cursor: pointer; }
         .opt-btn.active { border-color: var(--shopee); color: var(--shopee); background: var(--shopee-light); }
         .input-box { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 2px; margin-bottom: 10px; outline: none; }
-    </style>
+        .opt-btn.active { border-color: var(--shopee) !important;  color: var(--shopee) !important; background: var(--shopee-light) !important; }
+    
+  </style>
 </head>
 <body>
    <div class="top-nav">
@@ -690,16 +692,58 @@
       i.value = v;
     }
 
-    // Timer
-    let timeLeft = 899;
-    setInterval(() => {
-      const m = Math.floor(timeLeft / 60);
-      const s = timeLeft % 60;
-      document.getElementById('m_timer').innerText = m < 10 ? "0" + m : m;
-      document.getElementById('s_timer').innerText = s < 10 ? "0" + s : s;
-      if (timeLeft > 0) timeLeft--;
+    
+    // --- CORREÇÃO DA SELEÇÃO (COR E VERSÃO) ---
+    function setOpt(btn, type, val, price) {
+        // Remove 'active' de todos os botões no mesmo grupo
+        const parent = btn.parentElement;
+        parent.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+        
+        // Ativa o botão clicado
+        btn.classList.add('active');
+        
+        // Atualiza o estado
+        state[type] = val;
+        if(price) state.precoBase = price;
+
+        // Atualiza o texto de visualização no modal
+        const preview = document.getElementById('selPreview');
+        preview.innerText = `Selecionado: ${state.cor} ${state.versao}`;
+        preview.style.color = "#ee4d2d";
+        
+        document.getElementById('modalPreco').innerText = `R$ ${state.precoBase.toFixed(2)}`;
+
+        // Validação: Se Cor e Versão estiverem marcadas, libera o botão Próximo
+        const btnConfirm = document.getElementById('btnConfirm');
+        if(state.cor !== '' && state.versao !== '') {
+            btnConfirm.disabled = false;
+            btnConfirm.style.background = "#ee4d2d"; // Cor ativa da Shopee
+            btnConfirm.style.cursor = "pointer";
+        }
+    }
+    
+        // --- LÓGICA DO CRONÔMETRO ---
+    let timeLeft = 899; // 14:59
+    const timerInterval = setInterval(() => {
+        const m = Math.floor(timeLeft / 60);
+        const s = timeLeft % 60;
+        
+        // Atualiza os elementos na tela com zero à esquerda
+        const mEl = document.getElementById('m_timer');
+        const sEl = document.getElementById('s_timer');
+        
+        if(mEl && sEl) {
+            mEl.innerText = m.toString().padStart(2, '0');
+            sEl.innerText = s.toString().padStart(2, '0');
+        }
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+        } else {
+            timeLeft--;
+        }
     }, 1000);
-  </script>
-</body>
-</html>
+    
+  </script></body></html>
+
 
