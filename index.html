@@ -130,6 +130,15 @@
         .opt-btn.active { border-color: var(--shopee) !important;  color: var(--shopee) !important; background: var(--shopee-light) !important; }
         .page { display: none; /* Escondido por padrão */ width: 100%;  min-height: 100vh;  background: #f5f5f5;  position: absolute; /* Para sobrepor a home se necessário */   top: 0;left: 0;z-index: 100;}
         .page.active { display: block !important;  }
+        /* Garante que as páginas ocupem a tela toda e não deixem o fundo vazar */
+        .page { display: none; width: 100%; min-height: 100vh; background-color: #f5f5f5; position: relative; z-index: 100 }
+
+         /* Força a exibição apenas da página ativa */
+        .page.active { display: block !important; }
+
+         /* Ajuste para o corpo do site não criar rolagem dupla */
+        .body { margin: 0; padding: 0; overflow-x: hidden; background-color: #f5f5f5; }
+    
   </style>
 </head>
 <body>
@@ -213,6 +222,40 @@
         </div>
     </div>
 
+    <div id="productPage" class="page active">
+    
+    <div style="padding: 15px; background: #fff;">
+        <div style="color: #ee4d2d; font-size: 24px; font-weight: bold;">R$ 599,00</div>
+        <h1 style="font-size: 16px; color: #333; margin-top: 10px;">
+            <span style="background: #ee4d2d; color: #fff; padding: 2px 4px; border-radius: 2px; font-size: 12px;">Indicado</span>
+            Xiaomi Poco X7 PRO 5G Global Version - Lote Exclusivo 2026 (12GB/512GB)
+        </h1>
+    </div>
+
+    <div id="avaliacoes-container">
+        </div>
+
+    <div style="position: fixed; bottom: 0; width: 100%; max-width: 500px; display: flex; height: 50px; background: #fff; border-top: 1px solid #eee; z-index: 999;">
+        <div style="flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; font-size: 10px; color: #00bfa5;">
+            <i class="far fa-comments" style="font-size: 18px;"></i> Chat
+        </div>
+        <div style="flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; font-size: 10px; color: #00bfa5; border-left: 1px solid #eee;">
+            <i class="fas fa-cart-plus" style="font-size: 18px;"></i> Adicionar
+        </div>
+        <button onclick="openModal()" style="flex: 2; background: #ee4d2d; color: #fff; border: none; font-weight: bold; font-size: 16px;">
+            Compre Agora
+        </button>
+    </div>
+    
+    <div style="height: 60px;"></div>
+</div>
+
+<div id="addrPage" class="page" style="display:none;">
+    </div>
+
+<div id="checkoutPage" class="page" style="display:none;">
+</div>
+  
     <div class="review-section-title" style="display: block; padding-bottom: 5px;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
         <span style="font-weight:bold; font-size:13px; color:#222;">AVALIAÇÕES DO PRODUTO (19.566)</span>
@@ -601,4 +644,5 @@
 
 
               
+
 
