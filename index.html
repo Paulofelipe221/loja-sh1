@@ -216,18 +216,18 @@
 
 <div class="footer">
     <a href="https://shopee.com.br/shop/1078992312" class="footer-icon-btn">
-        <i class="far fa-comment-dots" style="color: #00bfa5;"></i>
+        <i class="far fa-comment-dots"></i>
         <span>Chat</span>
     </a>
     
     <button class="btn-add-cart" onclick="openModal()">
         <i class="fas fa-cart-plus"></i>
-        <span>Adicionar ao carrinho</span>
+        <span>Carrinho</span>
     </button>
     
     <button class="btn-buy-now" onclick="openModal()">Compre Agora</button>
 </div>
-
+    
 <div id="modal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -366,14 +366,30 @@
             window.scrollTo(0,0);
         }
 
-        function openModal() { document.getElementById('modalOptions').style.display = 'block'; }
-        function closeModal() { document.getElementById('modalOptions').style.display = 'none'; }
+        function openModal() {
+    const modal = document.getElementById('modalOptions');
+    if (modal) {
+        modal.style.display = 'block';
+        // Impede o fundo de rolar enquanto escolhe a cor
+        document.body.style.overflow = 'hidden'; 
+    } else {
+        console.error("Erro: O modal 'modalOptions' não foi encontrado no código!");
+    }
+}
 
-        function selectOpt(btn, val) {
-            btn.parentElement.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            selectedCor = val;
+function closeModal() {
+    document.getElementById('modalOptions').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Fecha o modal se clicar fora dele
+window.onclick = function(event) {
+    const modal = document.getElementById('modalOptions');
+    if (event.target == modal) {
+        closeModal();
+    }
         }
+        
 
         function updateScroll() {
             const track = document.getElementById('mainTrack');
@@ -476,4 +492,5 @@
     </script>
 </body>
 </html>
+
 
