@@ -1753,24 +1753,28 @@ let cronometroInterval = null;
 window.currentPix = "";
 
 // CRONÔMETRO 6 HORAS (SEM RESETAR)
-function iniciarCronometro() {
-// 12 horas + 20 minutos + 30 segundos em milissegundos
+function iniciarCronometro(criarNovo = false) {
+if (criarNovo || !localStorage.getItem('cronometro_end')) {
 const duracao = (12 * 60 * 60 * 1000) + (20 * 60 * 1000) + (30 * 1000);
 const endTime = new Date().getTime() + duracao;
 localStorage.setItem('cronometro_end', endTime);
+}
 
 if (cronometroInterval) clearInterval(cronometroInterval);
 
-cronometroInterval = setInterval(() => {
+atualizarDisplayCronometro();
+cronometroInterval = setInterval(atualizarDisplayCronometro, 1000);
+}
+
+function atualizarDisplayCronometro() {
 const now = new Date().getTime();
-const savedEnd = localStorage.getItem('cronometro_end');
+const savedEnd = parseInt(localStorage.getItem('cronometro_end'));
 const distance = savedEnd - now;
 
 if (distance < 0) {
-// Quando zerar, reinicia automaticamente
 clearInterval(cronometroInterval);
 localStorage.removeItem('cronometro_end');
-iniciarCronometro(); // Reinicia o cronômetro
+iniciarCronometro(true);
 return;
 }
 
@@ -1781,7 +1785,6 @@ const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 document.getElementById('h').textContent = String(hours).padStart(2, '0');
 document.getElementById('m').textContent = String(minutes).padStart(2, '0');
 document.getElementById('s').textContent = String(seconds).padStart(2, '0');
-}, 1000);
 }
 
 // CALCULAR DATA DE ENTREGA (8-10 DIAS)
@@ -2162,22 +2165,15 @@ document.getElementById('carouselNum').innerText = `${index}/7`;
 
 // INICIALIZAÇÃO
 window.onload = function() {
-// Verifica se já existe cronômetro rodando
-if (!localStorage.getItem('cronometro_end')) {
-iniciarCronometro();
-} else {
-// Continua cronômetro existente
-const endTime = parseInt(localStorage.getItem('cronometro_end'));
+const savedEnd = localStorage.getItem('cronometro_end');
 const now = new Date().getTime();
-if (endTime > now) {
-iniciarCronometro();
+
+if (!savedEnd || parseInt(savedEnd) <= now) {
+iniciarCronometro(true); // Cria novo cronômetro
 } else {
-// Cronômetro expirou
-document.getElementById('h').textContent = '00';
-document.getElementById('m').textContent = '00';
-document.getElementById('s').textContent = '00';
+iniciarCronometro(false); // Continua de onde parou!
 }
-}
+
 atualizarTotal();
 calcularEntrega();
 }
