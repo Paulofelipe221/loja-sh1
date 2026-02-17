@@ -1208,10 +1208,9 @@ animation: fadeIn 0.3s ease-in-out;
 <div class="flash-sale">
 <div class="flash-sale-left">
 <i class="fas fa-bolt"></i>
-<span>Ofertas Relâmpago</span>
+<span>TERMINA EM</span>
 </div>
 <div class="timer">
-<span class="timer-label">TERMINA EM</span>
 <span class="timer-unit" id="h">00</span>
 <span class="timer-separator">:</span>
 <span class="timer-unit" id="m">00</span>
@@ -1347,17 +1346,15 @@ Onix Oficial
 </div>
 </div>
 
-<!-- REVIEWS -->
-<div class="review-section-title">
-<span style="font-weight:bold; font-size:13px;">AVALIAÇÕES (19.566)</span>
-<a href="https://shopee.com.br/Xiaomi-Poco-X7-PRO-5G-Armazenamento-512GB-256GB-8GB-12GB-RAM-Processador-Dimensity-8400-Ultra-i.1078992312.23292818042" target="_blank" style="color:var(--shopee); font-size:12px; text-decoration:none;">Ver Tudo ></a>
+<div class="review-section-title" style="display: block; padding-bottom: 5px;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+<span style="font-weight:bold; font-size:13px; color:#222;">AVALIAÇÕES DO PRODUTO (19.566)</span>
+<a href="https://shopee.com.br/shop/1078992312/item/23292818042/rating" style="color:var(--shopee); font-size:12px; text-decoration:none;">Ver Tudo ></a>
 </div>
-
-<div style="background: white; padding: 10px 15px; border-bottom: 1px solid #f2f2f2;">
-<div style="display: flex; align-items: center; gap: 8px;">
-<div class="stars" style="margin: 0; font-size: 14px;">⭐⭐⭐⭐⭐</div>
-<span style="color: var(--shopee); font-size: 15px; font-weight: bold;">5.0</span>
-<span style="color: #757575; font-size: 12px;">(20.920 avaliações)</span>
+<div style="display: flex; align-items: center; gap: 5px;">
+<div class="stars" style="margin-bottom: 0; font-size: 12px;">⭐⭐⭐⭐⭐</div>
+<span style="color: var(--shopee); font-size: 13px; font-weight: bold;">5.0</span>
+<span style="color: #757575; font-size: 13px;">(20.920 resenhas)</span>
 </div>
 </div>
 
@@ -1549,7 +1546,19 @@ Adquirir Seguro
 <span class="cupom-text">Cupom da Loja</span>
 </div>
 <div style="display: flex; align-items: center; gap: 8px;">
-<span class="cupom-placeholder">já aplicado no frete</span>
+<span class="cupom-placeholder">Selecione ou digite o código</span>
+<i class="fas fa-chevron-right" style="color: #ccc; font-size: 12px;"></i>
+</div>
+</div>
+
+<!-- MENSAGEM VENDEDOR -->
+<div class="cupom-section">
+<div class="cupom-left">
+<i class="far fa-comment-dots" style="color: #757575;"></i>
+<span class="cupom-text" style="color: #757575;">Mensagem para o vendedor:</span>
+</div>
+<div>
+<span class="cupom-placeholder">Digite aqui</span>
 <i class="fas fa-chevron-right" style="color: #ccc; font-size: 12px;"></i>
 </div>
 </div>
@@ -1596,7 +1605,7 @@ Adquirir Seguro
 <div class="cupom-section">
 <div class="cupom-left">
 <i class="fas fa-ticket-alt"></i>
-<span class="cupom-text">já aplicado no valor total do produto</span>
+<span class="cupom-text">Cupom Shopee</span>
 </div>
 <div>
 <span class="cupom-placeholder">Selecione ou digite o código</span>
@@ -1745,7 +1754,9 @@ window.currentPix = "";
 
 // CRONÔMETRO 6 HORAS (SEM RESETAR)
 function iniciarCronometro() {
-const endTime = new Date().getTime() + (6 * 60 * 60 * 1000); // 6 horas
+// 12 horas + 20 minutos + 30 segundos em milissegundos
+const duracao = (12 * 60 * 60 * 1000) + (20 * 60 * 1000) + (30 * 1000);
+const endTime = new Date().getTime() + duracao;
 localStorage.setItem('cronometro_end', endTime);
 
 if (cronometroInterval) clearInterval(cronometroInterval);
@@ -1756,10 +1767,10 @@ const savedEnd = localStorage.getItem('cronometro_end');
 const distance = savedEnd - now;
 
 if (distance < 0) {
+// Quando zerar, reinicia automaticamente
 clearInterval(cronometroInterval);
-document.getElementById('h').textContent = '00';
-document.getElementById('m').textContent = '00';
-document.getElementById('s').textContent = '00';
+localStorage.removeItem('cronometro_end');
+iniciarCronometro(); // Reinicia o cronômetro
 return;
 }
 
